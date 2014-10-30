@@ -1,5 +1,5 @@
-if [ -f $HOME/settings/bash/.bashrc ]; then
-	source $HOME/settings/bash/.bashrc
+if [ -f /home/ejtravis/settings/bash/.bashrc ]; then
+	source /home/ejtravis/settings/bash/.bashrc
 fi
 
 alias ls="ls --color=auto"
