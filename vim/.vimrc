@@ -44,22 +44,22 @@ filetype plugin indent on   " required
 
 syntax on
 set backspace=2
-set background=dark
+set background=light
 set number		" line numbers
 
 set tabstop=4		" size of a hard tabstop
 set shiftwidth=4	" size of an indent
 set smarttab		" make [tab] insert indents instead of tabs @ line start
 set expandtab		" always use spaces instead of tab characters
-
+set ruler           " view status line
 " Useful Vim things from training manual
 map <F5> :!python % " Press F5 to run the current Python file
 set printoptions=number:y
 
-highlight PreProc ctermfg=White " Improve syntax highlighting, PreProc
+highlight PreProc ctermfg=White  " Improve syntax highlighting, PreProc
 highlight LineNr ctermfg=White   " Line number color
 highlight Comment ctermfg=Red    " Comment Color syntax highlighting
-highlight Constant ctermfg=Green " Constant Color syntax highlighting
+highlight Constant ctermfg=2     " Green non-bold
 highlight Type ctermfg=Magenta   " Type Color syntax highlighting
 hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 
