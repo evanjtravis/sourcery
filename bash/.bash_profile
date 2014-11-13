@@ -12,3 +12,4 @@ pylintless() {
 alias pylint=pylintless
 
 alias vim="vim -u /home/ejtravis/settings/vim/.vimrc"
+alias vi=vim
