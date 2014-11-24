@@ -1,0 +1,21 @@
+HOME=/home/ejtravis/
+TMP=$(HOME)tmp/
+PROJ_PATH=$(HOME)ComputerRegistration/
+VERSION=5.4rc1
+RPM=ComputerRegistration-$(VERSION)-1.el6.noarch.rpm
+SERVICE=security-tools
+
+all: build.o
+
+build.o:
+	rm -rf $(HOME)tmp
+	rm -rf $(PROJ_PATH)build
+	rm -rf $(PROJ_PATH)dist
+	python $(PROJ_PATH)setup.py bdist_rpm
+	mkdir $(TMP)
+	cp $(PROJ_PATH)dist/$(RPM) $(TMP)
+	chmod g+rx $(TMP)
+	chown .$(SERVICE) $(TMP)
+	chmod g+r $(TMP)$(RPM)
+	chown .$(SERVICE) $(TMP)$(RPM)
+	echo '---------->DONE'
