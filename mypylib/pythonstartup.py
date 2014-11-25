@@ -25,3 +25,8 @@ def c():
     """A less verbose clear command wrapper.
     """
     clear()
+
+def q():
+    """A less verbose quit command wrapper.
+    """
+    quit()

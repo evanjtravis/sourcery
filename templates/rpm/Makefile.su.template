@@ -1,11 +1,18 @@
+# 1. If you haven't already:
+# 	 Run 'Makefile' located in this directory
+# 2. Log in as su user on the system
+# 3. Copy this file into the su-user's home directory
+# 4. Run
+#
 # This makefile is designed to automate the testing of an RPM
 # within the context of an SDG virtual environment.
+#
+# This makefile should be placed in the home directory of the su-user.
 SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
 USR=ejtravis
-SVC=crl-svcs
 SRC=/home/$(USR)/CompassSpaceRequest/
 PACKAGE=IC2gCorrelation
 VERSION=4.1b1
@@ -18,6 +25,7 @@ DST=$(HOME)rpms/
 #####################################################################
 # Variables that in all likelihood will not need to change.
 #####################################################################
+SVC=$(shell whoami)
 RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm
 SUDO=sudo /sbin/service
 SHIB=$(SUDO) shibd
