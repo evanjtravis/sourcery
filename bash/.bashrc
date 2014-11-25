@@ -10,7 +10,8 @@ export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/
 
 export PYTHONSTARTUP=/home/ejtravis/settings/mypylib/pythonstartup.py
 export PYLINTRC=/home/ejtravis/settings/pylint/.pylintrc
-export MYPYLIB=/home/ejtravis/settings/mypylib
+export SETTINGS=/home/ejtravis/settings/
+export MYPYLIB=/home/ejtravis/settings/mypylib/
 
 #####################################################################
 # Settings

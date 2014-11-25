@@ -1,0 +1,12 @@
+*.gz
+*.jar
+*.log
+*.o
+*.pyc
+*.sw[mnop]
+*.tar
+*.zip
+*.conf
+.DS_Store
+.*.ejtravis.temp
+*.ejtravis.temp

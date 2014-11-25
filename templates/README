@@ -1,6 +1,0 @@
-Some things you may need to know:
-    Each makefile templates subdirectory can have multiple templates in it.
-    There is, however, one setup makefile just called Makefile. This
-    makefile is used to execute basic functions on the makefile templates
-    themselves including permissions and possibly setting up environment
-    variables specific to the project or task.
