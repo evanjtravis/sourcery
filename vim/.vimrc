@@ -45,7 +45,7 @@ filetype plugin indent on   " required
 syntax on
 set backspace=2
 set background=light
-set number nuw=6 columns=78		" line numbers
+set number nuw=6 columns=85		" line numbers
 
 set tabstop=4		" size of a hard tabstop
 set shiftwidth=4	" size of an indent
