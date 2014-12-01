@@ -12,18 +12,15 @@ DUMMY=dummy$(EXTENSION)
 COPY_TEMPLATES=$(MYPYLIB)copy_templates.py
 #####################################################################
 
-all: main.o rpm.o source.o done.o
+all: main rpm done.o
 
-main.o:
+main:
 	python $(COPY_TEMPLATES) $(MAIN_SRC) $(MAIN_DST)
 
-rpm.o:
+rpm:
 	python $(COPY_TEMPLATES) $(RPM_SRC) $(RPM_DST)
 
-source.o:
-	source ~/.bash_profile
-
-clean.o:
+clean:
 	rm -f $(MAIN_DST)*$(EXTENSION) $(MAIN_DST).*$(EXTENSION)
 	rm -f $(RPM_DST)*$(EXTENSION) $(RPM_DST).*$(EXTENSION)
 
