@@ -12,7 +12,7 @@ DUMMY=dummy$(EXTENSION)
 COPY_TEMPLATES=$(MYPYLIB)copy_templates.py
 #####################################################################
 
-all: main rpm done.o
+all: main rpm done
 
 main:
 	python $(COPY_TEMPLATES) $(MAIN_SRC) $(MAIN_DST)
