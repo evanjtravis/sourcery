@@ -1,4 +1,4 @@
-if [ -f /home/ejtravis/settings/bash/.bashrc ]; then
+if [ -f /home/ejtravis/settings/bash/bashrc ]; then
 	source /home/ejtravis/settings/bash/bashrc
 fi
 
