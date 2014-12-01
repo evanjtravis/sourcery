@@ -1,4 +1,4 @@
-TEMPLATES=$(SETTINGS)templates/
+TEMPLATES=$(HOME)/settings/templates/
 
 MAIN_SRC=$(TEMPLATES)main/
 MAIN_DST=/home/ejtravis/

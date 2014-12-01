@@ -1,7 +1,7 @@
 all:
 
 clean.o:
-	make -f $(SETTINGS)templates/Makefile clean.o
+	make -f /home/ejtravis/settings/templates/Makefile clean.o
 
 done.o:
 	@echo '----------> Done'
