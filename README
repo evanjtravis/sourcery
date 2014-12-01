@@ -1,0 +1,9 @@
+settings
+========
+
+Basic settings for when switching to different dev environments
+
+Steps:
+    1. source ~/settings/bash/bash_profile
+    2. cd ~/settings
+    3. make init
