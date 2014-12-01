@@ -24,5 +24,5 @@ clean:
 	rm -f $(MAIN_DST)*$(EXTENSION) $(MAIN_DST).*$(EXTENSION)
 	rm -f $(RPM_DST)*$(EXTENSION) $(RPM_DST).*$(EXTENSION)
 
-done.o:
+done:
 	@echo '----------> Done'

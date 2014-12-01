@@ -7,5 +7,5 @@ init:
 clean:
 	make -f $(SETTINGS)templates/Makefile clean
 
-done.o:
+done:
 	@echo '----------> Done'
