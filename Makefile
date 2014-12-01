@@ -1,12 +1,10 @@
 all:
 	
-init.o:
-	export SETTINGS=/home/ejtravis/settings
-	export MYPYLIB=/home/ejtravis/settings/mypylib
-	export PYTHONPATH=$(PYTHONPATH):$(MYPYLIB)
+init:
+	source /home/settings/bash/bash_profile
 	make -f /home/ejtravis/settings/templates/Makefile
 
-clean.o:
+clean:
 	make -f /home/ejtravis/settings/templates/Makefile clean.o
 
 done.o:
