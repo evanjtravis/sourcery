@@ -5,5 +5,9 @@ Basic settings for when switching to different dev environments
 
 Steps:
     1. source ~/settings/bash/bash_profile
-    2. cd ~/settings
+    2. cd ~/settings/init
     3. make init
+
+To cleanup:
+    1. cd ~/settings/init
+    2. make clean

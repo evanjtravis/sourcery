@@ -11,3 +11,4 @@
 .*.ejtravis.temp
 *.ejtravis.temp
 *.tws
+get-pip.py

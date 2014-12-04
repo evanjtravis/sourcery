@@ -7,7 +7,6 @@ RPM_SRC=$(TEMPLATES)rpm/
 RPM_DST=$(RPM_SRC)
 
 EXTENSION=.ejtravis.temp
-DUMMY=dummy$(EXTENSION)
 
 COPY_TEMPLATES=$(MYPYLIB)copy_templates.py
 #####################################################################
