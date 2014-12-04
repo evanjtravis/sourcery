@@ -4,7 +4,7 @@
 umask 022
 
 export SERVICE=crl-svcs
-export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:/home/ejtravis/settings
+export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:/home/ejtravis/settings:/home/ejtravis/twee
 
 export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages:/home/ejtravis/settings/mypylib
 
