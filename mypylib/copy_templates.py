@@ -7,7 +7,7 @@ import sys
 import shutil
 from optparse import OptionParser
 
-MYNAME = 'ejtravis'
+MYNAME = os.environ['USER']
 DST = ''
 SRC = ''
 TEMPLATE = 'template'
@@ -99,7 +99,7 @@ def _validate(options, args):
         datetime.datetime.now().second,
         MYNAME
     )
-
+# TODO add option to copy files as hidden so that hey can be stored in settings as unhidden files.
 def main():
     """Copy all '.template' files from source to destination directory.
     Files are renamed without '.template' exention.

@@ -1,5 +1,5 @@
-if [ -f /home/ejtravis/settings/bash/bashrc ]; then
-	source /home/ejtravis/settings/bash/bashrc
+if [ -f ~/settings/bash/bashrc ]; then
+	source ~/settings/bash/bashrc
 fi
 
 echo -e "\n\tSourced: ~/settings/bash/bash_profile\n"

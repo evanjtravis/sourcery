@@ -1,1 +1,1 @@
-source /home/ejtravis/settings/bash/bash_profile
+source ${SETTINGS}/bash/bash_profile

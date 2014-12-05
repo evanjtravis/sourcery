@@ -6,32 +6,29 @@
 #
 # This makefile is designed to automate the building of an RPM
 # within the context of SDG virtual environment and python distutils.
-USR=$(shell whoami)
-HOME=/home/$(USR)/
 PACKAGE=ComputerRegistration
-TMP=$(HOME)tmp/
-PROJ_PATH=$(HOME)$(PACKAGE)/
+TMP=$(HOME)/tmp
+PROJ_PATH=$(HOME)/$(PACKAGE)
 VERSION=5.4rc1
 RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm
-SVC=security-tools
 
-all: clean.o build.o permission.o done.o
+all: clean build permission done
 
-clean.o:
+clean:
 	rm -rf $(TMP)
-	rm -rf $(PROJ_PATH)build
-	rm -rf $(PROJ_PATH)dist
+	rm -rf $(PROJ_PATH)/build
+	rm -rf $(PROJ_PATH)/dist
 
-build.o:
-	python $(PROJ_PATH)setup.py bdist_rpm
+build:
+	python $(PROJ_PATH)/setup.py bdist_rpm
 	mkdir $(TMP)
-	cp $(PROJ_PATH)dist/$(RPM) $(TMP)
+	cp $(PROJ_PATH)/dist/$(RPM) $(TMP)
 
-permission.o:
+permission:
 	chmod g+rx $(TMP)
-	chown .$(SVC) $(TMP)
-	chmod g+r $(TMP)$(RPM)
-	chown .$(SVC) $(TMP)$(RPM)
+	chown .$(SERVICE) $(TMP)
+	chmod g+r $(TMP)/$(RPM)
+	chown .$(SERVICE) $(TMP)/$(RPM)
 
-done.o:
+done:
 	@echo '---------->DONE'

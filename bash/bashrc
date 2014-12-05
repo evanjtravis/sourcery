@@ -3,15 +3,20 @@
 #####################################################################
 umask 022
 
+##################################
+# Settings
+##################################
+export SETTINGS=${HOME}/settings
+export PYLINTRC=${SETTINGS}pylint/pylintrc
+export MYPYLIB=${SETTINGS}/mypylib
+export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
+
 export SERVICE=crl-svcs
-export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:/home/ejtravis/settings:/home/ejtravis/twee
 
-export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages:/home/ejtravis/settings/mypylib
+export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:${HOME}/settings:${HOME}/twee
 
-export PYTHONSTARTUP=/home/ejtravis/settings/mypylib/pythonstartup.py
-export PYLINTRC=/home/ejtravis/settings/pylint/pylintrc
-export SETTINGS=/home/ejtravis/settings/
-export MYPYLIB=/home/ejtravis/settings/mypylib/
+export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages:${MYPYLIB}
+
 
 #####################################################################
 # Settings
@@ -31,9 +36,9 @@ pylintless() {
 }
 alias pylint="pylintless"
 
-alias settings_clean="make -f ${SETTINGS}init/Makefile clean"
-alias settings_init="make -f ${SETTINGS}init/Makefile init"
+alias settings_clean="make -f ${SETTINGS}/init/Makefile clean"
+alias settings_init="make -f ${SETTINGS}/init/Makefile init"
 alias sourcee="source ~/.bash_profile"
-alias vim="vim -u /home/ejtravis/settings/vim/.vimrc"
+alias vim="vim -u ${SETTINGS}/vim/vimrc"
 alias vi="vim"
 

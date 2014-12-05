@@ -4,6 +4,6 @@
 if pip install -U pip; then
     echo "Pip upgraded."
 else
-    python $SETTINGS/init/get_get_pip.py
-    python $SETTINGS/init/get-pip.py
+    python ${SETTINGS}/init/get_get_pip.py
+    python ${SETTINGS}/init/get-pip.py
 fi
