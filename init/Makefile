@@ -2,8 +2,8 @@ all:
 
 init:
 	make -f $(SETTINGS)templates/Makefile
-	../vim/vundle.sh
-	./init.sh
+	$(SETTINGS)vim/vundle.sh
+	$(SETTINGS)init/init.sh
 
 clean:
 	make -f $(SETTINGS)templates/Makefile clean

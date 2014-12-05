@@ -31,6 +31,8 @@ pylintless() {
 }
 alias pylint="pylintless"
 
+alias settings_clean="make -f ${SETTINGS}init/Makefile clean"
+alias settings_init="make -f ${SETTINGS}init/Makefile init"
 alias sourcee="source ~/.bash_profile"
 alias vim="vim -u /home/ejtravis/settings/vim/.vimrc"
 alias vi="vim"
