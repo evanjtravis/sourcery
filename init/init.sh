@@ -3,7 +3,9 @@
 
 if pip install -U pip; then
     echo "Pip upgraded."
-else
+elif [ ! -d "/services" ]; then
     python ${SETTINGS}/init/get_get_pip.py
-    python ${SETTINGS}/init/get-pip.py
+    python ${SETTINGS}/init/get-pip.py --user
+else
+    echo "Cannot install pip on this system."
 fi

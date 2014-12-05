@@ -12,6 +12,7 @@ DST = ''
 SRC = ''
 TEMPLATE = 'template'
 OLD = ''
+HIDE = False
 
 
 
@@ -39,10 +40,21 @@ def _check_dst(templates):
         files = list_files(DST)
         for filename in templates:
             new = os.path.splitext(filename)[0]
+            if HIDE:
+                new = '.' + new
             if new in files:
                 old = os.path.join(DST, new)
                 new = old + OLD
                 shutil.copyfile(old, new)
+
+
+def _check_if_hidden(filename):
+    """Returns true if first character in filename is '.'.
+    """
+    hidden = False
+    if filename[0] == '.':
+        hidden = True
+    return hidden
 
 
 def _copy_all(templates):
@@ -50,7 +62,11 @@ def _copy_all(templates):
     """
     for filename in templates:
         template = os.path.join(SRC, filename)
-        new_file = os.path.join(DST, os.path.splitext(filename)[0])
+        hidden = _check_if_hidden(filename)
+        if HIDE and not hidden:
+            new_file = os.path.join(DST, '.' + os.path.splitext(filename)[0])
+        else:
+            new_file = os.path.join(DST, os.path.splitext(filename)[0])
         shutil.copyfile(template, new_file)
 
 
@@ -77,6 +93,7 @@ def _validate(options, args):
     global MYNAME
     global TEMPLATE
     global OLD
+    global HIDE
 
     if len(args) == 0:
         raise Exception("Need at least 1 argument: SRC")
@@ -99,7 +116,8 @@ def _validate(options, args):
         datetime.datetime.now().second,
         MYNAME
     )
-# TODO add option to copy files as hidden so that hey can be stored in settings as unhidden files.
+    HIDE = options.hide
+
 def main():
     """Copy all '.template' files from source to destination directory.
     Files are renamed without '.template' exention.
@@ -122,6 +140,14 @@ def main():
         dest='name',
         default=MYNAME,
         help='Specify an alternate name for old files.'
+    )
+    parser.add_option(
+        '-s',
+        '--shade',
+        action='store_true',
+        dest='hide',
+        default=False,
+        help='When files are copied, they are copied as hidden.'
     )
     (options, args) = parser.parse_args()
     _validate(options, args)

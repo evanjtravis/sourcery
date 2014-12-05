@@ -14,7 +14,7 @@ COPY_TEMPLATES=$(MYPYLIB)/copy_templates.py
 all: main rpm done
 
 main:
-	python $(COPY_TEMPLATES) $(MAIN_SRC) $(MAIN_DST)
+	python $(COPY_TEMPLATES) -s $(MAIN_SRC) $(MAIN_DST)
 
 rpm:
 	python $(COPY_TEMPLATES) $(RPM_SRC) $(RPM_DST)
