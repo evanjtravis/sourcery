@@ -43,6 +43,7 @@ filetype plugin indent on   " required
 """""""""""""""""""""""""""""""""
 
 syntax on
+set hlsearch                    " searched terms are highlighted
 set backspace=2
 set background=light
 set number nuw=6 columns=85		" line numbers
