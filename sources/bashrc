@@ -1,0 +1,32 @@
+umask 022
+
+source ~/settings/sources/settingsrc.bash
+#####################################################################
+# Environment Variables
+#####################################################################
+
+export SERVICE=crl-svcs
+
+export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:${HOME}/twee
+
+export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages
+
+export LS_COLORS='di=36'
+
+#####################################################################
+# Aliases
+#####################################################################
+alias c="clear"
+alias cdd="cd ../"
+alias ls="ls --group-directories-first --color=auto"
+alias test="python manage.py test"
+
+pylintless() {
+     pylint $1 | less
+}
+alias pylint="pylintless"
+
+alias sourcee="source ~/.bash_profile"
+alias vim="vim -u ${SETTINGS}/vim/vimrc"
+alias vi="vim"
+
