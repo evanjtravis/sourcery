@@ -1,6 +1,6 @@
 umask 022
 
-source ./settingsrc.bash
+source ~/settings/sources/settingsrc.bash
 #####################################################################
 # Environment Variables
 #####################################################################
@@ -9,7 +9,7 @@ export SERVICE=crl-svcs
 
 export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:${HOME}/twee
 
-export PYTHONPATH=/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages
+export PYTHONPATH=$PYTHONPATH:/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages
 
 export LS_COLORS='di=36'
 

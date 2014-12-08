@@ -8,7 +8,7 @@ export MYPYLIB=${SETTINGS}/mypylib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 
 export PATH=$PATH:${SETTINGS}
-export PYTHONPATH=${MYPYLIB}
+export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 
 #####################################################################
 # Aliases
