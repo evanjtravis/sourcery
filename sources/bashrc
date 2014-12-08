@@ -1,6 +1,6 @@
 umask 022
 
-source ~/settings/sources/settingsrc.bash
+source ./settingsrc.bash
 #####################################################################
 # Environment Variables
 #####################################################################
