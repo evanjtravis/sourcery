@@ -1,4 +1,4 @@
-if [ -e ~/settings/sources/bash_profile ]then;
+if [ -e ~/settings/sources/bash_profile ]; then
     source ~/settings/sources/bash_profile
 else
     echo -e "Template error.\n"
