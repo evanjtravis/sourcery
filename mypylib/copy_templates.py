@@ -1,72 +1,40 @@
 #!/usr/bin/env python
-"""Module used to 
+"""Module used to easily copy files while truncating common extensions and
+adding common prefixes.
 """
 import datetime
 import os
 import sys
 import shutil
+from myutils import list_files
 from optparse import OptionParser
 
 MYNAME = os.environ['USER']
-DST = ''
-SRC = ''
+PREFIX = ''
+SUFFIX = ''
 TEMPLATE = 'template'
+
+DST = ''
 OLD = ''
-HIDE = False
+SRC = ''
 
 
-
-def list_files(path):
-    """Returns a list of all files in a directory.
+def _check_for_old(filename):
+    """If the given filename is in the DST directory, an old copy is made.
     """
-    if os.path.isdir(path):
-        files = [f for f in os.listdir(path)\
-                if os.path.isfile(os.path.join(path, f))]
-        if len(files) == 0:
-            print os.listdir(path)
-            raise Exception("No files in '%s'." % path)
-        return files
-    else:
-        raise Exception("Not a valid directory '%s'." % path)
-
-
-def _check_dst(templates):
-    """Checks to make sure destination is a directory.
-    Copies files that have the same names as templates older versions.
-    """
-    if os.path.isfile(DST):
-        raise Exception('Destination is a file.')
-    elif os.path.isdir(DST):
-        files = list_files(DST)
-        for filename in templates:
-            new = os.path.splitext(filename)[0]
-            if HIDE:
-                new = '.' + new
-            if new in files:
-                old = os.path.join(DST, new)
-                new = old + OLD
-                shutil.copyfile(old, new)
-
-
-def _check_if_hidden(filename):
-    """Returns true if first character in filename is '.'.
-    """
-    hidden = False
-    if filename[0] == '.':
-        hidden = True
-    return hidden
+    if os.path.isfile(filename):
+        old_copy = filename + OLD
+        shutil.copyfile(filename, old_copy)
 
 
 def _copy_all(templates):
     """Copys all template files into the source directory.
     """
-    for filename in templates:
-        template = os.path.join(SRC, filename)
-        hidden = _check_if_hidden(filename)
-        if HIDE and not hidden:
-            new_file = os.path.join(DST, '.' + os.path.splitext(filename)[0])
-        else:
-            new_file = os.path.join(DST, os.path.splitext(filename)[0])
+    for template_name in templates:
+        template = os.path.join(SRC, template_name)
+        new_filename = PREFIX + os.path.splitext(template_name)[0] + SUFFIX
+        new_file = os.path.join(DST, new_filename)
+        _check_for_old(new_file)
         shutil.copyfile(template, new_file)
 
 
@@ -93,7 +61,8 @@ def _validate(options, args):
     global MYNAME
     global TEMPLATE
     global OLD
-    global HIDE
+    global PREFIX
+    global SUFFIX
 
     if len(args) == 0:
         raise Exception("Need at least 1 argument: SRC")
@@ -104,8 +73,14 @@ def _validate(options, args):
         elif len(args) == 2:
             DST = args[1]
         else:
-            raise Exception("Need at most 2 arguments: SRC DST")
+            raise Exception("Maximum of 2 arguments: SRC DST")
+    if not os.path.isdir(SRC):
+        raise Exception("Invalid Source argument. %s" % SRC)
+    if not os.path.isdir(DST):
+        raise Exception("Invalid Destination argument. %s" % DST)
     TEMPLATE = '.' + options.template
+    if len(TEMPLATE) < 2:
+        raise Exception("Invalid Template argument. %s" % TEMPLATE)
     MYNAME = options.name
     OLD = '.OLD.%s.%s.%s.%s.%s.%s.%s.temp' % (
         datetime.datetime.now().year,
@@ -116,7 +91,9 @@ def _validate(options, args):
         datetime.datetime.now().second,
         MYNAME
     )
-    HIDE = options.hide
+    PREFIX = options.prefix
+    SUFFIX = options.suffix
+
 
 def main():
     """Copy all '.template' files from source to destination directory.
@@ -142,17 +119,27 @@ def main():
         help='Specify an alternate name for old files.'
     )
     parser.add_option(
+        '-p',
+        '--prefix',
+        action='store',
+        type='string',
+        dest='prefix',
+        default=PREFIX,
+        help='When files are copied, they are copied with the prefix.'
+    
+    )
+    parser.add_option(
         '-s',
-        '--shade',
-        action='store_true',
-        dest='hide',
-        default=False,
-        help='When files are copied, they are copied as hidden.'
+        '--suffix',
+        action='store',
+        type='string',
+        dest='suffix',
+        default=SUFFIX,
+        help='When files are copied, they are copied with the suffix.'
     )
     (options, args) = parser.parse_args()
     _validate(options, args)
     templates = _get_templates()
-    _check_dst(templates)
     _copy_all(templates)
     sys.exit(0)
 

@@ -1,5 +1,3 @@
-if [ -f ~/settings/bash/bashrc ]; then
-	source ~/settings/bash/bashrc
-fi
+source ~/settings/sources/bashrc
 
 echo -e "\n\tSourced: ~/settings/bash/bash_profile\n"
