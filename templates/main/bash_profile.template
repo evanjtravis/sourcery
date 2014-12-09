@@ -1,5 +1,5 @@
-if [ -e ~/settings/sources/bash_profile ]; then
-    source ~/settings/sources/bash_profile
+if [ -e ${SOURCES}/bash_profile ]; then
+    source ${SOURCES}/bash_profile
 else
-    echo -e "Template error.\n"
+    echo -e "Bash profile template error.\n"
 fi

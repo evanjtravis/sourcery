@@ -1,3 +1,5 @@
-echo -e "Sourced:\n\t~/settings/sources/bash_profile"
-source ~/settings/sources/bashrc
+SETTINGS=~/sourcery
+SOURCES=${SETTINGS}/sources
+echo -e "Sourced:\n\t${SOURCES}/bash_profile"
+source ${SOURCES}/bashrc
 

@@ -1,11 +1,10 @@
-echo -e "\t~/settings/sources/settingsrc.bash"
+echo -e "\t${SOURCES}/settingsrc.bash"
 
 #####################################################################
 # Environment Variables
 #####################################################################
 
-export SETTINGS=${HOME}/settings
-export PYLINTRC=${SETTINGS}pylint/pylintrc
+export PYLINTRC=${SETTINGS}/pylint/pylintrc
 export MYPYLIB=${SETTINGS}/mypylib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 
