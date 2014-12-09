@@ -1,6 +1,7 @@
+echo -e "\t~/settings/sources/bashrc"
+
 umask 022
 
-source ~/settings/sources/settingsrc.bash
 #####################################################################
 # Environment Variables
 #####################################################################
@@ -16,17 +17,17 @@ export LS_COLORS='di=36'
 #####################################################################
 # Aliases
 #####################################################################
+
 alias c="clear"
 alias cdd="cd ../"
 alias ls="ls --group-directories-first --color=auto"
 alias test="python manage.py test"
-
-pylintless() {
-     pylint $1 | less
-}
-alias pylint="pylintless"
-
 alias sourcee="source ~/.bash_profile"
 alias vim="vim -u ${SETTINGS}/vim/vimrc"
 alias vi="vim"
 
+######################################################################
+# Additional Sources
+######################################################################
+
+source ~/settings/sources/settingsrc.bash
