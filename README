@@ -7,7 +7,7 @@ Contributors:
 Basic settings for when switching to different dev environments
 
 Steps:
-    1. $ source ~/sourcery/sources/bash_profile
+    1. $ source ~/sourcery/sources/profile
     2. $ sourcery.init
 
 To cleanup extra files created by settings.init:

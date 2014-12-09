@@ -1,5 +1,7 @@
-if [ -e ${SOURCES}/bash_profile ]; then
-    source ${SOURCES}/bash_profile
+SOURCERY_PROFILE=~/sourcery/sources/profile
+
+if [ -e ${SOURCERY_PROFILE} ]; then
+    source ${SOURCERY_PROFILE}
 else
     echo -e "Bash profile template error.\n"
 fi
