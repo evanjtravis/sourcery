@@ -18,7 +18,8 @@ export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 
 alias settings.clean="make -f ${SETTINGS}/init/Makefile clean"
 alias settings.init="sourcee;make -f ${SETTINGS}/init/Makefile init;sourcee"
-alias tosettings="cd $SETTINGS"
+alias tosettings="cd ${SETTINGS}"
+alias vim="vim -u ${SETTINGS}/vim/vimrc"
 
 #####################################################################
 # Favorites
