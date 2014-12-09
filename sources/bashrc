@@ -22,11 +22,11 @@ alias c="clear"
 alias cdd="cd ../"
 alias ls="ls --group-directories-first --color=auto"
 alias test="python manage.py test"
-alias sourcee="source ~/.bash_profile"
+alias sourcery="source ~/.bash_profile"
 alias vi="vim"
 
 ######################################################################
 # Additional Sources
 ######################################################################
 
-source ${SOURCES}/settingsrc.bash
+source ${SOURCES}/sourceryrc.bash

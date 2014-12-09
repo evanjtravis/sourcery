@@ -1,4 +1,4 @@
-echo -e "\t${SOURCES}/settingsrc.bash"
+echo -e "\t${SOURCES}/sourceryrc.bash"
 
 #####################################################################
 # Environment Variables
@@ -15,9 +15,9 @@ export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 # Aliases
 #####################################################################
 
-alias settings.clean="make -f ${SETTINGS}/init/Makefile clean"
-alias settings.init="sourcee;make -f ${SETTINGS}/init/Makefile init;sourcee"
-alias tosettings="cd ${SETTINGS}"
+alias sourcery.clean="make -f ${SETTINGS}/init/Makefile clean;sourcery"
+alias sourcery.init="sourcery;make -f ${SETTINGS}/init/Makefile init;sourcery"
+alias tosource="cd ${SETTINGS}"
 alias vim="vim -u ${SETTINGS}/vim/vimrc"
 
 #####################################################################
