@@ -4,11 +4,14 @@ echo -e "\t${SOURCES}/sourceryrc.bash"
 # Environment Variables
 #####################################################################
 
+export MYLIBS=${SETTINGS}/mylibs
+export MYPYLIB=${MYLIBS}/pylib
+export MYBASHLIB=${MYLIBS}/bashlib
+
 export PYLINTRC=${SETTINGS}/pylint/pylintrc
-export MYPYLIB=${SETTINGS}/mypylib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 
-export PATH=$PATH:${SETTINGS}
+export PATH=$PATH:${SETTINGS}:${MYBASHLIB}
 export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 
 #####################################################################
