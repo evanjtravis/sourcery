@@ -1,9 +1,29 @@
 #!/bin/bash
-# Get line number ranges of a file.
+# Display line number ranges of a file to the terminal.
+# Usage: $ pinch filename start-line end-line
+# By Evan J. Coon
+
 
 FILENAME=$1
 START=$2
 END=$3
+
+ERROR="[PINCH ERROR]"
+
+if [ $# -lt 3 ]; then
+    echo "$ERROR Need three arguments: Filename Start-line End-line"
+    exit 1
+fi
+
+if [ ! -f "$FILENAME" ]; then
+    echo -e "$ERROR File does not exist. \n\t$FILENAME"
+    exit 1
+fi
+
+if [ "$START" -gt "$END" ]; then
+    echo -e "$ERROR Start line is greater than End line."
+    exit 1
+fi
 
 NUMOFLINES=$(wc -l < "$FILENAME")
 
