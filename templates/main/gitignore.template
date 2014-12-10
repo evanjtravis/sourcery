@@ -11,5 +11,6 @@
 .*.ejtravis.temp
 *.ejtravis.temp
 *.tws
+pinch.history
 get-pip.py
 TODO

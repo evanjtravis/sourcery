@@ -7,7 +7,14 @@ FILENAME=$1
 START=$2
 END=$3
 
+
+ABSPATH=$( readlink -fn $FILENAME )
 ERROR="[PINCH ERROR]"
+HISTORY="${MYLIBS}/bashlib/pinch.history"
+HISTORYLIMIT=100
+MID=$(( HISTORYLIMIT/2 ))
+TEMP="${MYBASHLIB}/tmp"
+TODAY=$(date)
 
 # Check that the number of arguments is 3
 if [ $# -lt 3 ]; then
@@ -49,15 +56,26 @@ fi
 
 # The distance from the end of the file to end-line
 ENDDIFF=$(( NUMOFLINES - END ))
-
 # For larger files, this will run more quickly. If the distance from the
 # end of the file to the end-line is less than the distance from the
 # start of the file to the start-line, then start pinching from the
 # bottom as opposed to the top.
 if [ "$START" -lt "$ENDDIFF" ]; then
     < "$FILENAME" head -n $END | tail -n +$START
-else
+else    
     < "$FILENAME" tail -n +$START | head -n $(( END-START+1 ))
+fi
+
+# Update Log
+LOG="$TODAY: $ABSPATH $START $END"
+if [ -f "$HISTORY" ]; then
+    HISTORYLINES=$(wc -l < "$HISTORY")
+    if [ "$HISTORYLINES" -ge "$HISTORYLIMIT" ]; then
+        cp $HISTORY $HISTORY.old
+        echo $LOG > $HISTORY
+    else
+        echo $LOG >> $HISTORY
+    fi
 fi
 
 # Success
