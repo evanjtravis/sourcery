@@ -68,6 +68,10 @@ fi
 
 # Update Log
 LOG="$TODAY: $ABSPATH $START $END"
+if [ -d "${MYBASHLIB}" ]; then
+    touch $HISTORY
+fi
+
 if [ -f "$HISTORY" ]; then
     HISTORYLINES=$(wc -l < "$HISTORY")
     if [ "$HISTORYLINES" -ge "$HISTORYLIMIT" ]; then

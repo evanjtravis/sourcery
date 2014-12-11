@@ -19,8 +19,9 @@ export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 #####################################################################
 
 alias sourcery="source ~/.bash_profile"
-alias sourcery.clean="make -f ${SETTINGS}/init/Makefile clean;sourcery"
-alias sourcery.init="sourcery;make -f ${SETTINGS}/init/Makefile init;sourcery"
+alias sourcery.clean="sourcery.bash --clean;sourcery"
+alias sourcery.init="sourcery;sourcery.bash --initialize;sourcery"
+alias sourcery.reset="sourcery.init; sourcery.clean"
 alias tosourcery="cd ${SETTINGS}"
 alias vim="vim -u ${SETTINGS}/vim/vimrc"
 
