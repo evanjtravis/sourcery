@@ -1,8 +1,6 @@
-# 1. If you haven't already:
-# 	 Run 'Makefile' located in this directory
-# 2. Log in as su user on the system
-# 3. Copy this file into the su-user's home directory
-# 4. Run
+# 1. Log in as su user on the system
+# 2. Copy this file into the su-user's home directory
+# 3. Run
 #
 # This makefile is designed to automate the testing of an RPM
 # within the context of an SDG virtual environment.
@@ -12,8 +10,7 @@ SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
-USR=ejtravis
-SRC=/home/$(USR)/CompassSpaceRequest/
+SRC=/home/$(USERR)/CompassSpaceRequest/
 PACKAGE=IC2gCorrelation
 VERSION=4.1b1
 WSGI=$(PACKAGE)/config/wsgi.conf.template
@@ -28,12 +25,12 @@ RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm
 SUDO=sudo /sbin/service
 SHIB=$(SUDO) shibd
 HTTPD=$(SUDO) httpd
-RPM_INFO=$(HOME)/$(PACKAGE).info
-RPM_CONTENTS=$(HOME)/$(PACKAGE).contents
+RPM_INFO=~/$(PACKAGE).info
+RPM_CONTENTS=~/$(PACKAGE).contents
 
-all: clean.o setup.o uninstall.o install.o config.o restart.o done.o
+all: clean setup uninstall install config restart done
 
-clean.o:
+clean:
 	@echo 'cleaning...'
 	rm -rf $(PACKAGE)
 	rm -rf $(DST)
@@ -43,7 +40,7 @@ clean.o:
 	rm $(RPM_INFO)
 	rm $(RPM_CONTENTS)
 
-setup.o:
+setup:
 	@echo 'setting up installation environment...'
 	mkdir -p $(HOME)/public_html/http
 	mkdir -p $(HOME)/public_html/https
@@ -51,22 +48,22 @@ setup.o:
 	cp $(SRC)$(RPM) $(DST)
 	sdg_sync
 
-uninstall.o:
+uninstall:
 	@echo 'uninstalling old package version...'
 	rpm --query --info --package $(DST)$(RPM) >> $(RPM_INFO)
 	rpm --query --list --package $(DST)$(RPM) >> $(RPM_CONTENTS)
 	rpm --erase $(PACKAGE)
 
-install.o: uninstall.o
+install: uninstall
 	@echo 'installing new package version...'
 	rpm --upgrade $(DST)$(RPM)
 
-config.o: install.o
+config: install
 	@echo 'installing config files into package...'
 	mv $(WSGI) apache/wsgi.conf
 	cp TempConfig/* $(PACKAGE)/config
 
-restart.o:
+restart:
 	@echo 'restarting services...'
 	@echo '    shibboleth'
 	$(SHIB) stop
