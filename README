@@ -12,3 +12,6 @@ Steps:
 
 To cleanup extra files created by settings.init:
     1. $ sourcery.clean
+
+To initialize and clean files created by settings.init:
+    1. $ sourcery.reset

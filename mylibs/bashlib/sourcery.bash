@@ -1,8 +1,9 @@
-#/bin/bash
+#!/bin/bash
 # Script to set up everything for 'settings' git.
 TEMPLATES_PROG=templates.bash
 
-if [ "$1" = "--initialize" ]; then
+function init
+{
     if pip install -U pip; then
         echo "Pip upgraded."
 
@@ -19,19 +20,51 @@ if [ "$1" = "--initialize" ]; then
 
     # Install non-pip favorites
     favorites.bash
+}
 
-    # Install template files to their respective directories.
-    $TEMPLATES_PROG --initialize
-    echo "Sourcery initialization complete."
+function clean
+{
+    :
+}
 
-elif [ "$1" = "--clean" ]; then
-    $TEMPLATES_PROG --clean
-    echo "Sourcery clean complete."
+function reset
+{
+    init
+    clean
+}
 
-else
-    echo "Incorrect sourcery.bash invocation."
-    exit 1
+function message
+{
+    case "$1" in
+        "$INIT") echo "Sourcery initialization complete."
+            ;;
+        "$CLEAN") echo "Sourcery clean complete."
+            ;;
+        "$RESET") echo "Sourcery reset complete."
+            ;;
+        *)
+            echo "Incorrect invocation of sourcery."
+            ;;
+    esac
+}
 
-fi
+case "$1" in
+    "$INIT") init
+        ;;
+    "$CLEAN") clean
+        ;;
+    "$RESET") reset
+        ;;
+    *) :
+        ;;
+esac
 
-echo "----------> Done"
+# Either install templates, clean old templates, or both, depending on
+# invocation.
+$TEMPLATES_PROG $1
+
+# Notify user of success/ failure.
+message $1
+
+# Success
+exit 0
