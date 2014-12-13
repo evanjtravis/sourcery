@@ -19,6 +19,19 @@ OLD = ''
 SRC = ''
 
 
+class Opts():
+    """Class whose members can be accessed in the same way as the
+    options object in the OptionParser object.
+    """
+    def __init__(self, template, name, prefix, suffix):
+        """Initialize the Opts object.
+        """
+        self.template = template
+        self.name = name
+        self.prefix = prefix
+        self.suffix = suffix
+
+
 def _check_for_old(filename):
     """If the given filename is in the DST directory, an old copy is made.
     """
@@ -53,6 +66,19 @@ def _get_templates():
     return templates
 
 
+def _listify_args(args):
+    """Returns a list whose elements are organized and accessed in the same
+    way as the args object within the OptionParser object.
+    Takes a list of arguments and determines if they are None.
+    args order: [source, destination]
+    """
+    ret_args = []
+    for elem in args:
+        if elem != None:
+            ret_args.append(elem)
+    return ret_args
+
+
 def _validate(options, args):
     """Set global variables.
     """
@@ -60,9 +86,9 @@ def _validate(options, args):
     global DST
     global MYNAME
     global TEMPLATE
-    global OLD
     global PREFIX
     global SUFFIX
+    global OLD
 
     if len(args) == 0:
         raise Exception("Need at least 1 argument: SRC")
@@ -82,6 +108,8 @@ def _validate(options, args):
     if len(TEMPLATE) < 2:
         raise Exception("Invalid Template argument. %s" % TEMPLATE)
     MYNAME = options.name
+    PREFIX = options.prefix
+    SUFFIX = options.suffix
     OLD = '.OLD.%s.%s.%s.%s.%s.%s.%s.temp' % (
         datetime.datetime.now().year,
         datetime.datetime.now().month,
@@ -91,13 +119,41 @@ def _validate(options, args):
         datetime.datetime.now().second,
         MYNAME
     )
-    PREFIX = options.prefix
-    SUFFIX = options.suffix
+
+#####################################################################
+
+def _finish(options, args):
+    """Execute the steps that the command line invoked and program invoked
+    functions have in common.
+    """
+    _validate(options, args)
+    templates = _get_templates()
+    _copy_all(templates)
+
+
+def copy_templates(
+        source,
+        destination=None,
+        template=TEMPLATE,
+        name=MYNAME,
+        prefix=PREFIX,
+        suffix=SUFFIX):
+    """Copy all '.template' files from source to destination directory.
+    Files are renamed without '.template' exention. Files can be renamed
+    with a common prefix or suffix.
+    This command is invoked by a python program.
+    """
+    options = Opts(template, name, prefix, suffix)
+    args = _listify_args([source, destination])
+    _finish(options, args)
+    
 
 
 def main():
     """Copy all '.template' files from source to destination directory.
-    Files are renamed without '.template' exention.
+    Files are renamed without '.template' exention. Files can be renamed
+    with a common prefix or suffix.
+    This command is invoked by the command line.
     """
     parser = OptionParser()
     parser.add_option(
@@ -138,10 +194,7 @@ def main():
         help='When files are copied, they are copied with the suffix.'
     )
     (options, args) = parser.parse_args()
-    _validate(options, args)
-    templates = _get_templates()
-    _copy_all(templates)
-    sys.exit(0)
+    _finish(options, args)
 
 
 if __name__ == "__main__":
