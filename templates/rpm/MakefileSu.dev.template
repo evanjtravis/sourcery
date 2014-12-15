@@ -10,7 +10,7 @@ SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
-SRC=/home/$(USER)/CompassSpaceRequest
+SRC=/home/ejtravis/CompassSpaceRequest
 PACKAGE=IC2gCorrelation
 VERSION=4.1b1
 WSGI=$(PACKAGE)/config/wsgi.conf.template
@@ -35,10 +35,8 @@ clean:
 	rm -rf $(PACKAGE)
 	rm -rf $(DST)
 	rm -rf $(HOME)/public_html
-	touch $(RPM_INFO)
-	touch $(RPM_CONTENTS)
-	rm $(RPM_INFO)
-	rm $(RPM_CONTENTS)
+	rm -f $(RPM_INFO)
+	rm -f $(RPM_CONTENTS)
 
 setup:
 	@echo 'setting up installation environment...'
