@@ -1,6 +1,0 @@
-export SETTINGS=~/sourcery
-export SOURCES=${SETTINGS}/sources
-
-echo -e "Sourced:\n\t${SOURCES}/profile"
-source ${SOURCES}/bashrc
-

@@ -10,7 +10,7 @@ SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
-SRC=/home/$(USERR)/CompassSpaceRequest/
+SRC=/home/$(USER)/CompassSpaceRequest/
 PACKAGE=IC2gCorrelation
 VERSION=4.1b1
 WSGI=$(PACKAGE)/config/wsgi.conf.template

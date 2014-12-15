@@ -1,4 +1,4 @@
-SOURCERY_PROFILE=~/sourcery/sources/profile
+SOURCERY_PROFILE=/home/ejtravis/sourcery/sources/profile.bash
 
 if [ -e ${SOURCERY_PROFILE} ]; then
     source ${SOURCERY_PROFILE}
