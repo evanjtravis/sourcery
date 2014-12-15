@@ -1,0 +1,18 @@
+echo -e "\t${SU}/bashrc"
+
+SUDO="sudo /sbin/service"
+alias startshib="${SUDO} shibd start"
+alias startweb="${SUDO} httpd start"
+alias stobshib="${SUDO} httpd stop"
+alias stopweb="${SUDO} httpd stop"
+
+alias shibrestart="stobshib;startshib"
+alias webrestart="stopweb;startweb"
+
+alias restartall="webrestart;shibrestart"
+
+######################################################################
+# Additional Sources
+######################################################################
+
+source ${ALL}/sourceryrc.bash

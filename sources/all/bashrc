@@ -1,0 +1,25 @@
+echo -e "\t${SOURCES}/all/bashrc"
+
+#####################################################################
+# Aliases
+#####################################################################
+
+alias c="clear"
+alias djtest="python manage.py test"
+alias ls="ls --group-directories-first --color=auto"
+alias vi="vim"
+
+######################################################################
+# Additional Sources
+######################################################################
+ALL=${SOURCES}/all
+USR=${SOURCES}/user
+SU=${SOURCES}/service-user
+
+if [ "$MYNAME" == "$USER" ]; then
+    source ${USR}/bashrc
+    source ${USR}/sourceryrc.bash
+else
+    source ${SU}/bashrc
+    source ${SU}/sourceryrc.bash
+fi
