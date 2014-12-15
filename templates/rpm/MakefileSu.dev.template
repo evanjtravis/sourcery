@@ -10,14 +10,14 @@ SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
-SRC=/home/$(USER)/CompassSpaceRequest/
+SRC=/home/$(USER)/CompassSpaceRequest
 PACKAGE=IC2gCorrelation
 VERSION=4.1b1
 WSGI=$(PACKAGE)/config/wsgi.conf.template
 #####################################################################
 # Variable(s) that 'might' need to change.
 #####################################################################
-DST=$(HOME)/rpms/
+DST=$(HOME)/rpms
 #####################################################################
 # Variables that in all likelihood will not need to change.
 #####################################################################
@@ -34,7 +34,7 @@ clean:
 	@echo 'cleaning...'
 	rm -rf $(PACKAGE)
 	rm -rf $(DST)
-	rm -rf $(HOME)public_html
+	rm -rf $(HOME)/public_html
 	touch $(RPM_INFO)
 	touch $(RPM_CONTENTS)
 	rm $(RPM_INFO)
@@ -45,18 +45,18 @@ setup:
 	mkdir -p $(HOME)/public_html/http
 	mkdir -p $(HOME)/public_html/https
 	mkdir $(DST)
-	cp $(SRC)$(RPM) $(DST)
+	cp $(SRC)/$(RPM) $(DST)
 	sdg_sync
 
 uninstall:
 	@echo 'uninstalling old package version...'
-	rpm --query --info --package $(DST)$(RPM) >> $(RPM_INFO)
-	rpm --query --list --package $(DST)$(RPM) >> $(RPM_CONTENTS)
+	rpm --query --info --package $(DST)/$(RPM) >> $(RPM_INFO)
+	rpm --query --list --package $(DST)/$(RPM) >> $(RPM_CONTENTS)
 	rpm --erase $(PACKAGE)
 
 install: uninstall
 	@echo 'installing new package version...'
-	rpm --upgrade $(DST)$(RPM)
+	rpm --upgrade $(DST)/$(RPM)
 
 config: install
 	@echo 'installing config files into package...'
