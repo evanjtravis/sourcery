@@ -50,9 +50,10 @@ function message
             ;;
     esac
 }
-if [ ! -z "$INIT" ]; then
-    OPT="$ERROR"
+if [ "$USER" != "$MYNAME" ]; then
+    OPT=$ERROR
 fi
+
 
 case "$OPT" in
     "$INIT") init

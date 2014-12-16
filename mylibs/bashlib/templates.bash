@@ -29,7 +29,8 @@ function init
     # Base templates for DOT files in the home directory
     python ${COPY} -p . ${MAIN_SRC} ${MAIN_DST}
     # Base templates for makefiles when building an rpm
-    python ${COPY} ${RPM_SRC} ${RPM_DST}
+    # python ${COPY} ${RPM_SRC} ${RPM_DST}
+    # Commented out until better RPM_DST is found
 }
 
 function clean
@@ -42,7 +43,8 @@ function reset
     init
     clean
 }
-if [ ! -z "$INIT" ]; then
+
+if [ "$USER" != "$MYNAME" ]; then
     OPT=$ERROR
 fi
 

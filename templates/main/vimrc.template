@@ -2,12 +2,11 @@ let user=$USER
 let myname=$MYNAME
 set nocompatible           " be iMproved, required
 set nocp
-filetype off                " required
 if user == myname
     """"""""""""""""""""""""""""""""""""""
     " Install plugins for vim using VUNDLE
     """"""""""""""""""""""""""""""""""""""
-    
+    filetype off                " required
     " Set the runtime path to include Vundle, then initialize
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
@@ -33,7 +32,6 @@ if user == myname
     " End of Vim plugins, All plugins should be added before this line.
     call vundle#end()           " required
     filetype plugin indent on   " required
-    
     " Brief help
     " :PluginList       - lists configured plugins
     " :PluginInstall    - installs plugins; append '!' to update
@@ -50,7 +48,6 @@ set hlsearch                    " searched terms are highlighted
 set backspace=2
 set background=light
 set number nuw=6 columns=85		" line numbers
-
 set tabstop=4		" size of a hard tabstop
 set shiftwidth=4	" size of an indent
 set smarttab		" make [tab] insert indents instead of tabs @ line start
@@ -67,6 +64,11 @@ highlight Comment ctermfg=Red    " Comment Color syntax highlighting
 highlight Constant ctermfg=2     " Green non-bold
 highlight Type ctermfg=Magenta   " Type Color syntax highlighting
 hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
+
+"""""""""""""""""""""""""""""""
+" Auto Commands
+"""""""""""""""""""""""""""""""
+autocmd FileType make setlocal expandtab! smarttab!
 
 """""""""""""""""""""""""""""""
 " PyLint
