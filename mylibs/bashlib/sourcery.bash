@@ -1,6 +1,8 @@
 #!/bin/bash
 # Script to set up everything for 'settings' git.
 TEMPLATES_PROG=templates.bash
+ERROR="FOOBAR"
+OPT="$1"
 
 function init
 {
@@ -48,8 +50,11 @@ function message
             ;;
     esac
 }
+if [ ! -z "$INIT" ]; then
+    OPT="$ERROR"
+fi
 
-case "$1" in
+case "$OPT" in
     "$INIT") init
         ;;
     "$CLEAN") clean
@@ -62,10 +67,10 @@ esac
 
 # Either install templates, clean old templates, or both, depending on
 # invocation.
-$TEMPLATES_PROG $1
+$TEMPLATES_PROG $OPT
 
 # Notify user of success/ failure.
-message $1
+message $OPT
 
 # Success
 exit 0

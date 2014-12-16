@@ -4,6 +4,6 @@ echo -e "\t${SU}/sourceryrc.bash"
 # Aliases
 #####################################################################
 
-alias v="vim -u ${VIMRC}"
+alias vimm="vim -u ${VIMRC}"
 
 

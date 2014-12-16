@@ -10,6 +10,9 @@ RPM_SRC=${TEMPLATES}/rpm
 RPM_DST=${RPM_SRC}
 
 OLD=.${USER}.temp
+OPT="$1"
+
+ERROR="FOOBAR"
 
 function removeold
 {
@@ -39,8 +42,11 @@ function reset
     init
     clean
 }
+if [ ! -z "$INIT" ]; then
+    OPT=$ERROR
+fi
 
-case "$1" in
+case "$OPT" in
     "$INIT") init
         ;;
     "$CLEAN") clean

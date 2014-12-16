@@ -1,15 +1,15 @@
 echo -e "\t${SU}/bashrc"
 
 SUDO="sudo /sbin/service"
-alias startshib="${SUDO} shibd start"
-alias startweb="${SUDO} httpd start"
-alias stobshib="${SUDO} httpd stop"
-alias stopweb="${SUDO} httpd stop"
+alias "shib.start"="${SUDO} shibd start"
+alias "shib.stop"="${SUDO} httpd stop"
+alias "web.start"="${SUDO} httpd start"
+alias "web.stop"="${SUDO} httpd stop"
 
-alias shibrestart="stobshib;startshib"
-alias webrestart="stopweb;startweb"
+alias "shib.restart"="shib.stop;shib.start"
+alias "web.restart"="web.stop;web.start"
 
-alias restartall="webrestart;shibrestart"
+alias "service.restart"="web.restart;shib.restart"
 
 ######################################################################
 # Additional Sources
