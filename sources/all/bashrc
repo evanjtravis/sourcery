@@ -1,7 +1,19 @@
 echo -e "\t${SOURCES}/all/bashrc"
 
+#####################################################################
+# Environment Variables
+#####################################################################
 export LS_COLORS='di=36'
+export MYLIBS=${SETTINGS}/mylibs
+export MYPYLIB=${MYLIBS}/pylib
+export MYBASHLIB=${MYLIBS}/bashlib
 
+export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
+
+export PATH=$PATH:${SETTINGS}:${MYBASHLIB}
+export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
+
+export VIMRC=${MYHOME}/.vimrc
 #####################################################################
 # Aliases
 #####################################################################
@@ -21,3 +33,4 @@ else
     source ${SOURCES}/service-user/bashrc
     source ${SOURCES}/service-user/sourceryrc.bash
 fi
+
