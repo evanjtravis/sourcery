@@ -68,7 +68,7 @@ hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 """""""""""""""""""""""""""""""
 " Auto Commands
 """""""""""""""""""""""""""""""
-autocmd FileType make setlocal expandtab! smarttab!
+autocmd FileType make setlocal noexpandtab
 
 """""""""""""""""""""""""""""""
 " PyLint
