@@ -76,5 +76,5 @@ restart:
 	$(HTTPD) stop
 	$(HTTPD) start
 
-done.o:
+done:
 	@echo '---------->DONE'
