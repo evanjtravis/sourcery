@@ -6,27 +6,33 @@
 # within the context of an SDG virtual environment.
 #
 # This makefile should be placed in the home directory of the su-user.
+include $(SETTINGS)/templates/rpm/util.mk
+
 SHELL=/bin/bash
 #####################################################################
 # Variable(s) that will definitely need to change.
 #####################################################################
-SRC=/home/ejtravis/CompassSpaceRequest
-PACKAGE=IC2gCorrelation
-VERSION=4.1b1
-WSGI=$(PACKAGE)/config/wsgi.conf.template
+SRC= # Where the created RPM resides on the user side
+PACKAGE= # The package name of the RPM
+VERSION= # The version of the release
+WSGI= # The location of the wsgi.conf in relation to the installation directory
+
 #####################################################################
 # Variable(s) that 'might' need to change.
 #####################################################################
-DST=$(HOME)/rpms
+DST= # The destination of the RPM on the service-user side
+
 #####################################################################
 # Variables that in all likelihood will not need to change.
 #####################################################################
-RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm
-SUDO=sudo /sbin/service
-SHIB=$(SUDO) shibd
-HTTPD=$(SUDO) httpd
-RPM_INFO=~/$(PACKAGE).info
-RPM_CONTENTS=~/$(PACKAGE).contents
+RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm # Full name of the RPM
+SUDO=sudo /sbin/service # First part of command to restart services
+SHIB=$(SUDO) shibd # Second part of command to restart shibboleth
+HTTPD=$(SUDO) httpd # Second part of command to restart apache
+RPM_INFO=~/$(PACKAGE).info # Location of file to be created containing info on RPM
+RPM_CONTENTS=~/$(PACKAGE).contents # Location of file to be created containing the contents of the RPM
+
+$(call check_defined, DST PACKAGE SRC VERSION WSGI)
 
 all: clean setup uninstall install config restart done
 

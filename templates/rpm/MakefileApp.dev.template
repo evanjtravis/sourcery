@@ -4,11 +4,19 @@
 #
 # This makefile is designed to automate the building of an RPM
 # within the context of SDG virtual environment and python distutils.
-PACKAGE=ComputerRegistration
-TMP=$(HOME)/tmp
-PROJ_PATH=$(HOME)/$(PACKAGE)
-VERSION=5.4rc1
-RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm
+
+include $(SETTINGS)/templates/rpm/util.mk
+
+PACKAGE= # The name of the RPM package
+TMP= # Directory where RPM is stored upon generation
+PROJ_PATH= # Where RPM directories are created during generation (i.e. build, dist)
+VERSION= # The release version of the RPM
+#####################################################################
+# Variables unlikely to change.
+#####################################################################
+RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm # The full name of the RPM
+
+$(call check_defined, PACKAGE TMP PROJ_PATH VERSION)
 
 all: clean build permission done
 
