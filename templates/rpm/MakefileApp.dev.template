@@ -10,13 +10,14 @@ include $(SETTINGS)/templates/rpm/util.mk
 PACKAGE= # The name of the RPM package
 TMP= # Directory where RPM is stored upon generation
 PROJ_PATH= # Where RPM directories are created during generation (i.e. build, dist)
+SERVICE= # The service-user name of the application (e.g. security-tools)
 VERSION= # The release version of the RPM
 #####################################################################
 # Variables unlikely to change.
 #####################################################################
 RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm # The full name of the RPM
 
-$(call check_defined, PACKAGE TMP PROJ_PATH VERSION)
+$(call check_defined, PACKAGE TMP PROJ_PATH SERVICE VERSION)
 
 all: clean build permission done
 
