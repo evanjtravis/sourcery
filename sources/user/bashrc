@@ -6,7 +6,7 @@ umask 022
 #####################################################################
 
 export SERVICE=crl-svcs
-export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:${HOME}/twee
+export PATH=$PATH:/services/$SERVICE/sdg/share/python/django/bin:${HOME}/twee:${MYBASHLIB}/init
 export PYTHONPATH=$PYTHONPATH:/services/$SERVICE/sdg/share/python/django:/services/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages
 
 ######################################################################

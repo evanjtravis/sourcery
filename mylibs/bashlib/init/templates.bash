@@ -12,8 +12,6 @@ RPM_DST=${RPM_SRC}
 OLD=.${USER}.temp
 OPT="$1"
 
-ERROR="FOOBAR"
-
 function removeold
 {
     while [ "$1" != "" ]; do
@@ -30,7 +28,7 @@ function init
     python ${COPY} -p . ${MAIN_SRC} ${MAIN_DST}
     # Base templates for makefiles when building an rpm
     # python ${COPY} ${RPM_SRC} ${RPM_DST}
-    # Commented out until better RPM_DST is found
+    # TODO Commented out until better RPM_DST is found
 }
 
 function clean
@@ -43,10 +41,6 @@ function reset
     init
     clean
 }
-
-if [ "$USER" != "$MYNAME" ]; then
-    OPT=$ERROR
-fi
 
 case "$OPT" in
     "$INIT") init

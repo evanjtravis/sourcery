@@ -14,9 +14,6 @@ export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
 
 export VIMRC=${MYHOME}/.vimrc
 
-export INIT='--initialize'
-export CLEAN='--clean'
-export RESET='--reset'
 #####################################################################
 # Aliases
 #####################################################################
