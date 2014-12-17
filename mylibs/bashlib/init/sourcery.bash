@@ -3,9 +3,9 @@
 ERROR="FOOBAR"
 OPT="$1"
 
-INIT='--initialize'
-CLEAN='--clean'
-RESET='--reset'
+export INIT='--initialize'
+export CLEAN='--clean'
+export RESET='--reset'
 
 function init
 {
