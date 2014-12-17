@@ -1,5 +1,9 @@
 echo -e "\t${SU}/bashrc"
 
+#####################################################################
+# Aliases
+#####################################################################
+
 #alias "shib.start"="sudo /sbin/service shibd start"
 #alias "shib.stop"="sudo /sbin/service httpd stop"
 #alias "web.start"="sudo /sbin/service httpd start"
@@ -10,8 +14,6 @@ echo -e "\t${SU}/bashrc"
 
 #alias "service.restart"="web.restart;shib.restart"
 
-######################################################################
-# Additional Sources
-######################################################################
+alias vim="vim -u ${VIMRC}"
+alias vi="vim"
 
-source ${ALL}/sourceryrc.bash
