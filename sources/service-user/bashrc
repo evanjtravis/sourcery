@@ -1,14 +1,14 @@
 echo -e "\t${SU}/bashrc"
 
-alias "shib.start"="sudo /sbin/service shibd start"
-alias "shib.stop"="sudo /sbin/service httpd stop"
-alias "web.start"="sudo /sbin/service httpd start"
-alias "web.stop"="sudo /sbin/service httpd stop"
+#alias "shib.start"="sudo /sbin/service shibd start"
+#alias "shib.stop"="sudo /sbin/service httpd stop"
+#alias "web.start"="sudo /sbin/service httpd start"
+#alias "web.stop"="sudo /sbin/service httpd stop"
 
-alias "shib.restart"="shib.stop;shib.start"
-alias "web.restart"="web.stop;web.start"
+#alias "shib.restart"="shib.stop;shib.start"
+#alias "web.restart"="web.stop;web.start"
 
-alias "service.restart"="web.restart;shib.restart"
+#alias "service.restart"="web.restart;shib.restart"
 
 ######################################################################
 # Additional Sources
