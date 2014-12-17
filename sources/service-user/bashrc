@@ -1,4 +1,4 @@
-echo -e "\t${SU}/bashrc"
+echo -e "\t${SOURCES}/service-user/bashrc"
 
 #####################################################################
 # Aliases
