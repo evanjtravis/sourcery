@@ -31,7 +31,7 @@ fi
 #####################################################################
 
 if [ -d "$SDIR/$SERVICE" ]; then
-    alias service="su - $SERVICE"
+    alias service="echo -e '\n***Logging onto \"$SERVICE\"';su - $SERVICE"
 elif [ -d "$SDIR" ]; then
     alias service="echo '***Unrecognized service.'"
 else

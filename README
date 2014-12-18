@@ -6,12 +6,21 @@ Contributors:
 
 Basic settings for when switching to different dev environments
 
-Steps:
-    1. $ source ~/sourcery/sources/profile.bash
-    2. $ sourcery.init
+Steps as user:
+    To initialize sourcery:
+        1. $ source ~/sourcery/sources/profile.bash
+        2. $ sourcery.init
 
-To cleanup extra files created by settings.init:
-    1. $ sourcery.clean
+    To cleanup extra files created by settings.init:
+        1. $ sourcery.clean
 
-To initialize and clean files created by settings.init:
-    1. $ sourcery.reset
+    To initialize and clean files created by settings.init:
+        1. $ sourcery.reset
+
+Steps as service-user:
+    To set useful aliases:
+        1. $ source /home/YOUR_USER_NAME/.bash_profile
+
+To re-source the pertinent files as either user:
+    1. $ sourcery
+
