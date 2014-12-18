@@ -3,8 +3,8 @@ echo -e "\t${SOURCES}/all/bashrc"
 #####################################################################
 # Functions
 #####################################################################
-export PATH
-export PYTHONPATH
+export PATH=/usr/local/bin:/bin:/usr/bin
+export PYTHONPATH=
 
 add_to_path(){
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
