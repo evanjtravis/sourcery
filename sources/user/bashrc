@@ -12,13 +12,14 @@ SDIR=/services
 # Environment Variables
 #####################################################################
 
+add_to_path $HOME/twee
+
 export BASHINIT=$MYBASHLIB/init
 export PYINIT=$MYPYLIB/init
-add_to_path $HOME/twee
+
 add_to_path $BASHINIT
 add_to_pythonpath $PYINIT
-#export PATH=$PATH:$HOME/twee:$BASHINIT
-#export PYTHONPATH=$PYTHONPATH:$PYINIT
+
 if [ -d "$SDIR" ]; then
     export SERVICE=$(python $PYINIT/get_service.py)
     if [ -d "$SDIR/$SERVICE" ]; then
@@ -28,8 +29,6 @@ if [ -d "$SDIR" ]; then
         add_to_pythonpath $SDIR/$SERVICE/share/python
         add_to_pythonpath /usr/lib/python2.6/site-packages
         add_to_pythonpath /usr/lib64/python2.6/site-packages
-        #export PATH=$PATH:$SDIR/$SERVICE/sdg/share/python/django/bin
-        #export PYTHONPATH=$PYTHONPATH:$SDIR/$SERVICE/sdg/share/python/django:$SDIR/$SERVICE/share/python:/usr/lib/python2.6/site-packages:/usr/lib64/python2.6/site-packages
     else
         echo "***Unrecognized service: $SERVICE."
     fi

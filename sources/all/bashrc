@@ -6,12 +6,14 @@ echo -e "\t${SOURCES}/all/bashrc"
 export PATH=/usr/local/bin:/bin:/usr/bin
 export PYTHONPATH=
 
+# Only add to the path if it doesn't already exist
 add_to_path(){
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="${PATH:+"$PATH:"}$1"
     fi
 }
 
+# Only add to the pythonpath if it doesn't already exist
 add_to_pythonpath(){
     if [ -d "$1" ] && [[ ":$PYTHONPATH:" != *":$1:"* ]]; then
         PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}$1"
@@ -36,17 +38,12 @@ export LS_COLORS='di=36'
 export MYLIBS=${SETTINGS}/mylibs
 export MYPYLIB=${MYLIBS}/pylib
 export MYBASHLIB=${MYLIBS}/bashlib
-
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
+export VIMRC=${MYHOME}/.vimrc
 
 add_to_path ${SETTINGS}
 add_to_path ${MYBASHLIB}
-
 add_to_pythonpath ${MYPYLIB}
-#export PATH=$PATH:${SETTINGS}:${MYBASHLIB}
-#export PYTHONPATH=$PYTHONPATH:${MYPYLIB}
-
-export VIMRC=${MYHOME}/.vimrc
 
 #####################################################################
 # Aliases
