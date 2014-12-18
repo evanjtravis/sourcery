@@ -45,10 +45,10 @@ else
     alias service="echo '***SERVICE NOT AVAILABLE ON SYSTEM.'"
 fi
 
+alias cdsource="cd $SETTINGS"
 alias sourcery.clean="sourcery.bash --clean;sourcery"
 alias sourcery.init="sourcery;sourcery.bash --initialize;sourcery"
 alias sourcery.reset="sourcery.bash --reset;sourcery"
-alias cdsource="cd $SETTINGS"
 alias vi="vim"
 
 #####################################################################
