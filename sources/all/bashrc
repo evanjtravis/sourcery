@@ -1,6 +1,16 @@
 echo -e "\t${SOURCES}/all/bashrc"
 
 #####################################################################
+# Temporary Variables
+#####################################################################
+
+USR=${SOURCES}/user
+SU=${SOURCES}/service-user
+
+USRrc=${USR}/bashrc
+SUrc=${SU}/bashrc
+
+#####################################################################
 # Environment Variables
 #####################################################################
 
@@ -30,9 +40,9 @@ alias sourcery="source ${MYHOME}/.bash_profile"
 ######################################################################
 
 if [ "$MYNAME" == "$USER" ]; then
-    source ${SOURCES}/user/bashrc
+    source ${USRrc}
 else
-    source ${SOURCES}/service-user/bashrc
+    source ${SUrc}
 fi
 
 

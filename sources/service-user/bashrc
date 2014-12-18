@@ -1,13 +1,19 @@
-echo -e "\t${SOURCES}/service-user/bashrc"
+echo -e "\t${SUrc}"
+
+#####################################################################
+# Temporary Variables
+#####################################################################
+
+SUDO="sudo /sbin/service"
 
 #####################################################################
 # Aliases
 #####################################################################
 
-#alias "shib.start"="sudo /sbin/service shibd start"
-#alias "shib.stop"="sudo /sbin/service httpd stop"
-#alias "web.start"="sudo /sbin/service httpd start"
-#alias "web.stop"="sudo /sbin/service httpd stop"
+alias "shib.start"="${SUDO} shibd start"
+alias "shib.stop"="${SUDO} httpd stop"
+alias "web.start"="${SUDO} httpd start"
+alias "web.stop"="${SUDO} httpd stop"
 
 #alias "shib.restart"="shib.stop;shib.start"
 #alias "web.restart"="web.stop;web.start"

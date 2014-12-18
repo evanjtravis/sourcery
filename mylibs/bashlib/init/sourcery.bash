@@ -13,9 +13,9 @@ function init
         echo "Pip upgraded."
 
     elif [ ! -d "/services" ]; then
-        python ${MYPYLIB}/get_get_pip.py
-        chmod 755 ${MYPYLIB}/get-pip.py
-        python ${MYPYLIB}/get-pip.py --user
+        python ${PYINIT}/get_get_pip.py
+        chmod 755 ${PYINIT}/get-pip.py
+        python ${PYINIT}/get-pip.py --user
 
     else
         :
