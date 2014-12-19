@@ -6,17 +6,37 @@ echo -e "\t${SOURCES}/all/bashrc"
 export PATH=/usr/local/bin:/bin:/usr/bin
 export PYTHONPATH=
 
-# Only add to the path if it doesn't already exist
+# Only add to the PATH if it exists and if it is not already a member of
+# PATH
 add_to_path(){
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
+    local DIRECTORY=$1
+    if [ -d "$DIRECTORY" ]; then
+        if [[ ":$PATH:" != *":$DIRECTORY:"* ]]; then
+            PATH="${PATH:+"$PATH:"}$DIRECTORY"
+        else
+            echo -e \
+            "***DUPLICATE DIRECTORY EXCLUDED FROM PATH:\n\t$DIRECTORY"
+        fi
+    else
+        echo -e \
+        "***NONEXISTENT DIRECTORY EXCLUDED FROM PATH:\n\t$DIRECTORY"
     fi
 }
 
-# Only add to the pythonpath if it doesn't already exist
+# Only add to the pythonpath if it exists and if it is not already a member
+# of PYTHONPATH
 add_to_pythonpath(){
-    if [ -d "$1" ] && [[ ":$PYTHONPATH:" != *":$1:"* ]]; then
-        PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}$1"
+    local DIRECTORY=$1
+    if [ -d "$DIRECTORY" ]; then
+        if [[ ":$PYTHONPATH:" != *":$DIRECTORY:"* ]]; then
+        PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}$DIRECTORY"
+        else
+            echo -e \
+            "***DUPLICATE DIRECTORY EXCLUDED FROM PYTHONPATH:\n\t$DIRECTORY"
+        fi
+    else
+        echo -e \
+        "***NONEXISTENT DIRECTORY EXCLUDED FROM PYTHONPATH:\n\t$DIRECTORY"
     fi
 }
 

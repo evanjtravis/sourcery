@@ -1,6 +1,13 @@
-export MYNAME=ejtravis
-export MYHOME=/home/${MYNAME}
+NAME=$(uname -o)
+export MYNAME
 
+if [ "$NAME" == "Cygwin" ]; then
+    MYNAME=$USER
+else
+    MYNAME=$TTY_OWNER
+fi
+
+export MYHOME=/home/${MYNAME}
 export SETTINGS=${MYHOME}/sourcery
 export SOURCES=${SETTINGS}/sources
 

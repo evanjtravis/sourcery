@@ -9,20 +9,19 @@ export RESET='--reset'
 
 function init
 {
-    if pip install -U pip; then
-        echo "Pip upgraded."
+    if pip -V 2>/dev/null; then
+        echo "Pip exists on system."
+        pip -V # Print the current pip version
+        # Install favorite python packages using pip
+        get_pip_favorites.bash
 
     elif [ ! -d "/services" ]; then
         python ${PYINIT}/get_get_pip.py
         chmod 755 ${PYINIT}/get-pip.py
         python ${PYINIT}/get-pip.py --user
-
     else
-        :
+        echo "Pip cannot be installed (by you) on this system."
     fi
-
-    # Install favorite python packages.
-    get_pip_favorites.bash
 
     # Install non-pip favorites
     favorites.bash
