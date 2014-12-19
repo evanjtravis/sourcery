@@ -84,28 +84,6 @@ print_list(){
 # Environment Variables
 #####################################################################
 
-# Check for /usr/local/sdg symlink to /services/<service>/sdg
-if [ -d "$SDG" ]; then
-    add_to_path $SDG/share/python/django/bin
-    
-    add_to_pythonpath $SDG/share/python/django
-    add_to_pythonpath $SDG/share/python
-else
-    # Add /services/<service>/sdg to paths
-    if [ -d "$SDIR" ]; then
-        add_error "$SDG symlink not detected."
-        export SERVICE=$(python ${PYINIT}/get_service.py)
-        if [ -d "${SDIR}/${SERVICE}" ]; then
-            add_to_path ${SDIR}/${SERVICE}/sdg/share/python/django/bin
-        
-            add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python/django
-            add_to_pythonpath ${SDIR}/${SERVICE}/share/python
-        else
-            add_error "Unrecognized service: $SERVICE."
-        fi
-    fi
-fi
-
 export LS_COLORS='di=36'
 export MYLIBS=${SETTINGS}/mylibs
 export MYPYLIB=${MYLIBS}/pylib
@@ -119,6 +97,28 @@ add_to_path ${MYBASHLIB}
 add_to_pythonpath ${MYPYLIB}
 add_to_pythonpath /usr/lib/python2.6/site-packages
 add_to_pythonpath /usr/lib64/python2.6/site-packages
+
+if [ -d "${SDIR}" ]; then
+    export SERVICE=$(python ${MYPYLIB}/get_service.py)
+    # Check for /usr/local/sdg symlink to /services/<service>/sdg
+    if [ -d "$SDG" ]; then
+        add_to_path $SDG/share/python/django/bin
+    
+        add_to_pythonpath $SDG/share/python/django
+        add_to_pythonpath $SDG/share/python
+    else
+        # Add /services/<service>/sdg to paths if symlink not found
+        add_error "$SDG symlink not detected."
+        if [ -d "${SDIR}/${SERVICE}" ]; then
+            add_to_path ${SDIR}/${SERVICE}/sdg/share/python/django/bin
+        
+            add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python/django
+            add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python
+        else
+            add_error "No su entry for $HOST. See ${MYPYLIB}/get_service.py"
+        fi
+    fi
+fi
 
 #####################################################################
 # Aliases
