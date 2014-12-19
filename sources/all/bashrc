@@ -1,4 +1,16 @@
 echo -e "\t${SOURCES}/all/bashrc"
+#####################################################################
+# Temporary Variables
+#####################################################################
+declare -a py_path_rejects=()
+declare -a path_rejects=()
+
+USR=${SOURCES}/user
+SU=${SOURCES}/service-user
+
+USRrc=${USR}/bashrc
+SUrc=${SU}/bashrc
+
 
 #####################################################################
 # Functions
@@ -14,12 +26,10 @@ add_to_path(){
         if [[ ":$PATH:" != *":$DIRECTORY:"* ]]; then
             PATH="${PATH:+"$PATH:"}$DIRECTORY"
         else
-            echo -e \
-            "***DUPLICATE DIRECTORY EXCLUDED FROM PATH:\n\t$DIRECTORY"
+            path_rejects=(${path_rejects[@]} $DIRECTORY)
         fi
     else
-        echo -e \
-        "***NONEXISTENT DIRECTORY EXCLUDED FROM PATH:\n\t$DIRECTORY"
+        path_rejects=(${path_rejects[@]} $DIRECTORY)
     fi
 }
 
@@ -31,24 +41,21 @@ add_to_pythonpath(){
         if [[ ":$PYTHONPATH:" != *":$DIRECTORY:"* ]]; then
         PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}$DIRECTORY"
         else
-            echo -e \
-            "***DUPLICATE DIRECTORY EXCLUDED FROM PYTHONPATH:\n\t$DIRECTORY"
+            py_path_rejects=(${py_path_rejects[@]} $DIRECTORY)
         fi
     else
-        echo -e \
-        "***NONEXISTENT DIRECTORY EXCLUDED FROM PYTHONPATH:\n\t$DIRECTORY"
+        py_path_rejects=(${py_path_rejects[@]} $DIRECTORY)
     fi
 }
 
-#####################################################################
-# Temporary Variables
-#####################################################################
-
-USR=${SOURCES}/user
-SU=${SOURCES}/service-user
-
-USRrc=${USR}/bashrc
-SUrc=${SU}/bashrc
+# Print the contents of a list
+print_list(){
+    local LIST=$1
+    for i in ${LIST[*]}
+    do
+        echo -e "\t${i}"
+    done
+}
 
 #####################################################################
 # Environment Variables
@@ -87,4 +94,11 @@ else
     source ${SUrc}
 fi
 
-
+if [ ${#path_rejects[*]} -ne 0 ]; then
+    echo "***PATH: DUPLICATE OR NONEXISTENT DIRECTORIES:"
+    print_list $path_rejects
+fi
+if [ ${#py_path_rejects[*]} -ne 0 ]; then
+    echo "***PYTHONPATH: DUPLICATE OR NONEXISTENT DIRECTORIES:"
+    print_list $py_path_rejects
+fi
