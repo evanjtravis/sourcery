@@ -3,13 +3,6 @@ echo -e "\t${USRrc}"
 umask 022
 
 #####################################################################
-# Temporary Variables
-#####################################################################
-
-SDIR=/services
-SDG=/usr/local/sdg
-
-#####################################################################
 # Environment Variables
 #####################################################################
 
@@ -22,27 +15,6 @@ add_to_path $BASHINIT
 
 add_to_pythonpath $PYINIT
 
-# Check for /usr/local/sdg symlink to /services/<service>/sdg
-if [ -d "$SDG" ]; then
-    add_to_path $SDG/share/python/django/bin
-    
-    add_to_pythonpath $SDG/share/python/django
-    add_to_pythonpath $SDG/share/python
-else
-    # Add /services/<service>/sdg to paths
-    echo "***SDG symlink not detected. You should look into that."
-    if [ -d "$SDIR" ]; then
-        export SERVICE=$(python ${PYINIT}/get_service.py)
-        if [ -d "${SDIR}/${SERVICE}" ]; then
-            add_to_path ${SDIR}/${SERVICE}/sdg/share/python/django/bin
-        
-            add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python/django
-            add_to_pythonpath ${SDIR}/${SERVICE}/share/python
-        else
-            echo "***Unrecognized service: $SERVICE."
-        fi
-    fi
-fi
 #####################################################################
 # Aliases
 #####################################################################

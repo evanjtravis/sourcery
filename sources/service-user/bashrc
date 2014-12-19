@@ -17,15 +17,10 @@ add_to_pythonpath ~/share/python
 # Aliases
 #####################################################################
 
-alias "shib.start"="${SUDO} shibd start"
-alias "shib.stop"="${SUDO} httpd stop"
-alias "web.start"="${SUDO} httpd start"
-alias "web.stop"="${SUDO} httpd stop"
-
-#alias "shib.restart"="shib.stop;shib.start"
-#alias "web.restart"="web.stop;web.start"
-
-#alias "service.restart"="web.restart;shib.restart"
+alias "startshib"="${SUDO} shibd start"
+alias "startweb"="${SUDO} httpd start"
+alias "stopshib"="${SUDO} shibd stop"
+alias "stopweb"="${SUDO} httpd stop"
 
 alias vim="vim -u ${VIMRC}"
 alias vi="vim"

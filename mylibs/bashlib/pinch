@@ -63,7 +63,7 @@ ENDDIFF=$(( NUMOFLINES - END ))
 if [ "$START" -lt "$ENDDIFF" ]; then
     < "$FILENAME" head -n $END | tail -n +$START
 else    
-    < "$FILENAME" tail -n +$START | head -n $(( END-START+1 ))
+    < "$FILENAME" tail -n +$(( START-1 )) | head -n $(( END-START+1 ))
 fi
 
 # Update Log
