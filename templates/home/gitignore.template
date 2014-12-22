@@ -9,6 +9,8 @@ get-pip.py
 *.log
 *.o
 pinch.history
+pinch_cut.temp
+pinch_result.temp
 *.pyc
 *.sw[mnop]
 *.tar

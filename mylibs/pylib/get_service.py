@@ -2,37 +2,59 @@
 """A simple python function to get the service name of the current system
 out of a list of known service names.
 """
+from ConfigParser import ConfigParser
 import os
+
+
+def determine_service():
+    """Tries to determine the name of the service to log into based on an
+    assumed file structure present in SDG dev systems.
+    Assumed File Structure:
+        /services/lost+found
+                 /share
+    """
+    # For now just pass back None, as I don't know the file structure off of
+    # the top of my head.
+    service_dir = '/services'
+    assumed_dirs = ['lost+found', 'share']
+
+    slash_services = os.listdir(service_dir)
+    possible_services = []
+
+    for item in slash_services:
+        item_path = os.path.join(service_dir, item)
+        if (not os.path.isfile(item_path)) and (item not in assumed_dirs):
+            possible_services.append(item)
+
+    if len(possible_services == 1):
+        return possible_services[0]
+    else:
+        return None
 
 
 def main():
     """The main function of the program.
     It prints the name of the service to be captured by bash source file.
     """
-    HOST = os.environ['HOST']
-    SERVICE = ''
+    CONFIG_PATH = os.environ['SOURCERY'] + '/config/services.config'
+    HOST_URL = os.environ['HOST']
+    HOST_NAME = HOST.split('.')[0]
+    SERVICE = None
 
-    # HOST: SERVICE
-    services = {
-        'orwell': 'security-tools',
-        'caboose': 'sdg-sandbox',
-        'spacereq': 'crl-svcs'
-    }
-    if '-' in HOST:
-        SERVICE = HOST.split('-')[0]
-    else:
-        SERVICE = HOST.split('.')[0]
+    CONFIG = ConfigParser()
+    CONFIG.read(CONFIG_PATH)
+    SERVICES = dict(config.items('services'))
 
-    if SERVICE in services.keys():
-        try:
-            print services[SERVICE]
-        except KeyError:
-            print None
-    else:
-        print None
-
+    for key in SERVICES.keys():
+        if key in SERVICE:
+            SERVICE = SERVICES[key]
+    
+    if SERVICE == None:
+        #SERVICE = determine_service()
+        SERVICE = None # placeholder
+        
+    print SERVICE
 
 
 if __name__ == "__main__":
     main()
-

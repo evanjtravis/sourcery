@@ -1,7 +1,8 @@
 #!/bin/bash
 # Script to set up everything for 'settings' git.
 ERROR="FOOBAR"
-OPT="$1"
+OPT="${1}"
+TEMPLATES_PROG=templates.bash
 
 export INIT='--initialize'
 export CLEAN='--clean'
@@ -25,27 +26,31 @@ function init
 
     # Install non-pip favorites
     favorites.bash
+    
+    # Install templates
+    templates.bash ${INIT}
+
 }
 
 function clean
 {
-    :
+    ${TEMPLATES_PROG} ${CLEAN}
 }
 
 function reset
 {
-    init
+    ${TEMPLATES_PROG} ${INIT}
     clean
 }
 
 function message
 {
-    case "$1" in
-        "$INIT") echo "Sourcery initialization complete."
+    case "${1}" in
+        "${INIT}") echo "Sourcery initialization complete."
             ;;
-        "$CLEAN") echo "Sourcery clean complete."
+        "${CLEAN}") echo "Sourcery clean complete."
             ;;
-        "$RESET") echo "Sourcery reset complete."
+        "${RESET}") echo "Sourcery reset complete."
             ;;
         *)
             echo "Incorrect invocation of sourcery."
@@ -53,23 +58,19 @@ function message
     esac
 }
 
-case "$OPT" in
-    "$INIT") init
+case "${OPT}" in
+    "${INIT}") init
         ;;
-    "$CLEAN") clean
+    "${CLEAN}") clean
         ;;
-    "$RESET") reset
+    "${RESET}") reset
         ;;
     *) :
         ;;
 esac
 
-# Either install templates, clean old templates, or both, depending on
-# invocation.
-templates.bash $OPT
-
 # Notify user of success/ failure.
-message $OPT
+message ${OPT}
 
 # Success
 exit 0

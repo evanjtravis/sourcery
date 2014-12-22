@@ -3,21 +3,21 @@
 COPY=${MYPYLIB}/copy_templates.py
 TEMPLATES=${SETTINGS}/templates
 
-MAIN_SRC=${TEMPLATES}/main
+MAIN_SRC=${TEMPLATES}/home
 MAIN_DST=${HOME}
 
 RPM_SRC=${TEMPLATES}/rpm
 RPM_DST=${RPM_SRC}
 
 OLD=.${USER}.temp
-OPT="$1"
+OPT="${1}"
 
 function removeold
 {
-    while [ "$1" != "" ]; do
-        DIRECTORY=$1
-        echo "Removing $OLD files from $DIRECTORY"
-        rm -f "$DIRECTORY"/*"$OLD" "$DIRECTORY"/.*"$OLD"
+    while [ "${1}" != "" ]; do
+        DIRECTORY=${1}
+        echo "Removing ${OLD} files from ${DIRECTORY}"
+        rm -f "${DIRECTORY}"/*"${OLD}" "${DIRECTORY}"/.*"${OLD}"
         shift
     done
 }
@@ -42,12 +42,12 @@ function reset
     clean
 }
 
-case "$OPT" in
-    "$INIT") init
+case "${OPT}" in
+    "${INIT}") init
         ;;
-    "$CLEAN") clean
+    "${CLEAN}") clean
         ;;
-    "$RESET") reset
+    "${RESET}") reset
         ;;
     *) echo "Incorrect template.bash invocation."
 esac

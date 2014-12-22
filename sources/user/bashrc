@@ -27,7 +27,7 @@ else
     alias service="echo '***CITES SERVICES NOT AVAILABLE ON SYSTEM.'"
 fi
 
-alias cdsource="cd $SETTINGS"
+alias cdsource="cd $SOURCERY"
 alias sourcery.clean="sourcery.bash --clean;sourcery"
 alias sourcery.init="sourcery;sourcery.bash --initialize;sourcery"
 alias sourcery.reset="sourcery.bash --reset;sourcery"

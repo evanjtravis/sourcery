@@ -8,8 +8,8 @@ else
 fi
 
 export MYHOME=/home/${MYNAME}
-export SETTINGS=${MYHOME}/sourcery
-export SOURCES=${SETTINGS}/sources
+export SOURCERY=${MYHOME}/sourcery
+export SOURCES=${SOURCERY}/sources
 
 echo -e "Sourced:\n\t${SOURCES}/profile.bash"
 

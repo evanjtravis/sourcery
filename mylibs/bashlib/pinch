@@ -3,84 +3,145 @@
 # Usage: $ pinch filename start-line end-line
 # By Evan J. Coon
 
-FILENAME=$1
-START=$2
-END=$3
+TO_CUT=false
 
+while getopts ":x" opt; do
+    case $opt in
+        x)
+            TO_CUT=true
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -$OPTARG requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+shift $((OPTIND-1))
 
-ABSPATH=$( readlink -fn $FILENAME )
+FILENAME=${1}
+START=${2}
+END=${3}
+
+ABSPATH=$( readlink -fn ${FILENAME} )
 ERROR="[PINCH ERROR]"
-HISTORY="${MYLIBS}/bashlib/pinch.history"
+HISTORY="${MYBASHLIB}/pinch.history"
 HISTORYLIMIT=100
 MID=$(( HISTORYLIMIT/2 ))
 TEMP="${MYBASHLIB}/tmp"
 TODAY=$(date)
 
+
+function pinch_log
+{
+    # Update Log
+    if $TO_CUT; then
+        LOG="${TODAY}: ${ABSPATH} -x ${START} ${END}"
+    else
+        LOG="${TODAY}: ${ABSPATH} ${START} ${END}"
+    fi
+
+    if [ -d "${MYBASHLIB}" ]; then
+        touch ${HISTORY}
+    fi
+
+    if [ -f "${HISTORY}" ]; then
+        HISTORYLINES=$(wc -l < "${HISTORY}")
+        if [ "${HISTORYLINES}" -ge "${HISTORYLIMIT}" ]; then
+            cp ${HISTORY} ${HISTORY}.old
+            echo ${LOG} > ${HISTORY}
+        else
+            echo ${LOG} >> ${HISTORY}
+        fi
+    fi
+   
+}
+
+
+function cut
+{
+    local TEMP_CUT=${MYBASHLIB}/pinch_cut.temp
+    local TEMP_RESULT=${MYBASHLIB}/pinch_result.temp
+
+    sed "${START},${END}d" $FILENAME > $TEMP_RESULT
+    pinch $FILENAME $START $END > $TEMP_CUT
+    
+    cat $TEMP_RESULT > $FILENAME
+    echo -e "***CUT TEXT: TEMPORARILY STORED IN:\n\t${TEMP_CUT}***"
+    cat $TEMP_CUT
+    echo -e "***END CUT TEXT. FOUND IN\n\t${TEMP_CUT}***"
+    # Update the log
+    pinch_log
+}
+
+
+function main
+{
+    # For larger files, this will run more quickly. If the distance from the
+    # end of the file to the end-line is less than the distance from the
+    # start of the file to the start-line, then start pinching from the
+    # bottom as opposed to the top.
+    if [ "${START}" -lt "${ENDDIFF}" ]; then
+        < "${FILENAME}" head -n ${END} | tail -n +${START}
+    else    
+        < "${FILENAME}" tail -n +$(( START )) | head -n $(( END-START+1 ))
+    fi
+
+    # Update the log
+    pinch_log
+}
+
+
 # Check that the number of arguments is 3
 if [ $# -lt 3 ]; then
-    echo "$ERROR Need three arguments: Filename Start-line End-line"
+    echo "${ERROR} Need three arguments: Filename Start-line End-line"
     exit 1
 fi
 
 # Check that the file exists.
-if [ ! -f "$FILENAME" ]; then
-    echo -e "$ERROR File does not exist. \n\t$FILENAME"
+if [ ! -f "${FILENAME}" ]; then
+    echo -e "${ERROR} File does not exist. \n\t${FILENAME}"
     exit 1
 fi
 
 # Check that start-line is not greater than end-line
-if [ "$START" -gt "$END" ]; then
-    echo -e "$ERROR Start line is greater than End line."
+if [ "${START}" -gt "${END}" ]; then
+    echo -e "${ERROR} Start line is greater than End line."
     exit 1
 fi
 
 # Check that start-line is positive.
-if [ "$START" -lt 0 ]; then
-    echo -e "$ERROR Start line is less than 0."
+if [ "${START}" -lt 0 ]; then
+    echo -e "${ERROR} Start line is less than 0."
     exit 1
 fi
 
 # Check that end-line is positive.
-if [ "$END" -lt 0 ]; then
-    echo -e "$ERROR End line is less than 0."
+if [ "${END}" -lt 0 ]; then
+    echo -e "${ERROR} End line is less than 0."
     exit 1
 fi
 
-NUMOFLINES=$(wc -l < "$FILENAME")
+NUMOFLINES=$(wc -l < "${FILENAME}")
 
 # Check that end-line is not greater than the number of lines in the file.
-if [ "$END" -gt "$NUMOFLINES" ]; then
-    echo -e "$ERROR End line is greater than number of lines in file."
+if [ "${END}" -gt "${NUMOFLINES}" ]; then
+    echo -e "${ERROR} End line is greater than number of lines in file."
     exit 1
 fi
 
 # The distance from the end of the file to end-line
 ENDDIFF=$(( NUMOFLINES - END ))
-# For larger files, this will run more quickly. If the distance from the
-# end of the file to the end-line is less than the distance from the
-# start of the file to the start-line, then start pinching from the
-# bottom as opposed to the top.
-if [ "$START" -lt "$ENDDIFF" ]; then
-    < "$FILENAME" head -n $END | tail -n +$START
-else    
-    < "$FILENAME" tail -n +$(( START-1 )) | head -n $(( END-START+1 ))
+
+if $TO_CUT; then
+    cut
+else
+    main
 fi
 
-# Update Log
-LOG="$TODAY: $ABSPATH $START $END"
-if [ -d "${MYBASHLIB}" ]; then
-    touch $HISTORY
-fi
-
-if [ -f "$HISTORY" ]; then
-    HISTORYLINES=$(wc -l < "$HISTORY")
-    if [ "$HISTORYLINES" -ge "$HISTORYLIMIT" ]; then
-        cp $HISTORY $HISTORY.old
-        echo $LOG > $HISTORY
-    else
-        echo $LOG >> $HISTORY
-    fi
-fi
 
 # Success
 exit 0

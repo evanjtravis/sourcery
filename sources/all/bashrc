@@ -85,13 +85,13 @@ print_list(){
 #####################################################################
 
 export LS_COLORS='di=36'
-export MYLIBS=${SETTINGS}/mylibs
+export MYLIBS=${SOURCERY}/mylibs
 export MYPYLIB=${MYLIBS}/pylib
 export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 export VIMRC=${MYHOME}/.vimrc
 
-add_to_path ${SETTINGS}
+add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
 
 add_to_pythonpath ${MYPYLIB}
