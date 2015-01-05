@@ -1,0 +1,28 @@
+USAGE: pinch [-dhvx] FILENAME LINE-ARGS
+DESCRIPTION
+    Select lines from FILENAME according to the given LINE-ARGS.
+
+    LINE-ARGS controls which lines in FILENAME are selected.
+    LINE-ARGS can be either positive or negative. Negative numbers cause pinch
+    to count lines from the end of the file. This is a list of recognized
+    LINE-ARGS:
+        
+        NUM                  single line
+        
+        STARTLINE..ENDLINE   line range defined by start and end lines
+        
+        STARTLINE:COUNT      line range defined by start line and line offset.
+
+    OPTIONS:
+        -d                    disable logging
+
+        -h                    display this help
+
+        -v                    verbose mode
+
+        -x                    cut (delete) lines from FILENAME
+
+Any number of LINE-ARGS can be supplied to pinch.
+The resulting text from all arguments will be aggregated and
+displayed on the command terminal in the order that they are
+given to the pinch command.

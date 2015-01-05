@@ -3,76 +3,140 @@
 # Usage: $ pinch filename start-line end-line
 # By Evan J. Coon
 
-TO_CUT=false
+#####################################################################
+# ERROR HANDLING
+#####################################################################
+function usage
+{
+    echo "pinch [-xvd] FILENAME START END"
+    echo -e "\tx: cut lines from FILENAME"
+    echo -e "\tv: verbose"
+    echo -e "\td: disable logging"
+}
 
-while getopts ":x" opt; do
-    case $opt in
-        x)
-            TO_CUT=true
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
+
+function raise_error
+{
+    ERROR="[PINCH ERROR]: "
+    local ERR="$1"
+    if [ -n "$ERROR" ]; then
+        echo -e "${ERROR}${ERR}"
+        usage
+        if [ -n "$2" ]; then
+            exit $2
+        else
             exit 1
-            ;;
-        :)
-            echo "Option -$OPTARG requires an argument." >&2
-            exit 1
-            ;;
-    esac
-done
-shift $((OPTIND-1))
+        fi
+    fi
+}
 
-FILENAME=${1}
-START=${2}
-END=${3}
 
-ABSPATH=$( readlink -fn ${FILENAME} )
-ERROR="[PINCH ERROR]"
-HISTORY="${MYBASHLIB}/pinch.history"
-HISTORYLIMIT=100
-MID=$(( HISTORYLIMIT/2 ))
-TEMP="${MYBASHLIB}/tmp"
-TODAY=$(date)
+function check_errors
+{
+    
+    # Check that the number of arguments is 3
+    if [ $# -lt 3 ]; then
+        raise_error "Need three arguments: FILNAME START-line END-line"
+    fi
+
+    # Check that the file exists.
+    if [ ! -f "${FILENAME}" ]; then
+        raise_error "File: ${FILENAME} does not exist."
+    fi
+
+    # Check that start-line is not greater than end-line
+    if [ "${START}" -gt "${END}" ]; then
+        raise_error "START-line: ${START} is greater than END-line: ${END}"
+    fi
+
+    # Check that start-line is positive.
+    if [ "${START}" -lt 0 ]; then
+        raise_error "START-line: ${START} is less than 0."
+    fi
+
+    # Check that end-line is positive.
+    if [ "${END}" -lt 0 ]; then
+        raise_error "END-line: ${END} is less than 0."
+    fi
+
+    # Check that end-line is not greater than the number of lines in the file.
+    if [ "${END}" -gt "${NUMOFLINES}" ]; then
+        raise_error "END-line: ${END} is greater than number of lines in file: ${NUMOFLINES}"
+    fi
+}
+
+
+#####################################################################
+# SECONDARY FUNCTIONS
+#####################################################################
+function message
+{
+    # Print message if verbose mode is true
+    local to_print="${1}"
+    if ${VERBOSE}; then
+        echo -e "${to_print}"
+    fi
+}
 
 
 function pinch_log
 {
     # Update Log
-    if $TO_CUT; then
-        LOG="${TODAY}: ${ABSPATH} -x ${START} ${END}"
+    if ${DISABLE_LOG}; then
+        :
     else
-        LOG="${TODAY}: ${ABSPATH} ${START} ${END}"
-    fi
-
-    if [ -d "${MYBASHLIB}" ]; then
-        touch ${HISTORY}
-    fi
-
-    if [ -f "${HISTORY}" ]; then
-        HISTORYLINES=$(wc -l < "${HISTORY}")
-        if [ "${HISTORYLINES}" -ge "${HISTORYLIMIT}" ]; then
-            cp ${HISTORY} ${HISTORY}.old
-            echo ${LOG} > ${HISTORY}
+        MESSAGE="PINCH LOG: ${HISTORY} : "
+        LOG_OPTIONS=""
+        if ${TO_CUT}; then
+            LOG_OPTIONS=${LOG_OPTIONS}"x"
+        fi
+        if ${VERBOSE}; then
+            LOG_OPTIONS=${LOG_OPTIONS}"v"
+        fi
+        if ${TO_CUT} || ${VERBOSE}; then
+            LOG_OPTIONS=" -"${LOG_OPTIONS}" "
         else
-            echo ${LOG} >> ${HISTORY}
+            LOG_OPTIONS=" "
+        fi
+
+        LOG="${TODAY}: ${ABSPATH}${LOG_OPTIONS}${START} ${END}"
+
+        if [ -d "${MYBASHLIB}" ]; then
+            touch ${HISTORY}
+        fi
+
+        if [ -f "${HISTORY}" ]; then
+            HISTORYLINES=$(wc -l < "${HISTORY}")
+            if [ "${HISTORYLINES}" -ge "${HISTORYLIMIT}" ]; then
+                cp ${HISTORY} ${HISTORY}.old
+                echo ${LOG} > ${HISTORY}
+                message "${MESSAGE}1 entry available"
+            else
+                echo ${LOG} >> ${HISTORY}
+                HISTORYLINES=$((HISTORYLINES+1))
+                message "${MESSAGE}${HISTORYLINES} entries available."
+            fi
         fi
     fi
    
 }
 
 
+#####################################################################
+# PRIMARY FUNCTIONS
+#####################################################################
 function cut
 {
     local TEMP_CUT=${MYBASHLIB}/pinch_cut.temp
     local TEMP_RESULT=${MYBASHLIB}/pinch_result.temp
 
-    sed "${START},${END}d" $FILENAME > $TEMP_RESULT
-    pinch $FILENAME $START $END > $TEMP_CUT
+    sed "${START},${END}d" ${FILENAME} > ${TEMP_RESULT}
+    pinch -d ${FILENAME} ${START} ${END} > ${TEMP_CUT}
     
-    cat $TEMP_RESULT > $FILENAME
-    echo -e "***CUT TEXT: TEMPORARILY STORED IN:\n\t${TEMP_CUT}***"
-    cat $TEMP_CUT
-    echo -e "***END CUT TEXT. FOUND IN\n\t${TEMP_CUT}***"
+    cp ${TEMP_RESULT} ${FILENAME}
+    message "***CUT TEXT: TEMPORARILY STORED IN:\n\t${TEMP_CUT}***"
+    cat ${TEMP_CUT}
+    message "***END CUT TEXT. FOUND IN\n\t${TEMP_CUT}***"
     # Update the log
     pinch_log
 }
@@ -95,53 +159,68 @@ function main
 }
 
 
-# Check that the number of arguments is 3
-if [ $# -lt 3 ]; then
-    echo "${ERROR} Need three arguments: Filename Start-line End-line"
-    exit 1
+#####################################################################
+# Execution
+#####################################################################
+    #################################################################
+    # OPTIONS PARSING
+    #################################################################
+TO_CUT=false
+VERBOSE=false
+DISABLE_LOG=false
+while getopts ":xvd" opt; do
+    case ${opt} in
+        x)
+            TO_CUT=true
+            ;;
+        v)
+            VERBOSE=true
+            ;;
+        d)
+            DISABLE_LOG=true
+            ;;
+        \?)
+            raise_error "Invalid option: -${OPTARG}"
+            ;;
+        :)
+            raise_error "Option -${OPTARG} requires an argument."
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+    #####################################################################
+    # MAIN VARIABLE DECLARATION
+    #####################################################################
+FILENAME=${1}
+START=${2}
+END=${3}
+
+# This variable is automatically set when using sourcery
+if [ -z ${MYBASHLIB} ] || [ ! -d ${MYBASHLIB} ]; then
+    MYBASHLIB=~
 fi
 
-# Check that the file exists.
-if [ ! -f "${FILENAME}" ]; then
-    echo -e "${ERROR} File does not exist. \n\t${FILENAME}"
-    exit 1
-fi
-
-# Check that start-line is not greater than end-line
-if [ "${START}" -gt "${END}" ]; then
-    echo -e "${ERROR} Start line is greater than End line."
-    exit 1
-fi
-
-# Check that start-line is positive.
-if [ "${START}" -lt 0 ]; then
-    echo -e "${ERROR} Start line is less than 0."
-    exit 1
-fi
-
-# Check that end-line is positive.
-if [ "${END}" -lt 0 ]; then
-    echo -e "${ERROR} End line is less than 0."
-    exit 1
-fi
-
+# The absolute path of FILENAME, used for logging
+ABSPATH=$( readlink -fn ${FILENAME} )
+# The location of the history of pinch actions used.
+HISTORY="${MYBASHLIB}/pinch.history"
+# The maximum number of lines stored in the HISTORY file
+HISTORYLIMIT=100
+# The number of lines of the given file
 NUMOFLINES=$(wc -l < "${FILENAME}")
-
-# Check that end-line is not greater than the number of lines in the file.
-if [ "${END}" -gt "${NUMOFLINES}" ]; then
-    echo -e "${ERROR} End line is greater than number of lines in file."
-    exit 1
-fi
-
+# Today's date, used for logging
+TODAY=$(date)
 # The distance from the end of the file to end-line
 ENDDIFF=$(( NUMOFLINES - END ))
 
-if $TO_CUT; then
+check_errors $@
+
+if ${TO_CUT}; then
     cut
 else
     main
 fi
-
 
 # Success
 exit 0

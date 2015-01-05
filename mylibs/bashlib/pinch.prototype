@@ -1,0 +1,300 @@
+#!/bin/bash
+# Display line number ranges of a file to the terminal.
+# Usage: $ pinch filename start-line end-line
+# By Evan J. Coon
+
+#####################################################################
+# ERROR HANDLING
+#####################################################################
+function usage
+{
+    pinch -d "${MYBASHLIB}/help/pinch" 1
+}
+
+
+function raise_error
+{
+    ERROR="[PINCH ERROR]: "
+    local ERR="$1"
+    if [ -n "$ERROR" ]; then
+        echo -e "${ERROR}${ERR}"
+        usage
+        if [ -n "$2" ]; then
+            exit $2
+        else
+            exit 1
+        fi
+    fi
+}
+
+
+function check_errors
+{
+    
+    # Check that the file exists.
+    if [ ! -f "${FILENAME}" ]; then
+        raise_error "File: ${FILENAME} does not exist."
+    fi
+
+}
+
+
+function check_starts_and_ends_initially
+{
+    local NUM_REGEX='-?[0-9]+$'
+    for i in ${!starts[@]}; do
+        START=${starts[$i]}
+        END=${ends[$i]}
+         # Check that each START is a number.
+        if ! [[ ${START} =~ ${NUM_REGEX} ]]; then
+            raise_error "START-line: ${START} at Position: ${i} is not a number."
+        fi
+        
+        # Check that each END is a number.
+        if ! [[ ${END} =~ ${NUM_REGEX} ]]; then
+            raise_error "END-line: ${END} at Position: ${i} is not a number."
+        fi
+        # If START is negative, determine its positive equivalent and replace in array
+        if [ "${START}" -lt 0 ]; then
+            START=$(( FILE_LENGTH+START ))
+            starts[${i}]=${START}
+        fi
+        # If END is negative, determine its positive equivalent and replace in array
+        if [ "${END}" -lt 0 ]; then
+            END=$(( FILE_LENGTH+END ))
+            ends[${i}]=${END}
+        fi
+        # Check that start-line is not greater than end-line
+        if [ "${START}" -gt "${END}" ]; then
+            raise_error "START-line: ${START} at Position: ${i} is greater than END-line: ${END}"
+        fi
+        
+        # Check that end-line is not greater than the number of lines in the file.
+        if [ "${END}" -gt "${FILE_LENGTH}" ]; then
+
+            raise_error "END-line: ${END} at Position: ${i} is greater than number of lines in file: ${FILE_LENGTH}"
+        fi
+
+
+    done
+}
+
+
+function check_starts_and_ends_for_each_cut
+{
+    # Check that end-line is not greater than the number of lines in the file.
+    if [ "${END}" -gt "${FILE_LENGTH}" ]; then
+        raise_error "END-line: ${END} is greater than number of lines in file: ${FILE_LENGTH}"
+    fi
+}
+
+#####################################################################
+# SECONDARY FUNCTIONS
+#####################################################################
+function add_to_starts_and_ends
+{
+    ends=(${ends[@]} ${END})
+    starts=(${starts[@]} ${START})
+}
+
+
+function message
+{
+    # Print message if verbose mode is true
+    local to_print="${1}"
+    if ${VERBOSE}; then
+        echo -e "${to_print}"
+    fi
+}
+
+
+function pinch_log
+{
+    # Update Log
+    if ${DISABLE_LOG}; then
+        :
+    else
+        local TODAY=$(date)
+        local MESSAGE="PINCH LOG: ${HISTORY} : "
+        local LOG="${TODAY}: ${OPTS} ${ABSPATH} ${ARGS}"
+
+        if [ -d "${MYBASHLIB}" ]; then
+            touch ${HISTORY}
+        fi
+
+        if [ -f "${HISTORY}" ]; then
+            local HISTORYLINES=$(wc -l < "${HISTORY}")
+            if [ "${HISTORYLINES}" -ge "${HISTORYLIMIT}" ]; then
+                cp ${HISTORY} ${HISTORY}.old
+                echo ${LOG} > ${HISTORY}
+                message "${MESSAGE}1 entry available"
+            else
+                echo ${LOG} >> ${HISTORY}
+                HISTORYLINES=$((HISTORYLINES+1))
+                message "${MESSAGE}${HISTORYLINES} entries available."
+            fi
+        fi
+    fi
+   
+}
+
+
+#####################################################################
+# PRIMARY FUNCTIONS
+#####################################################################
+function cut
+{
+    START=${1}
+    END=${2}
+    FILE_LENGTH=$(wc -l < "${FILENAME}")
+    check_starts_and_ends_for_each_cut
+
+    sed "${START},${END}d" ${FILENAME} > ${TEMP_RESULT}
+
+    pinch -d ${FILENAME} ${START} ${END} > ${TEMP_CUT}
+    
+    # Update the log
+}
+
+
+function sub_pinch
+{
+    # For larger files, this will run more quickly. If the distance from the
+    # end of the file to the end-line is less than the distance from the
+    # start of the file to the start-line, then start pinching from the
+    # bottom as opposed to the top.
+    START=${1}
+    END=${2}
+    if [ "${START}" -lt "${ENDDIFF}" ]; then
+        < "${FILENAME}" head -n ${END} | tail -n +${START} >> ${CURRENT_PINCH}
+    else    
+        < "${FILENAME}" tail -n +$(( START )) | head -n $(( END-START+1 )) >> ${CURRENT_PINCH}
+    fi
+
+}
+
+
+#####################################################################
+# Execution
+#####################################################################
+    #################################################################
+    # OPTIONS PARSING
+    #################################################################
+declare -a OPTS=()
+TO_CUT=false
+VERBOSE=false
+DISABLE_LOG=false
+while getopts ":xvdh" opt; do
+    case ${opt} in
+        d)
+            DISABLE_LOG=true
+            OPTS=(${OPTS[@]} '-d')
+            ;;
+        h)
+            cat "${MYBASHLIB}/help/pinch"
+            exit 0
+            ;;
+        v)
+            VERBOSE=true
+            OPTS=(${OPTS[@]} '-v')
+            ;;
+        x)
+            TO_CUT=true
+            OPTS=(${OPTS[@]} '-x')
+            ;;
+        \?)
+            raise_error "Invalid option: -${OPTARG}"
+            ;;
+        :)
+            raise_error "Option -${OPTARG} requires an argument."
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+    #################################################################
+    # ARGUMENT PARSING
+    #################################################################
+FILENAME=${1}
+shift
+declare -a starts=()
+declare -a ends=()
+ARGS=${@}
+RANGE_SEP=".."
+OFFSET_SEP=":"
+SINGLE_SEP=","
+OIFS=$IFS
+for arg in "$ARGS"; do
+    if [[ "${arg}" == *"${RANGE_SEP}"* ]]; then
+        IFS=${RANGE_SEP}
+        set -- $arg
+        START=${1}
+        END=${2}
+    elif [[ "${arg}" == *"${OFFSET_SEP}"* ]]; then
+        IFS=${OFFSET_SEP}
+        set -- $arg
+        START=${1}
+        local tmp=${2}
+        END=$(( START+tmp ))
+    elif [[ "${arg}" == *"${SINGLE_SEP}"* ]]; then
+        IFS=${SINGLE_SEP}
+        for line in ${arg}; do
+            START=${line}
+            END=${line}
+            add_to_starts_and_ends
+        done
+    else
+        START=${arg}
+        END=${arg}
+    fi
+    if [ "${IFS}" != "${SINGLE_SEP}" ]; then
+        add_to_starts_and_ends
+    fi
+    IFS=$OIFS
+done
+check_errors
+check_starts_and_ends_initially
+    #################################################################
+    # MAIN VARIABLE DECLARATION
+    #################################################################
+# This variable is automatically set when using sourcery
+if [ -z ${MYBASHLIB} ] || [ ! -d ${MYBASHLIB} ]; then
+    MYBASHLIB=~
+fi
+
+# The absolute path of FILENAME, used for logging
+ABSPATH=$( readlink -fn ${FILENAME} )
+# The location of the history of pinch actions used.
+HISTORY="${MYBASHLIB}/pinch.history"
+# The maximum number of lines stored in the HISTORY file
+HISTORYLIMIT=100
+# The length of the given file
+FILE_LENGTH=$(wc -l < "${FILENAME}")
+# The distance from the end of the file to end-line
+ENDDIFF=$(( FILE_LENGTH - END ))
+# The file where each pinch is stored until the last LINE-ARG is processed
+CURRENT_PINCH=${MYBASHLIB}/current.pinch
+
+rm -f ${CURRENT_PINCH}
+touch ${CURRENT_PINCH}
+
+if ${TO_CUT}; then
+    TEMP_FILE=${MYBASHLIB}/file_copy.pinch
+    OLD_FILENAME=${FILENAME}
+    cp ${FILENAME} ${TEMP_FILE}
+    FILENAME=${TEMP_FILE}
+    for i in ${!starts[@]}; do
+        cut starts[${i}] ends[${i}]
+    done
+    cp ${TEMP_FILE} ${OLD_FILENAME}
+    rm -f ${TEMP_FILE}
+else
+    for i in ${!starts[@]}; do
+        sub_pinch starts[${i}] ends[${i}]
+    done
+fi
+cat ${CURRENT_PINCH}
+pinch_log
+
+# Success
+exit 0

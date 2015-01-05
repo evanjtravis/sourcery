@@ -2,7 +2,6 @@
 """A simple python function to get the service name of the current system
 out of a list of known service names.
 """
-from ConfigParser import ConfigParser
 import os
 
 
@@ -11,12 +10,11 @@ def determine_service():
     assumed file structure present in SDG dev systems.
     Assumed File Structure:
         /services/lost+found
-                 /share
+                 /scratch
+                 /smg-p
     """
-    # For now just pass back None, as I don't know the file structure off of
-    # the top of my head.
     service_dir = '/services'
-    assumed_dirs = ['lost+found', 'share']
+    assumed_dirs = ['lost+found', 'scratch', 'smg-p']
 
     slash_services = os.listdir(service_dir)
     possible_services = []
@@ -36,23 +34,7 @@ def main():
     """The main function of the program.
     It prints the name of the service to be captured by bash source file.
     """
-    CONFIG_PATH = os.environ['SOURCERY'] + '/config/services.config'
-    HOST_URL = os.environ['HOST']
-    HOST_NAME = HOST.split('.')[0]
-    SERVICE = None
-
-    CONFIG = ConfigParser()
-    CONFIG.read(CONFIG_PATH)
-    SERVICES = dict(config.items('services'))
-
-    for key in SERVICES.keys():
-        if key in SERVICE:
-            SERVICE = SERVICES[key]
-    
-    if SERVICE == None:
-        #SERVICE = determine_service()
-        SERVICE = None # placeholder
-        
+    SERVICE = determine_service()
     print SERVICE
 
 
