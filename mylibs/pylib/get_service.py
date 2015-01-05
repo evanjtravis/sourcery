@@ -24,7 +24,7 @@ def determine_service():
         if (not os.path.isfile(item_path)) and (item not in assumed_dirs):
             possible_services.append(item)
 
-    if len(possible_services == 1):
+    if (len(possible_services) == 1):
         return possible_services[0]
     else:
         return None

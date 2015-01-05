@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install template files to their respective directories.
 COPY=${MYPYLIB}/copy_templates.py
-TEMPLATES=${SETTINGS}/templates
+TEMPLATES=${SOURCERY}/templates
 
 MAIN_SRC=${TEMPLATES}/home
 MAIN_DST=${HOME}

@@ -6,7 +6,7 @@
 # within the context of an SDG virtual environment.
 #
 # This makefile should be placed in the home directory of the su-user.
-include $(SETTINGS)/templates/rpm/util.mk
+include $(SOURCERY)/templates/rpm/util.mk
 
 SHELL=/bin/bash
 #####################################################################

@@ -35,10 +35,10 @@ add_error(){
 # Only add to the PATH if it exists and if it is not already a member of
 # PATH
 add_to_path(){
-    local DIRECTORY=$1
+   local DIRECTORY=$1
     if [ -d "$DIRECTORY" ]; then
-        if [[ ":$PATH:" != *":$DIRECTORY:"* ]]; then
-            PATH="${PATH:+"$PATH:"}$DIRECTORY"
+        if [[ ":${PATH}:" != *":${DIRECTORY}:"* ]]; then
+            PATH="${PATH:+"${PATH}:"}${DIRECTORY}"
         else
             path_duplicates=(${path_duplicates[@]} $DIRECTORY)
         fi
@@ -50,10 +50,10 @@ add_to_path(){
 # Only add to the pythonpath if it exists and if it is not already a member
 # of PYTHONPATH
 add_to_pythonpath(){
-    local DIRECTORY=$1
+   local DIRECTORY=$1
     if [ -d "$DIRECTORY" ]; then
-        if [[ ":$PYTHONPATH:" != *":$DIRECTORY:"* ]]; then
-        PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}$DIRECTORY"
+        if [[ ":${PYTHONPATH}:" != *":${DIRECTORY}:"* ]]; then
+            PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}${DIRECTORY}"
         else
             py_path_duplicates=(${py_path_duplicates[@]} $DIRECTORY)
         fi
@@ -95,11 +95,9 @@ add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
 
 add_to_pythonpath ${MYPYLIB}
-add_to_pythonpath /usr/lib/python2.6/site-packages
-add_to_pythonpath /usr/lib64/python2.6/site-packages
-
 if [ -d "${SDIR}" ]; then
     export SERVICE=$(python ${MYPYLIB}/get_service.py)
+    add_to_pythonpath /services/${SERVICE}/share/python/django
     # Check for /usr/local/sdg symlink to /services/<service>/sdg
     if [ -d "$SDG" ]; then
         add_to_path $SDG/share/python/django/bin
@@ -119,6 +117,9 @@ if [ -d "${SDIR}" ]; then
         fi
     fi
 fi
+add_to_pythonpath /usr/lib/python2.6/site-packages
+add_to_pythonpath /usr/lib64/python2.6/site-packages
+
 
 #####################################################################
 # Aliases

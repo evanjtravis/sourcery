@@ -5,7 +5,7 @@
 # This makefile is designed to automate the building of an RPM
 # within the context of SDG virtual environment and python distutils.
 
-include $(SETTINGS)/templates/rpm/util.mk
+include $(SOURCERY)/templates/rpm/util.mk
 
 PACKAGE= # The name of the RPM package
 TMP= # Directory where RPM is stored upon generation
