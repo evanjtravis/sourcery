@@ -1,6 +1,7 @@
 .DS_Store
 .*.ejtravis.temp
 get-pip.py
+MANIFEST
 pinch.history
 pinch_cut.temp
 pinch_result.temp
