@@ -19,7 +19,7 @@ RPM=$(PACKAGE)-$(VERSION)-1.el6.noarch.rpm # The full name of the RPM
 
 $(call check_defined, PACKAGE TMP PROJ_PATH SERVICE VERSION)
 
-all: clean build permission done
+all: clean build permission reclean done
 
 clean:
 	rm -rf $(TMP)
@@ -36,6 +36,10 @@ permission:
 	chown .$(SERVICE) $(TMP)
 	chmod g+r $(TMP)/$(RPM)
 	chown .$(SERVICE) $(TMP)/$(RPM)
+
+reclean:
+	rm -rf $(PROJ_PATH)/build
+	rm -rf $(PROJ_PATH)/dist
 
 done:
 	@echo '---------->DONE'
