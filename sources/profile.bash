@@ -13,5 +13,5 @@ export SOURCES=${SOURCERY}/sources
 
 echo -e "Sourced:\n\t${SOURCES}/profile.bash"
 
-source ${SOURCES}/all/bashrc
+source ${SOURCES}/all/main
 

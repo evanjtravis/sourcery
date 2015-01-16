@@ -12,12 +12,8 @@ _ARGS = {
 }
 
 
-def usage():
-    pass
-
-
-def check_errors():
-    pass
+def _validate(options, args):
+    
 
 
 def log():
@@ -62,7 +58,16 @@ def main():
         default=_ARGS['HELP'],
         help='Display this help.'
     )
+    parser.add_option(
+        '-i',
+        '--input-file',
+        action='store',
+        dest='input_file',
+        default=_ARGS['INPUT_FILE'],
+        help='Provide input file to the program.'
+    )
     (options, args) = parser.parse_args()
+    _validate(options, args)
 
 if __name__ == "__main__":
     main()

@@ -1,20 +1,8 @@
-echo -e "\t${SUrc}"
+echo -e "\t${SU}/bashrc"
 
 #####################################################################
 # Temporary Variables
 #####################################################################
 
 SUDO="sudo /sbin/service"
-
-#####################################################################
-# Aliases
-#####################################################################
-
-alias "startshib"="${SUDO} shibd start"
-alias "startweb"="${SUDO} httpd start"
-alias "stopshib"="${SUDO} shibd stop"
-alias "stopweb"="${SUDO} httpd stop"
-
-alias vim="vim -u ${VIMRC}"
-alias vi="vim"
 

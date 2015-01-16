@@ -1,4 +1,4 @@
-echo -e "\t${USRrc}"
+echo -e "\t${USR}/bashrc"
 
 umask 022
 
@@ -14,27 +14,4 @@ export PYINIT=${MYPYLIB}/init
 add_to_path $BASHINIT
 
 add_to_pythonpath $PYINIT
-
-#####################################################################
-# Aliases
-#####################################################################
-
-if [ -d "${SDIR}/${SERVICE}" ]; then
-    alias service="echo -e '\n***Logging onto \"$SERVICE\"';su - $SERVICE"
-elif [ -d "$SDIR" ]; then
-    alias service="echo '***Unrecognized service.'"
-else
-    alias service="echo '***CITES SERVICES NOT AVAILABLE ON SYSTEM.'"
-fi
-
-alias cdsource="cd $SOURCERY"
-alias sourcery.clean="sourcery.bash --clean;sourcery"
-alias sourcery.init="sourcery;sourcery.bash --initialize;sourcery"
-alias sourcery.reset="sourcery.bash --reset;sourcery"
-alias vi="vim"
-
-#####################################################################
-# Favorites
-#####################################################################
-
 
