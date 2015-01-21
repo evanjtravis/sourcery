@@ -2,3 +2,4 @@ alias c="clear"
 alias djtest="python manage.py test"
 alias ls="ls --group-directories-first --color=auto"
 alias sourcery="source ${MYHOME}/.bash_profile"
+

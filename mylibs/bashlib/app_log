@@ -1,0 +1,8 @@
+LINES=0
+if [ -z "$1" ]; then
+    LINES=10
+else
+    LINES=$1
+fi
+
+tail -f -n $LINES /var/log/syslog/local0
