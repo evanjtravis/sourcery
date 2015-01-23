@@ -121,7 +121,7 @@ def _validate(options, args):
     _ARGS['MYNAME'] = options.name
     _ARGS['PREFIX'] = options.prefix
     _ARGS['SUFFIX'] = options.suffix
-    _ARGS['OLD'] = '.OLD.%s.%s.%s.%s.%s.%s.%s.temp' % (
+    _ARGS['OLD'] = '.OLD.%s.%s.%s.%s.%s.%s.%s.sourcery.temp' % (
         datetime.datetime.now().year,
         datetime.datetime.now().month,
         datetime.datetime.now().day,

@@ -9,7 +9,7 @@ MAIN_DST=${HOME}
 RPM_SRC=${TEMPLATES}/rpm
 RPM_DST=${RPM_SRC}
 
-OLD=.${USER}.temp
+OLD=.${USER}.sourcery.temp
 OPT="${1}"
 
 function removeold
