@@ -5,7 +5,7 @@ umask 022
 #####################################################################
 # Environment Variables
 #####################################################################
-
+LS_COLORS='di=96'
 add_to_path ${HOME}/twee
 
 export BASHINIT=${MYBASHLIB}/init
