@@ -59,12 +59,18 @@ def _check_for_old(filename):
 def _copy_all(templates):
     """Copys all template files into the source directory.
     """
+    DST = _ARGS['DST']
+    SRC = _ARGS['SRC']
+    PREFIX = _ARGS['PREFIX']
+    SUFFIX = _ARGS['SUFFIX']
+    FORCE = _ARGS['FORCE']
+
     for template_name in templates:
-        template = os.path.join(_ARGS['SRC'], template_name)
-        new_filename = _ARGS['PREFIX'] + \
-                os.path.splitext(template_name)[0] + _ARGS['SUFFIX']
-        new_file = os.path.join(_ARGS['DST'], new_filename)
-        if _ARGS['FORCE'] == False:
+        template = os.path.join(SRC, template_name)
+        new_filename = PREFIX + \
+                os.path.splitext(template_name)[0] + SUFFIX
+        new_file = os.path.join(DST, new_filename)
+        if FORCE == False:
             _check_for_old(new_file)
         shutil.copyfile(template, new_file)
 
@@ -72,15 +78,18 @@ def _copy_all(templates):
 def _get_templates():
     """Returns a list of all files with TEMPLATE extension.
     """
+    SRC = _ARGS['SRC']
+    TEMPLATE = _ARGS['TEMPLATE']
+    
     templates = []
-    files = list_files(_ARGS['SRC'])
+    files = list_files(SRC)
     for filename in files:
         name, extension = os.path.splitext(filename)
-        if extension == _ARGS['TEMPLATE']:
+        if extension == TEMPLATE:
             templates.append(name + extension)
     if len(templates) == 0:
         raise Exception('No template \'%s\' files found.\n\t%s\n\t%s' %
-                (_ARGS['TEMPLATE'], _ARGS['SRC'], files))
+                (TEMPLATE, SRC, files))
     return templates
 
 
