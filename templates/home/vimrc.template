@@ -74,7 +74,7 @@ hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 " Auto Commands
 """""""""""""""""""""""""""""""
 autocmd FileType make setlocal noexpandtab
-
+au BufNewFile,BufRead *.config set filetype=conf
 """""""""""""""""""""""""""""""
 " PyLint
 """""""""""""""""""""""""""""""
