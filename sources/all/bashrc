@@ -38,4 +38,4 @@ if [ -d "${SDIR}" ]; then
 fi
 add_to_pythonpath /usr/lib/python2.6/site-packages
 add_to_pythonpath /usr/lib64/python2.6/site-packages
-
+add_to_pythonpath ~/classNotes/scripts
