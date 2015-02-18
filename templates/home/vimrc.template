@@ -25,6 +25,7 @@ if user == myname
     let g:pymode_lint_checkers = ['pyflakes', 'mccabe', 'pylint']
     let g:pymode_lint_ignore = 'C,R'
     let g:pymode_syntax = 0
+    let g:pymode_rope = 0
     " Installs Tagbar
     Plugin 'majutsushi/tagbar'
     " Use :TagBarToggle to turn on Tagbar
