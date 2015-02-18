@@ -15,12 +15,15 @@ if user == myname
     Plugin 'gmarik/Vundle.vim'
     
     " Istalls pylint-mode
-    Plugin 'vim-scripts/pylint-mode'
+    Plugin 'klen/python-mode'
     " Configures pyLint-mode to run PyLint when saving
-    let g:PyLintCWindow = 1
-    let g:PyLintSigns = 1
-    let g:PyLintOnWrite = 1
-    
+    let g:pymode_options_max_line_length = 70
+    let g:pymode_lint_cwindow = 1
+    let g:pymode_quickfix_maxheight = 10
+    let g:pymode_quickfix_minheight = 10
+    let g:pymode_lint_unmodified = 1
+    let g:pymode_lint_ignore = 'E302,E303,E265,E261,E262,E501,W391,R0901,W0603,W0604,E1002'
+    let g:pymode_syntax = 0
     " Installs Tagbar
     Plugin 'majutsushi/tagbar'
     " Use :TagBarToggle to turn on Tagbar
@@ -32,6 +35,7 @@ if user == myname
     " End of Vim plugins, All plugins should be added before this line.
     call vundle#end()           " required
     filetype plugin indent on   " required
+    filetype indent on
     " Brief help
     " :PluginList       - lists configured plugins
     " :PluginInstall    - installs plugins; append '!' to update
@@ -47,7 +51,7 @@ syntax on
 set hlsearch                    " searched terms are highlighted
 set backspace=2
 set background=light
-set number nuw=6 columns=85		" line numbers
+set number nuw=6	" line numbers
 set tabstop=4		" size of a hard tabstop
 set shiftwidth=4	" size of an indent
 set smarttab		" make [tab] insert indents instead of tabs @ line start

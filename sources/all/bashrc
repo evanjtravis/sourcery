@@ -9,6 +9,7 @@ export MYPYLIB=${MYLIBS}/pylib
 export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 export VIMRC=${MYHOME}/.vimrc
+export PYLINTRC=${MYHOME}/.pylintrc
 
 add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
