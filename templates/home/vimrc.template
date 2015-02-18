@@ -22,9 +22,9 @@ if user == myname
     let g:pymode_quickfix_maxheight = 10
     let g:pymode_quickfix_minheight = 10
     let g:pymode_lint_unmodified = 1
-    let g:pymode_lint_ignore = 'E302,E303,E265,E261,E262,E501,W391,R0901,W0603,W0604,E1002'
+    let g:pymode_lint_checkers = ['pyflakes', 'mccabe', 'pylint']
+    let g:pymode_lint_ignore = 'C,R'
     let g:pymode_syntax = 0
-    let g:pymode_rope = 0
     " Installs Tagbar
     Plugin 'majutsushi/tagbar'
     " Use :TagBarToggle to turn on Tagbar
