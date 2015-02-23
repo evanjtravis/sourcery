@@ -1,4 +1,12 @@
 #####################################################################
+# Functions
+#####################################################################
+xtractRPM(){
+    rpm2cpio  | cpio -idmv
+}
+
+
+#####################################################################
 # Aliases
 #####################################################################
 
@@ -11,6 +19,7 @@ else
 fi
 
 alias cdsource="cd $SOURCERY"
+alias extractRPM=xtractRPM
 alias sourcery.clean="sourcery.bash --clean;sourcery"
 alias sourcery.init="sourcery;sourcery.bash --initialize;sourcery"
 alias sourcery.reset="sourcery.bash --reset;sourcery"
