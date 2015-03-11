@@ -12,7 +12,8 @@ export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 export VIMRC=${MYHOME}/.vimrc
 export PYLINTRC=${MYHOME}/.pylintrc
-# For when working on ledger-dev and TDI --> Solutions directory used for relative paths
+# For when working on ledger-dev and TDI --> Solutions directory used
+# for relative paths
 export TDI_SOLDIR=${MYHOME}/TDI/
 
 add_to_path ${SOURCERY}
