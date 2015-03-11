@@ -1,10 +1,12 @@
+#!/usr/bin/bash
+
 NAME=$(uname -o)
 export MYNAME
 
-if [ "$NAME" == "Cygwin" ]; then
-    MYNAME=$USER
+if [ "${NAME}" == "Cygwin" ]; then
+    MYNAME=${USER}
 else
-    MYNAME=$TTY_OWNER
+    MYNAME=${TTY_OWNER}
 fi
 
 export MYHOME=/home/${MYNAME}

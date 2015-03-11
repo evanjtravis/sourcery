@@ -1,13 +1,15 @@
+#!/usr/bin/bash
+
 PROFILE=sourcery/sources/profile.bash
 NAME=$(uname -o)
-if [ "$NAME" == "Cygwin" ]; then
-    SOURCERY_PROFILE=~/$PROFILE
+if [ "${NAME}" == "Cygwin" ]; then
+    SOURCERY_PROFILE=~/${PROFILE}
 else
-    SOURCERY_PROFILE=/home/$TTY_OWNER/sourcery/sources/profile.bash
+    SOURCERY_PROFILE=/home/${TTY_OWNER}/sourcery/sources/profile.bash
 fi
 
 if [ -e ${SOURCERY_PROFILE} ]; then
-    source $SOURCERY_PROFILE
+    source ${SOURCERY_PROFILE}
 else
     echo -e "Bash profile template error.\n"
 fi

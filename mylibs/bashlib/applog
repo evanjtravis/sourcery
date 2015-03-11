@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 LINES=0
 if [ -z "$1" ]; then
     LINES=10

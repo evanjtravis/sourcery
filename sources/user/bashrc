@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 echo -e "\t${USR}/bashrc"
 
 umask 022

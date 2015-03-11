@@ -50,23 +50,23 @@ if user == myname
     """""""""""""""""""""""""""""""""
 endif
 syntax on
-set hlsearch                    " searched terms are highlighted
-set backspace=2
-set background=light
-set number nuw=6	" line numbers
-set tabstop=4		" size of a hard tabstop
-set shiftwidth=4	" size of an indent
-set smarttab		" make [tab] insert indents instead of tabs @ line start
-set expandtab		" always use spaces instead of tab characters
-set ruler           " view status line
-set mouse=a         " doesn't copy line numbers
-set copyindent      " copy the previous indentation on autoindenting
-set ignorecase      " ignore case when searching
-set smartcase       " ingnore case when searching with only lowercase
-set incsearch       " show search matches as you type
-set undolevels=1000 " up to 1000 undos stored
+set hlsearch         " searched terms are highlighted
+set backspace=2      " Allows the use of backspace on xterm windows
+set background=light " Default background setting
+set number nuw=6	 " line number columns, 6 charactes per row
+set tabstop=4		 " size of a hard tabstop
+set shiftwidth=4	 " size of an indent
+set smarttab		 " make [tab] insert indents instead of tabs @ line start
+set expandtab		 " always use spaces instead of tab characters
+set ruler            " view status line
+set mouse=a          " doesn't copy line numbers in visual mode
+set copyindent       " copy the previous indentation on autoindenting
+set ignorecase       " ignore case when searching
+set smartcase        " ingnore case when searching with only lowercase
+set incsearch        " show search matches as you type
+set undolevels=1000  " up to 1000 undos stored
 " Useful Vim things from training manual
-map <F5> :!python % " Press F5 to run the current Python file
+map <F5> :!python %  " Press F5 to run the current Python file
 set printoptions=number:y
 
 highlight PreProc ctermfg=White  " Improve syntax highlighting, PreProc
@@ -80,7 +80,7 @@ hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 " Auto Commands
 """""""""""""""""""""""""""""""
 autocmd FileType make setlocal noexpandtab
-au BufNewFile,BufRead *.config set filetype=conf
+au BufNewFile,BufRead *.config set filetype=conf " config is a conf file
 """""""""""""""""""""""""""""""
 " PyLint
 """""""""""""""""""""""""""""""

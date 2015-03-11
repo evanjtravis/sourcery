@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 echo -e "\t${SOURCES}/all/bashrc"
 #####################################################################
 # Environment Variables
@@ -10,6 +12,8 @@ export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 export VIMRC=${MYHOME}/.vimrc
 export PYLINTRC=${MYHOME}/.pylintrc
+# For when working on ledger-dev and TDI --> Solutions directory used for relative paths
+export TDI_SOLDIR=${MYHOME}/TDI/
 
 add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
@@ -19,21 +23,21 @@ if [ -d "${SDIR}" ]; then
     export SERVICE=$(python ${MYPYLIB}/get_service.py)
     add_to_pythonpath /services/${SERVICE}/share/python/django
     # Check for /usr/local/sdg symlink to /services/<service>/sdg
-    if [ -d "$SDG" ]; then
-        add_to_path $SDG/share/python/django/bin
+    if [ -d "${SDG}" ]; then
+        add_to_path ${SDG}/share/python/django/bin
     
-        add_to_pythonpath $SDG/share/python/django
-        add_to_pythonpath $SDG/share/python
+        add_to_pythonpath ${SDG}/share/python/django
+        add_to_pythonpath ${SDG}/share/python
     else
         # Add /services/<service>/sdg to paths if symlink not found
-        add_error "$SDG symlink not detected."
+        add_error "${SDG} symlink not detected."
         if [ -d "${SDIR}/${SERVICE}" ]; then
             add_to_path ${SDIR}/${SERVICE}/sdg/share/python/django/bin
         
             add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python/django
             add_to_pythonpath ${SDIR}/${SERVICE}/sdg/share/python
         else
-            add_error "No su entry for $HOST. See ${MYPYLIB}/get_service.py"
+            add_error "No su entry for ${HOST}. See ${MYPYLIB}/get_service.py"
         fi
     fi
 fi
@@ -42,5 +46,7 @@ add_to_pythonpath /usr/lib/python2.7/site-packages
 add_to_pythonpath /usr/lib64/python2.7/site-packages
 add_to_pythonpath /usr/lib/python2.6/site-packages
 add_to_pythonpath /usr/lib64/python2.6/site-packages
-add_to_pythonpath ~/classNotes/bin/python
+add_to_pythonpath ${MYHOME}/classNotes/bin/python
+# For when working on ledger-dev and TDI --> Unit Tests
+add_to_pythonpath ${MYHOME}/central_registry-unit-test/module/
 

@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 #####################################################################
 # Temporary Variables
 #####################################################################
@@ -19,45 +20,90 @@ SU=${SOURCES}/service-user
 export PATH=/usr/local/bin:/bin:/usr/bin
 export PYTHONPATH=
 
+#######################################
 # Add a non-null error to the errors array
+# Globals:
+#   errors
+# Arguments:
+#   error string
+# Returns:
+#   None
+#######################################
 add_error(){
     local ERROR=$1
-    if [ -n "$ERROR" ]; then
-        errors=(${errors[@]} $ERROR)
+    if [ -n "${ERROR}" ]; then
+        errors=(${errors[@]} ${ERROR})
     fi
 }
 
-# Only add to the PATH if it exists and if it is not already a member of
-# PATH
+#######################################
+# Only add to the PATH if it exists and if it is not already a member
+# of PATH
+# Globals:
+#   PATH
+#   path_duplicates
+#   path_nonexistent
+# Arguments:
+#   directory string
+# Returns:
+#   None
+#######################################
 add_to_path(){
    local DIRECTORY=$1
-    if [ -d "$DIRECTORY" ]; then
+    if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PATH}:" != *":${DIRECTORY}:"* ]]; then
             PATH="${PATH:+"${PATH}:"}${DIRECTORY}"
         else
-            path_duplicates=(${path_duplicates[@]} $DIRECTORY)
+            path_duplicates=(${path_duplicates[@]} ${DIRECTORY})
         fi
     else
-        path_nonexistent=(${path_nonexistent[@]} $DIRECTORY)
+        path_nonexistent=(${path_nonexistent[@]} ${DIRECTORY})
     fi
 }
 
-# Only add to the pythonpath if it exists and if it is not already a member
-# of PYTHONPATH
+#######################################
+# Only add the directory to the pythonpath if it exists and if it is
+# not already a member of PYTHONPATH
+# Globals:
+#   PYTHONPATH
+#   py_path_duplicates
+#   py_path_nonexistent
+# Arguments:
+#   directory string
+# Returns:
+#   None
+#######################################
 add_to_pythonpath(){
    local DIRECTORY=$1
-    if [ -d "$DIRECTORY" ]; then
+    if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PYTHONPATH}:" != *":${DIRECTORY}:"* ]]; then
-            PYTHONPATH="${PYTHONPATH:+"$PYTHONPATH:"}${DIRECTORY}"
+            PYTHONPATH="${PYTHONPATH:+"${PYTHONPATH}:"}${DIRECTORY}"
         else
-            py_path_duplicates=(${py_path_duplicates[@]} $DIRECTORY)
+            py_path_duplicates=(${py_path_duplicates[@]} ${DIRECTORY})
         fi
     else
-        py_path_nonexistent=(${py_path_nonexistent[@]} $DIRECTORY)
+        py_path_nonexistent=(${py_path_nonexistent[@]} ${DIRECTORY})
     fi
 }
 
-# Retrieve the indented contents of a list w/o -e argument
+#######################################
+# Print to terminal the indented contents of a list without the echo
+# -e argument. The contents of the print are captured for later use.
+# If the -e argument were used, it would strip all escape sequences
+# from the string.
+# Globals:
+#    None
+# Arguments:
+#    A list of strings
+# Returns:
+#   None
+# Pseudo Return:
+#   Each string in the list is printed and prepended with a tab
+#   escape sequence.
+#       "\t"
+#   This output is captured later in the program for printing to the
+#   terminal.
+#######################################
 indent_list(){
     local LIST=$1
     for i in ${LIST[*]}
@@ -66,7 +112,15 @@ indent_list(){
     done
 }
 
-# Print contents of a list
+#######################################
+# Print the contents of a list of strings to terminal.
+# Globals:
+#   None
+# Arguments:
+#   A list of strings with escape sequences. E.G. '\n', '\t', etc.
+# Returns:
+#   None
+#######################################
 print_list(){
     local LIST=$1
     for i in ${LIST[*]}
@@ -93,19 +147,19 @@ fi
 #####################################################################
 
 if [ ${#path_nonexistent[*]} -ne 0 ]; then
-    err="PATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list $path_nonexistent)"
+    err="PATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list ${path_nonexistent})"
     add_error $err
 fi
 if [ ${#path_duplicates[*]} -ne 0 ]; then
-    err="PATH:_DUPLICATE_DIRECTORIES:\n$(indent_list $path_duplicates)"
+    err="PATH:_DUPLICATE_DIRECTORIES:\n$(indent_list ${path_duplicates})"
     add_error $err
 fi
 if [ ${#py_path_nonexistent[*]} -ne 0 ]; then
-    err="PYTHONPATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list $py_path_nonexistent)"
+    err="PYTHONPATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list ${py_path_nonexistent})"
     add_error $err
 fi
 if [ ${#py_path_duplicates[*]} -ne 0 ]; then
-    err="PYTHONPATH:_DUPLICATE_DIRECTORIES:\n$(indent_list $py_path_duplicates)"
+    err="PYTHONPATH:_DUPLICATE_DIRECTORIES:\n$(indent_list ${py_path_duplicates})"
     add_error $err
 fi
 

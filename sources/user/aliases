@@ -1,6 +1,17 @@
+#!/usr/bin/bash
 #####################################################################
 # Functions
 #####################################################################
+
+#######################################
+# Extract the contents of an RPM without installing it.
+# Globals:
+#   None
+# Arguments:
+#   None
+# Returns:
+#   None
+########################################
 xtractRPM(){
     rpm2cpio  | cpio -idmv
 }
