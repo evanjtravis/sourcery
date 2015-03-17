@@ -81,6 +81,7 @@ hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 """""""""""""""""""""""""""""""
 autocmd FileType make setlocal noexpandtab
 au BufNewFile,BufRead *.config set filetype=conf " config is a conf file
+au BufNewFile,BufRead *.conf set filetype=conf " conf is a conf file
 """""""""""""""""""""""""""""""
 " PyLint
 """""""""""""""""""""""""""""""
