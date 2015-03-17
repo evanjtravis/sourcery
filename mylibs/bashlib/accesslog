@@ -1,0 +1,9 @@
+NAME=""
+if [ -z "$1" ]; then
+    echo "[ERROR] Need the name of the project."
+    exit 1
+else
+    NAME=$1
+fi
+
+tail -f -n 25 "/var/log/httpd/${NAME}.cites.illinois.edu_https_access_log"
