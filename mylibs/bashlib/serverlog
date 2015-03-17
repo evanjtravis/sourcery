@@ -1,4 +1,3 @@
-#!/usr/bin/bash
 NAME=""
 if [ -z "$1" ]; then
     echo "[ERROR] Need the name of the project."
