@@ -32,7 +32,7 @@ load-plugins=
 # Disable the message, report, category or checker with the given id(s). You
 # can either give multiple identifier separated by comma (,) or put this option
 # multiple time.
-disable=F0401,R0901,W0603,W0604,E1002
+disable=F0401,R0901,W0603,W0604,E1002,E1124
 
 
 [REPORTS]
@@ -67,7 +67,7 @@ comment=no
 [MISCELLANEOUS]
 
 # List of note tags to take in consideration, separated by a comma.
-notes=FIXME,XXX,TODO
+notes=FIXME,XXX,TODO,REMOVE
 
 
 [BASIC]
