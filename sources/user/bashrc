@@ -15,6 +15,5 @@ export PYINIT=${MYPYLIB}/init
 
 add_to_path $BASHINIT
 add_to_path /cygdrive/c/HashiCorp/Vagrant/bin
-
 add_to_pythonpath $PYINIT
 

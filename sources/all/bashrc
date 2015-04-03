@@ -18,7 +18,7 @@ export TDI_SOLDIR=${MYHOME}/TDI/
 
 add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
-
+add_to_pythonpath ~/central-registry-unit-test/module/
 add_to_pythonpath ${MYPYLIB}
 if [ -d "${SDIR}" ]; then
     export SERVICE=$(python ${MYPYLIB}/get_service.py)
