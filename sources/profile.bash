@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# PROMPT_COMMAND is cleared here and added to later on during 'sourcery' commands.
+export PROMPT_COMMAND=""
+
 NAME=$(uname -o)
 export MYNAME
 
@@ -12,6 +15,7 @@ fi
 export MYHOME=/home/${MYNAME}
 export SOURCERY=${MYHOME}/sourcery
 export SOURCES=${SOURCERY}/sources
+export STATIC=${SOURCERY}/static
 
 #====================================================================
 # Git Aware Prompt

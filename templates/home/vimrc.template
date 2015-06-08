@@ -90,3 +90,14 @@ au BufNewFile,BufRead *.xml set noet ci pi sts=0 sw=4 ts=4 " Use tabs in xml fil
 set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
 set errorformat=%f:%l:\ %m
 " Use :cnext and :cprevious to page through results
+
+""""""""""""""""""""""""""""""
+" Custom Commands
+""""""""""""""""""""""""""""""
+if user==myname
+    function! NewSection()
+        let sectionFile=$STATIC."/new_section.txt"
+        exe 'r' . sectionFile
+    endfunction
+    :command Section call NewSection()
+endif
