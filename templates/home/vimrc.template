@@ -33,6 +33,10 @@ if user == myname
     " Installs NERDTree
     Plugin 'scrooloose/nerdtree'
     " Use :NERDTreeToggle to turn on NERDTree
+
+    " Installs MatchTag
+    Plugin 'gregsexton/MatchTag'
+    " No toggle information available
     
     " End of Vim plugins, All plugins should be added before this line.
     call vundle#end()           " required
