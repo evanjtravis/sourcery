@@ -65,16 +65,21 @@ set ignorecase       " ignore case when searching
 set smartcase        " ingnore case when searching with only lowercase
 set incsearch        " show search matches as you type
 set undolevels=1000  " up to 1000 undos stored
+set cursorline       " highlight current line
+set cursorcolumn     " highlight current column
 " Useful Vim things from training manual
 map <F5> :!python %  " Press F5 to run the current Python file
 set printoptions=number:y
 
 highlight PreProc ctermfg=White  " Improve syntax highlighting, PreProc
 highlight LineNr ctermfg=White   " Line number color
-highlight Comment ctermfg=Red    " Comment Color syntax highlighting
+highlight Comment ctermfg=Red    " Comment Color syntax highlightingl
 highlight Constant ctermfg=2     " Green non-bold
 highlight Type ctermfg=Magenta   " Type Color syntax highlighting
 hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
+hi CursorLine cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
+hi CursorColumn cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 """""""""""""""""""""""""""""""
 " Auto Commands
