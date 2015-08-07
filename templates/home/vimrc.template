@@ -37,6 +37,10 @@ if user == myname
     " Installs MatchTag
     Plugin 'gregsexton/MatchTag'
     " No toggle information available
+
+    " Installs vim-behave syntax highlighting
+    Plugin 'https://gitlab.com/mcepl/vim-behave.git'
+    " No toggle information available
     
     " End of Vim plugins, All plugins should be added before this line.
     call vundle#end()           " required
@@ -83,7 +87,7 @@ highlight Type ctermfg=Magenta   " Type Color syntax highlighting
 hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 hi CursorLine cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
 hi CursorColumn cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR> " Type: \c
 
 """""""""""""""""""""""""""""""
 " Auto Commands
