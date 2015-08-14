@@ -24,3 +24,9 @@ Steps as service-user:
 To re-source the pertinent files as either user:
     1. $ sourcery
 
+
+To initialize git-aware-prompt submodule:
+    1. $ cd ~/sourcery
+    2. $ git submodule init
+    3. $ git submodule update
+
