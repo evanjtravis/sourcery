@@ -5,6 +5,7 @@ Contributors:
 ========
 
 Basic settings for when switching to different dev environments
+    1. $ chmod -R 755 sourcery
 
 Steps as user:
     To initialize sourcery:
