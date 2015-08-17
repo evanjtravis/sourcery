@@ -2,11 +2,10 @@ sourcery
 
 Contributors:
     Evan J. Coon
-========
 
 Basic settings for when switching to different dev environments
-    1. $ chmod -R 755 sourcery
-
+    DON'T ARBITRARILY CHANGE PERMISSIONS ON ALL FILES AGAIN
+    ALSO, DON'T USE SOURCERY AS idm-web USER!!!
 Steps as user:
     To initialize sourcery:
         1. $ source ~/sourcery/sources/profile.bash
