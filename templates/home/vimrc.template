@@ -95,6 +95,7 @@ nnoremap <Leader>c :set cursorline! cursorcolumn!<CR> " Type: \c
 autocmd FileType make setlocal noexpandtab
 au BufNewFile,BufRead *.config set filetype=conf " config is a conf file
 au BufNewFile,BufRead *.conf set filetype=conf " conf is a conf file
+au BufNewFile,BufRead .gitignore set filetype=conf " .gitignore is a conf file
 au BufNewFile,BufRead *.xml set noet ci pi sts=0 sw=4 ts=4 " Use tabs in xml files
 """""""""""""""""""""""""""""""
 " PyLint
