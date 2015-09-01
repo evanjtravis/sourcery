@@ -12,6 +12,8 @@ export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
 export VIMRC=${MYHOME}/.vimrc
 export PYLINTRC=${MYHOME}/.pylintrc
+# FIXME
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/jre
 # For when working on ledger-dev and TDI --> Solutions directory used
 # for relative paths
 export TDI_SOLDIR=${MYHOME}/TDI/
