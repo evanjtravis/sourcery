@@ -88,7 +88,8 @@ hi MatchParen cterm=none ctermbg=white ctermfg=blue " Improve paren match
 hi CursorLine cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
 hi CursorColumn cterm=NONE ctermbg=123 ctermfg=white guibg=123 guifg=white
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR> " Type: \c
-
+vnoremap // y/<C-R>"<CR>
+"       ^^ Search file for highlighted text
 """""""""""""""""""""""""""""""
 " Auto Commands
 """""""""""""""""""""""""""""""
