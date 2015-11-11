@@ -116,3 +116,11 @@ if user==myname
     endfunction
     :command Section call NewSection()
 endif
+
+
+" Tab Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:map t<Up> :tabr<CR>    " Move to first tab
+:map t<Down> :tabl<CR>  " Move to last tab
+:map t<Left> :tabp<CR>  " Move one tab to the left
+:map t<Right> :tabn<CR> " Move one tab to the right
