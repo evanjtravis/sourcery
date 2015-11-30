@@ -4,6 +4,7 @@
 alias eclipse="cd ~/installs/eclipse; ./eclipse"
 
 export CATALINA_HOME=''
+export JAVA_HOME=/etc/alternatives/jre
 
 add_to_path ~/installs/maven/bin
 
