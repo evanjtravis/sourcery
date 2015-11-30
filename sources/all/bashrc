@@ -14,9 +14,6 @@ export VIMRC=${MYHOME}/.vimrc
 export PYLINTRC=${MYHOME}/.pylintrc
 # FIXME
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/jre
-# For when working on ledger-dev and TDI --> Solutions directory used
-# for relative paths
-export TDI_SOLDIR=${MYHOME}/TDI/
 
 add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}
@@ -50,6 +47,4 @@ add_to_pythonpath /usr/lib64/python2.7/site-packages
 add_to_pythonpath /usr/lib/python2.6/site-packages
 add_to_pythonpath /usr/lib64/python2.6/site-packages
 add_to_pythonpath ${MYHOME}/classNotes/bin/python
-# For when working on ledger-dev and TDI --> Unit Tests
-add_to_pythonpath ${MYHOME}/central_registry-unit-test/module/
 

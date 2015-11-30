@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+export TDI_SOLDIR=${MYHOME}/TDI/ # Used for relative directories when using (S/T)DI
+
+alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
+alias runtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
+alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
+
+add_to_pythonpath "${MYHOME}/central-registry-unit-test/module/"

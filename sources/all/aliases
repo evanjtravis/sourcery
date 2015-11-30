@@ -5,7 +5,4 @@ alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
 alias djtest="python manage.py test"
 alias ls="ls --group-directories-first --color=auto"
 alias sourcery="source ${MYHOME}/.bash_profile"
-alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
-alias runtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
 alias commit_msg="git log -1 --pretty=%B"
-alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"

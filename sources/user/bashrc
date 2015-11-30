@@ -17,3 +17,10 @@ add_to_path $BASHINIT
 add_to_path /cygdrive/c/HashiCorp/Vagrant/bin
 add_to_pythonpath $PYINIT
 
+host_settings_filename=`hostname`
+if [ -e "${SOURCES}/hosts/${host_settings_filename}" ]; then
+    echo -e "\t${SOURCES}/hosts/${host_settings_filename}"
+    source ${SOURCES}/hosts/${host_settings_filename}
+else
+    echo -e "\n****No source file found for this host."
+fi

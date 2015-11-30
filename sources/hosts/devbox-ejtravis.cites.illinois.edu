@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+
+alias eclipse="cd ~/installs/eclipse; ./eclipse"
+
+export CATALINA_HOME=''
+
+add_to_path ~/installs/maven/bin
+
