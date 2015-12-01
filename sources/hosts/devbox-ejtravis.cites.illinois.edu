@@ -3,8 +3,10 @@
 
 alias eclipse="cd ~/installs/eclipse; ./eclipse"
 
-export CATALINA_HOME=''
+export CATALINA_HOME="~/installs/tomcat"
+export CATALINA_BASE=""
 export JAVA_HOME=/etc/alternatives/jre
 
 add_to_path ~/installs/maven/bin
-
+add_to_path ~/installs/activemq/bin
+add_to_path ~/installs/tomcat/bin

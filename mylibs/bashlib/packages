@@ -1,0 +1,4 @@
+# list all of the packages installed on the system
+
+rpm -qa > ~/packages.txt
+vim -c "sort u" -c wq ~/packages.txt
