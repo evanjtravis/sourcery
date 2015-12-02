@@ -1,12 +1,27 @@
 #!/usr/bin/bash
 
-
-alias eclipse="cd ~/installs/eclipse; ./eclipse"
-
-export CATALINA_HOME="~/installs/tomcat"
-export CATALINA_BASE=""
+# As anyone...
+#---------------------------------------------------------------------
 export JAVA_HOME=/etc/alternatives/jre
 
-add_to_path ~/installs/maven/bin
-add_to_path ~/installs/activemq/bin
-add_to_path ~/installs/tomcat/bin
+source scl_source enable python27
+source scl_source enable rh-postgresql94
+
+# As yourself...
+#---------------------------------------------------------------------
+if [ "${USER}" = "${TTY_OWNER}" ]; then
+    alias eclipse="cd ~/installs/eclipse; ./eclipse"
+
+    export CATALINA_HOME="~/installs/tomcat"
+    export CATALINA_BASE=""
+
+    add_to_path ~/installs/maven/bin
+    add_to_path ~/installs/activemq/bin
+    add_to_path ~/installs/tomcat/bin
+
+# As the service user...
+#-----------------------------------------------------------------
+#else
+
+fi
+

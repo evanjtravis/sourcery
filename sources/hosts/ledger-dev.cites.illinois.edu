@@ -1,9 +1,21 @@
 #!/usr/bin/bash
 
-export TDI_SOLDIR=${MYHOME}/TDI/ # Used for relative directories when using (S/T)DI
+# As anyone...
+#---------------------------------------------------------------------
 
-alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
-alias runtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
-alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
+# As yourself...
+#---------------------------------------------------------------------
+if [ ${USER} == ${TTY_OWNER} ]; then
+    export TDI_SOLDIR=${MYHOME}/TDI/ # Used for relative directories when using (S/T)DI
 
-add_to_pythonpath "${MYHOME}/central-registry-unit-test/module/"
+    alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
+    alias runtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
+    alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
+
+    add_to_pythonpath "${MYHOME}/central-registry-unit-test/module/"
+
+# As the service user...
+#---------------------------------------------------------------------
+else
+
+fi
