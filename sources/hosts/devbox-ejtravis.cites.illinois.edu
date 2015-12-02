@@ -3,6 +3,7 @@
 # As anyone...
 #---------------------------------------------------------------------
 export JAVA_HOME=/etc/alternatives/jre
+export PGDATA=/services/sdgdev-ejtravis/databases/pgsql/9.4/data
 
 source scl_source enable python27
 source scl_source enable rh-postgresql94
