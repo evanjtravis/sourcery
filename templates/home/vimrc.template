@@ -41,6 +41,10 @@ if user == myname
     " Installs vim-behave syntax highlighting
     Plugin 'https://gitlab.com/mcepl/vim-behave.git'
     " No toggle information available
+
+    " Installs godlygeek/tabular
+    Plugin 'godlygeek/tabular'
+    " No toggle information available
     
     " End of Vim plugins, All plugins should be added before this line.
     call vundle#end()           " required
