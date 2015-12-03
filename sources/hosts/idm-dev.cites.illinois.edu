@@ -9,6 +9,6 @@ if [ ${USER} == ${TTY_OWNER} ]; then
 
 # As the service user...
 #---------------------------------------------------------------------
-else
+#else
 
 fi
