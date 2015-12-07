@@ -22,7 +22,8 @@ if [ "${USER}" = "${TTY_OWNER}" ]; then
 
 # As the service user...
 #-----------------------------------------------------------------
-#else
-
+else
+    export PGDATA="/services/sdgdev-ejtravis/databases/pgsql/9.4/data"
+    export PGHOST=localhost
 fi
 
