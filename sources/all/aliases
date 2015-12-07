@@ -5,4 +5,4 @@ alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
 alias djtest="python manage.py test"
 alias ls="ls --group-directories-first --color=auto"
 alias sourcery="source ${MYHOME}/.bash_profile"
-alias commit_msg="git log -1 --pretty=%B"
+alias gitcommit="git log -1 --pretty=%B"
