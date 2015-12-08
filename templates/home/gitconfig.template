@@ -18,3 +18,5 @@
 	helper = cache --timeout 3600
 [commit]
     template = ~/.gitmessage
+[alias]
+    ignored = !git ls-files -v | grep "^[[:lower:]]"
