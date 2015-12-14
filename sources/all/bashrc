@@ -5,6 +5,7 @@ echo -e "\t${SOURCES}/all/bashrc"
 # Environment Variables
 #####################################################################
 
+export EDITOR=vim
 export LS_COLORS=''
 export MYLIBS=${SOURCERY}/mylibs
 export MYPYLIB=${MYLIBS}/pylib
