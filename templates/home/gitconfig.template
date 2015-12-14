@@ -20,3 +20,4 @@
     template = ~/.gitmessage
 [alias]
     ignored = !git ls-files -v | grep "^[[:lower:]]"
+    origin = config --get remote.origin.url
