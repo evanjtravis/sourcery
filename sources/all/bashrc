@@ -11,10 +11,11 @@ export MYLIBS=${SOURCERY}/mylibs
 export MYPYLIB=${MYLIBS}/pylib
 export MYBASHLIB=${MYLIBS}/bashlib
 export PYTHONSTARTUP=${MYPYLIB}/pythonstartup.py
+export GIT_CONFIG=${MYHOME}/.gitconfig
 export VIMRC=${MYHOME}/.vimrc
 export PYLINTRC=${MYHOME}/.pylintrc
 # FIXME
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.51-1.b16.el6_7.x86_64/jre
+export JAVA_HOME=/etc/alternatives/jre
 
 add_to_path ${SOURCERY}
 add_to_path ${MYBASHLIB}

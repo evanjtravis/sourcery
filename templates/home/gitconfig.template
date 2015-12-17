@@ -17,7 +17,7 @@
 [credential]
 	helper = cache --timeout 3600
 [commit]
-    template = ~/.gitmessage
+    template = /home/ejtravis/.gitmessage
 [alias]
     ignored = !git ls-files -v | grep "^[[:lower:]]"
     origin = config --get remote.origin.url

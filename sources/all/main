@@ -17,8 +17,8 @@ SU=${SOURCES}/service-user
 #####################################################################
 # Functions
 #####################################################################
-export PATH=/usr/local/bin:/bin:/usr/bin
-export PYTHONPATH=
+export PATH
+export PYTHONPATH
 
 #######################################
 # Add a non-null error to the errors array
@@ -134,14 +134,6 @@ print_list(){
 source ${SOURCES}/all/bashrc
 source ${SOURCES}/all/aliases
 
-if [ "${MYNAME}" == "${USER}" ]; then
-    source ${USR}/bashrc
-    source ${USR}/aliases
-else
-    source ${SU}/bashrc
-    source ${SU}/aliases
-fi
-
 host_settings_filename=`hostname`
 if [ -e "${SOURCES}/hosts/${host_settings_filename}" ]; then
     echo -e "\t${SOURCES}/hosts/${host_settings_filename}"
@@ -149,6 +141,19 @@ if [ -e "${SOURCES}/hosts/${host_settings_filename}" ]; then
 else
     echo -e "\n****No source file found for this host."
 fi
+
+if [ "${MYNAME}" == "${USER}" ]; then
+    source ${USR}/bashrc
+    source ${USR}/aliases
+else
+    source ${SU}/bashrc
+    source ${SU}/aliases
+    if [ -f "~/.svc_profile" ]; then
+        source "~/.svc_profile"
+        echo "Sourced service profile."
+    fi
+fi
+
 
 #####################################################################
 # Gather up and print errors

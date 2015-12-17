@@ -2,7 +2,6 @@
 
 # As anyone...
 #---------------------------------------------------------------------
-export JAVA_HOME=/etc/alternatives/jre
 export PGDATA=/services/sdgdev-ejtravis/databases/pgsql/9.4/data
 
 source scl_source enable python27
@@ -11,18 +10,21 @@ source scl_source enable rh-postgresql94
 # As yourself...
 #---------------------------------------------------------------------
 if [ "${USER}" = "${TTY_OWNER}" ]; then
-    alias eclipse="cd ~/installs/eclipse; ./eclipse"
+    echo "You are you."
+# As the service user...
+#-----------------------------------------------------------------
+else
+    echo "You are the service user."
 
-    export CATALINA_HOME="~/installs/tomcat"
-    export CATALINA_BASE=""
+    alias eclipse="cd ~/installs/eclipse; ./eclipse"
 
     add_to_path ~/installs/maven/bin
     add_to_path ~/installs/activemq/bin
     add_to_path ~/installs/tomcat/bin
-
-# As the service user...
-#-----------------------------------------------------------------
-else
+    add_to_path /usr/bin/perl
+    
+    export CATALINA_HOME="~/installs/tomcat"
+    export CATALINA_BASE=""
     export PGDATA="/services/sdgdev-ejtravis/databases/pgsql/9.4/data"
     export PGHOST=localhost
 fi
