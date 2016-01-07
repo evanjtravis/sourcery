@@ -25,3 +25,14 @@ source $GITAWAREPROMPT/main.sh
 export PS1="\n\[$txtgrn\]\u\[$txtred\]@\[$txtgrn\]\h\n\$git_branch\[$txtred\]\$git_dirty\[$txtylw\]pwd: \w\n\[$txtrst\]\$ "
 #====================================================================
 
+
+#====================================================================
+# X-Forwarding Automation
+#   - Allow service user to access X-forwarding options.
+#--------------------------------------------------------------------
+
+if [ -e ~/.Xauthority ]; then
+    chmod 644 ~/.Xauthority
+fi
+
+#--------------------------------------------------------------------
