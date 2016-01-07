@@ -1,23 +1,24 @@
 #!/usr/bin/bash
 
 NAME=$(uname -o)
-export MYNAME
+export SOURCERY_MYNAME
 
 if [ "${NAME}" == "Cygwin" ]; then
-    MYNAME=${USER}
+    SOURCERY_MYNAME=${USER}
 else
-    MYNAME=${TTY_OWNER}
+    SOURCERY_MYNAME=${TTY_OWNER}
 fi
 
-export MYHOME=/home/${MYNAME}
-export SOURCERY=${MYHOME}/sourcery
-export SOURCES=${SOURCERY}/sources
-export STATIC=${SOURCERY}/static
+export SOURCERY_MYHOME=/home/${SOURCERY_MYNAME}
+export SOURCERY=${SOURCERY_MYHOME}/sourcery
+export SOURCERY_SOURCES=${SOURCERY}/sources
+export SOURCERY_STATIC=${SOURCERY}/static
+export SOURCERY_ERRORS=${SOURCERY}/errors
 
 # PROMPT_COMMAND is cleared here and added to later on.
 export PROMPT_COMMAND=""
 
-echo -e "Sourced:\n\t${SOURCES}/profile.bash"
+echo -e "Sourced:\n\t${SOURCERY_SOURCES}/profile.bash"
 
-source ${SOURCES}/all/main
+source ${SOURCERY_SOURCES}/all/main
 

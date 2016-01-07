@@ -1,12 +1,12 @@
 #!/usr/bin/bash
 
-echo -e "\t${SU}/bashrc"
+echo -e "\t${SOURCERY_SU_DIR}/bashrc"
 
 #####################################################################
 # Temporary Variables
 #####################################################################
 LS_COLORS="di=93"
-SUDO="sudo /sbin/service"
+SOURCERY_SUDO="sudo /sbin/service"
 
 export PS1="\n\u@\h\npwd: \w\n$ "
 
@@ -16,8 +16,8 @@ export PS1="\n\u@\h\npwd: \w\n$ "
 #     account.
 #--------------------------------------------------------------------
 
-if [ -e ${MYHOME}/.Xauthority ]; then
-    xauth merge ${MYHOME}/.Xauthority
+if [ -e ${SOURCERY_MYHOME}/.Xauthority ]; then
+    xauth merge ${SOURCERY_MYHOME}/.Xauthority
 fi
 
 #====================================================================

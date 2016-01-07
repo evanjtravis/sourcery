@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
-PROFILE=sourcery/sources/profile.bash
+SOURCERY_PROFILE=""
 NAME=$(uname -o)
 if [ "${NAME}" == "Cygwin" ]; then
-    SOURCERY_PROFILE=~/${PROFILE}
+    SOURCERY_PROFILE=~/sourcery/sources/profile.bash
 else
     SOURCERY_PROFILE=/home/${TTY_OWNER}/sourcery/sources/profile.bash
 fi

@@ -1,18 +1,17 @@
 #!/usr/bin/bash
-#####################################################################
+#====================================================================
 # Temporary Variables
-#####################################################################
-declare -a errors=()
-declare -a path_duplicates=()
-declare -a path_nonexistent=()
-declare -a py_path_duplicates=()
-declare -a py_path_nonexistent=()
+#====================================================================
 
-SDIR=/services
-SDG=/usr/local/sdg
+rm -rf ${SOURCERY_ERRORS}/*
 
-USR=${SOURCES}/user
-SU=${SOURCES}/service-user
+ERROR=0
+
+SOURCERY_SERVICE_DIR=/services
+SOURCERY_SDG_DIR=/usr/local/sdg
+
+SOURCERY_USR_DIR=${SOURCERY_SOURCES}/user
+SOURCERY_SU_DIR=${SOURCERY_SOURCES}/service-user
 
 #####################################################################
 # Functions
@@ -30,9 +29,14 @@ export PYTHONPATH
 #   None
 #######################################
 add_error(){
-    local ERROR=$1
-    if [ -n "${ERROR}" ]; then
-        errors=(${errors[@]} ${ERROR})
+    local error=$1
+    local file=${SOURCERY_ERRORS}/errors.log
+    if [ -n "${error}" ]; then
+        ERROR=1
+        if [ ! -f $file ]; then
+            printf "*****ERRORS*****\n" > $file
+        fi
+        printf "\t${error}\n" >> $file
     fi
 }
 
@@ -50,14 +54,17 @@ add_error(){
 #######################################
 add_to_path(){
    local DIRECTORY=$1
+   local file=${SOURCERY_ERRORS}/path_non.log
     if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PATH}:" != *":${DIRECTORY}:"* ]]; then
             PATH="${PATH:+"${PATH}:"}${DIRECTORY}"
-        else
-            path_duplicates=(${path_duplicates[@]} ${DIRECTORY})
         fi
     else
-        path_nonexistent=(${path_nonexistent[@]} ${DIRECTORY})
+        ERROR=1
+        if [ ! -f $file ];then
+            printf "*****NON-EXISTENT PATHS*****\n" > $file
+        fi
+        printf "\t${DIRECTORY}\n" >> $file 
     fi
 }
 
@@ -75,79 +82,42 @@ add_to_path(){
 #######################################
 add_to_pythonpath(){
    local DIRECTORY=$1
+   local file=${SOURCERY_ERRORS}/py_path_non.log
     if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PYTHONPATH}:" != *":${DIRECTORY}:"* ]]; then
             PYTHONPATH="${PYTHONPATH:+"${PYTHONPATH}:"}${DIRECTORY}"
-        else
-            py_path_duplicates=(${py_path_duplicates[@]} ${DIRECTORY})
         fi
     else
-        py_path_nonexistent=(${py_path_nonexistent[@]} ${DIRECTORY})
+        ERROR=1
+        if [ ! -f $file ];then
+            printf "*****NON-EXISTENT PYTHON PATHS*****\n" > $file
+        fi
+        printf "\t${DIRECTORY}\n" >> $file 
     fi
 }
 
-#######################################
-# Print to terminal the indented contents of a list without the echo
-# -e argument. The contents of the print are captured for later use.
-# If the -e argument were used, it would strip all escape sequences
-# from the string.
-# Globals:
-#    None
-# Arguments:
-#    A list of strings
-# Returns:
-#   None
-# Pseudo Return:
-#   Each string in the list is printed and prepended with a tab
-#   escape sequence.
-#       "\t"
-#   This output is captured later in the program for printing to the
-#   terminal.
-#######################################
-indent_list(){
-    local LIST=$1
-    for i in ${LIST[*]}
-    do
-        echo "\t${i}"
-    done
-}
 
-#######################################
-# Print the contents of a list of strings to terminal.
-# Globals:
-#   None
-# Arguments:
-#   A list of strings with escape sequences. E.G. '\n', '\t', etc.
-# Returns:
-#   None
-#######################################
-print_list(){
-    local LIST=$1
-    for i in ${LIST[*]}
-    do
-        echo -e "${i}"
-    done
-}
-######################################################################
+
+#====================================================================
 # Additional Sources
-######################################################################
-source ${SOURCES}/all/bashrc
-source ${SOURCES}/all/aliases
+#--------------------------------------------------------------------
+source ${SOURCERY_SOURCES}/all/bashrc
+source ${SOURCERY_SOURCES}/all/aliases
 
 host_settings_filename=`hostname`
-if [ -e "${SOURCES}/hosts/${host_settings_filename}" ]; then
-    echo -e "\t${SOURCES}/hosts/${host_settings_filename}"
-    source ${SOURCES}/hosts/${host_settings_filename}
+if [ -e "${SOURCERY_SOURCES}/hosts/${host_settings_filename}" ]; then
+    echo -e "\t${SOURCERY_SOURCES}/hosts/${host_settings_filename}"
+    source ${SOURCERY_SOURCES}/hosts/${host_settings_filename}
 else
     echo -e "\n****No source file found for this host."
 fi
 
-if [ "${MYNAME}" == "${USER}" ]; then
-    source ${USR}/bashrc
-    source ${USR}/aliases
+if [ "${SOURCERY_MYNAME}" == "${USER}" ]; then
+    source ${SOURCERY_USR_DIR}/bashrc
+    source ${SOURCERY_USR_DIR}/aliases
 else
-    source ${SU}/bashrc
-    source ${SU}/aliases
+    source ${SOURCERY_SU_DIR}/bashrc
+    source ${SOURCERY_SU_DIR}/aliases
     if [ -f "~/.svc_profile" ]; then
         source "~/.svc_profile"
         echo "Sourced service profile."
@@ -155,28 +125,11 @@ else
 fi
 
 
-#####################################################################
+#====================================================================
 # Gather up and print errors
-#####################################################################
+#====================================================================
 
-if [ ${#path_nonexistent[*]} -ne 0 ]; then
-    err="PATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list ${path_nonexistent})"
-    add_error $err
-fi
-if [ ${#path_duplicates[*]} -ne 0 ]; then
-    err="PATH:_DUPLICATE_DIRECTORIES:\n$(indent_list ${path_duplicates})"
-    add_error $err
-fi
-if [ ${#py_path_nonexistent[*]} -ne 0 ]; then
-    err="PYTHONPATH:_NONEXISTENT_DIRECTORIES:\n$(indent_list ${py_path_nonexistent})"
-    add_error $err
-fi
-if [ ${#py_path_duplicates[*]} -ne 0 ]; then
-    err="PYTHONPATH:_DUPLICATE_DIRECTORIES:\n$(indent_list ${py_path_duplicates})"
-    add_error $err
-fi
-
-if [ ${#errors[*]} -ne 0 ]; then
-    echo "***[SOURCERY ERRORS]***"
-    print_list $errors
+if [ $ERROR -eq 1 ]; then
+    printf "***[SOURCERY ERRORS FOUND]***\n"
+    printf "\tuse command \`sourcery.errors\` for details."
 fi

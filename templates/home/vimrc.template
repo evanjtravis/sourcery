@@ -1,5 +1,5 @@
 let user=$USER
-let myname=$MYNAME
+let myname=$SOURCERY_MYNAME
 set nocompatible           " be iMproved, required
 set nocp
 if user == myname

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-echo -e "\t${USR}/bashrc"
+echo -e "\t${SOURCERY_USR_DIR}/bashrc"
 
 umask 022
 
@@ -10,17 +10,14 @@ umask 022
 LS_COLORS='di=96:ln=35;100'
 add_to_path ${HOME}/twee
 
-export BASHINIT=${MYBASHLIB}/init
-export PYINIT=${MYPYLIB}/init
-
-add_to_path $BASHINIT
+add_to_path ${SOURCERY_BASHLIB}/init
 add_to_path /cygdrive/c/HashiCorp/Vagrant/bin
-add_to_pythonpath $PYINIT
+add_to_pythonpath ${SOURCERY_PYLIB}/init
 
 #====================================================================
 # Git Aware Prompt
 #--------------------------------------------------------------------
-export GITAWAREPROMPT=${SOURCES}/utils/git-aware-prompt
+export GITAWAREPROMPT=${SOURCERY_SOURCES}/utils/git-aware-prompt
 source $GITAWAREPROMPT/main.sh
 export PS1="\n\[$txtgrn\]\u\[$txtred\]@\[$txtgrn\]\h\n\$git_branch\[$txtred\]\$git_dirty\[$txtylw\]pwd: \w\n\[$txtrst\]\$ "
 #====================================================================

@@ -17,9 +17,9 @@ function init
         get_pip_favorites.bash
 
     elif [ ! -d "/services" ]; then
-        python ${PYINIT}/get_get_pip.py
-        chmod 755 ${PYINIT}/get-pip.py
-        python ${PYINIT}/get-pip.py --user
+        python ${SOURCERY_PYINIT}/get_get_pip.py
+        chmod 755 ${SOURCERY_PYINIT}/get-pip.py
+        python ${SOURCERY_PYINIT}/get-pip.py --user
     else
         echo "Pip cannot be installed (by you) on this system."
     fi
