@@ -13,7 +13,6 @@ export SOURCERY_BASHLIB=${SOURCERY_LIB}/bash
 export PYTHONSTARTUP=${SOURCERY_PYLIB}/pythonstartup.py
 export PYLINTRC=${SOURCERY_MYHOME}/.pylintrc
 export VIMRC=${SOURCERY_MYHOME}/.vimrc
-export VIMINIT=${VIMRC}
 # FIXME
 export JAVA_HOME=/etc/alternatives/jre
 
