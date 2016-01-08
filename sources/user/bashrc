@@ -10,8 +10,8 @@ umask 022
 LS_COLORS='di=96:ln=35;100'
 add_to_path ${HOME}/twee
 
-export BASHINIT=${SOURCERY_BASHLIB}/init
-export PYINIT=${SOURCERY_PYLIB}/init
+export SOURCERY_BASHINIT=${SOURCERY_BASHLIB}/init
+export SOURCERY_PYINIT=${SOURCERY_PYLIB}/init
 
 add_to_path ${SOURCERY_BASHINIT}
 add_to_path /cygdrive/c/HashiCorp/Vagrant/bin
