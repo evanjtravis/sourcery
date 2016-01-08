@@ -1,21 +1,21 @@
 # Identify your Commits
 [user]
-	name = Evan J. Travis
-	email = ejtravis@illinois.edu
+    name = Evan J. Travis
+    email = ejtravis@illinois.edu
 [core]
 # Enable a global ignore list
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
 # Choose a custom pager
-	pager = less -FRX
+    pager = less -FRX
 # Default to new style push behavior
 [push]
-	default = simple
+    default = simple
 # Enable colored output
 [color]
-	ui = true
+    ui = true
 # Do not prompt for a password quite so often
 [credential]
-	helper = cache --timeout 3600
+    helper = cache --timeout 3600
 [commit]
     template = ~/.gitmessage
 [alias]
