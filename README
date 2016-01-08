@@ -4,8 +4,6 @@ Contributors:
     Evan J. Coon
 
 Basic settings for when switching to different dev environments
-    DON'T ARBITRARILY CHANGE PERMISSIONS ON ALL FILES AGAIN
-    ALSO, DON'T USE SOURCERY AS idm-web USER!!!
 Steps as user:
     To initialize sourcery:
         1. $ source ~/sourcery/sources/profile.bash
@@ -16,6 +14,13 @@ Steps as user:
 
     To initialize and clean files created by settings.init:
         1. $ sourcery.reset
+    
+    To view summary of sourcery errors:
+        1. $ sourcery.errors
+    
+    @wip
+    To view help for sourcery commands:
+        1. $ sourcery.help
 
 Steps as service-user:
     To set useful aliases:
