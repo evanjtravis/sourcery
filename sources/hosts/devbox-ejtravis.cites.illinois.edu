@@ -31,7 +31,7 @@ else
     # Because I'm using GIT on this system as the service user, these
     # files should be copied over to be used automatically by git
     # processes. Should be a one-time fix.
-    if [ ! -h ~/.gitconfig && ! -f ~/.gitconfig ]; then
+    if [ ! -h ~/.gitconfig -a ! -f ~/.gitconfig ]; then
         ln -s ${SOURCERY_MYHOME}/.gitconfig ~/.gitconfig
         ln -s ${SOURCERY_MYHOME}/.gitmessage ~/.gitmessage
         ln -s ${SOURCERY_MYHOME}/.gitignore ~/.gitignore
