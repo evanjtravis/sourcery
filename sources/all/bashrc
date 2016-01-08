@@ -11,7 +11,6 @@ export SOURCERY_LIB=${SOURCERY}/lib
 export SOURCERY_PYLIB=${SOURCERY_LIB}/python
 export SOURCERY_BASHLIB=${SOURCERY_LIB}/bash
 export PYTHONSTARTUP=${SOURCERY_PYLIB}/pythonstartup.py
-export GIT_CONFIG=${SOURCERY_MYHOME}/.gitconfig
 export VIMRC=${SOURCERY_MYHOME}/.vimrc
 export PYLINTRC=${SOURCERY_MYHOME}/.pylintrc
 # FIXME

@@ -10,14 +10,3 @@ SOURCERY_SUDO="sudo /sbin/service"
 
 export PS1="\n\u@\h\npwd: \w\n$ "
 
-#====================================================================
-# X-Forwarding
-#   - Automatically merge x-forwarding when logging into service user
-#     account.
-#--------------------------------------------------------------------
-
-if [ -e ${SOURCERY_MYHOME}/.Xauthority ]; then
-    xauth merge ${SOURCERY_MYHOME}/.Xauthority
-fi
-
-#====================================================================

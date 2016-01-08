@@ -3,7 +3,9 @@
 # Temporary Variables
 #====================================================================
 
-rm -rf ${SOURCERY_ERRORS}/*
+if [ $USER == $TTY_OWNER ]; then
+    rm -rf ${SOURCERY_ERRORS}/*
+fi
 
 ERROR=0
 
@@ -35,7 +37,9 @@ add_error(){
         ERROR=1
         if [ ! -f $file ]; then
             printf "*****ERRORS*****\n" > $file
-            chmod 666 $file
+            if [ $USER == $TTY_OWNER ]; then
+                chmod 666 $file
+            fi
         fi
         printf "\t${error}\n" >> $file
     fi
@@ -64,7 +68,9 @@ add_to_path(){
         ERROR=1
         if [ ! -f $file ];then
             printf "*****NON-EXISTENT PATHS*****\n" > $file
-            chmod 666 $file
+            if [ $USER == $TTY_OWNER ]; then
+                chmod 666 $file
+            fi
         fi
         printf "\t${DIRECTORY}\n" >> $file 
     fi
@@ -93,7 +99,9 @@ add_to_pythonpath(){
         ERROR=1
         if [ ! -f $file ];then
             printf "*****NON-EXISTENT PYTHON PATHS*****\n" > $file
-            chmod 666 $file
+            if [ $USER == $TTY_OWNER ]; then
+                chmod 666 $file
+            fi
         fi
         printf "\t${DIRECTORY}\n" >> $file 
     fi

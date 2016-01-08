@@ -17,7 +17,7 @@
 [credential]
 	helper = cache --timeout 3600
 [commit]
-    template = /home/ejtravis/.gitmessage
+    template = ~/.gitmessage
 [alias]
     alias = !git_aliases.py
     ignored = !git ls-files -v | grep "^[[:lower:]]"

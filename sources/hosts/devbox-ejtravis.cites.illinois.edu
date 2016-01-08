@@ -27,5 +27,25 @@ else
     export CATALINA_BASE=""
     export PGDATA="/services/sdgdev-ejtravis/databases/pgsql/9.4/data"
     export PGHOST=localhost
+
+    # Because I'm using GIT on this system as the service user, these
+    # files should be copied over to be used automatically by git
+    # processes. Should be a one-time fix.
+    if [ ! -h ~/.gitconfig && ! -f ~/.gitconfig ]; then
+        ln -s ${SOURCERY_MYHOME}/.gitconfig ~/.gitconfig
+        ln -s ${SOURCERY_MYHOME}/.gitmessage ~/.gitmessage
+        ln -s ${SOURCERY_MYHOME}/.gitignore ~/.gitignore
+    fi
+    #====================================================================
+    # X-Forwarding
+    #   - Automatically merge x-forwarding when logging into service user
+    #     account.
+    #--------------------------------------------------------------------
+
+    if [ -e ${SOURCERY_MYHOME}/.Xauthority ]; then
+        xauth merge ${SOURCERY_MYHOME}/.Xauthority
+    fi
+
+    #====================================================================
 fi
 
