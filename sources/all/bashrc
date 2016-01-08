@@ -18,6 +18,7 @@ export PYLINTRC=${SOURCERY_MYHOME}/.pylintrc
 export JAVA_HOME=/etc/alternatives/jre
 
 add_to_path ${SOURCERY}
+add_to_path ${SOURCERY_PYLIB}
 add_to_path ${SOURCERY_BASHLIB}
 add_to_pythonpath ~/central-registry-unit-test/module/
 add_to_pythonpath ${SOURCERY_PYLIB}

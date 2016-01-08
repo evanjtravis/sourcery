@@ -19,5 +19,8 @@
 [commit]
     template = /home/ejtravis/.gitmessage
 [alias]
+    alias = !git_aliases
     ignored = !git ls-files -v | grep "^[[:lower:]]"
     origin = config --get remote.origin.url
+    prev = log -1 --pretty=%B
+
