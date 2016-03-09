@@ -9,7 +9,7 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     export TDI_SOLDIR=${SOURCERY_MYHOME}/TDI/ # Used for relative directories when using (S/T)DI
 
     alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
-    alias runtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
+    alias tdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
     alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
 
     add_to_pythonpath "${SOURCERY_MYHOME}/central-registry-unit-test/module/"
