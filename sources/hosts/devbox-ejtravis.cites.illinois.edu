@@ -22,6 +22,7 @@ else
     add_to_path ~/installs/activemq/bin
     add_to_path ~/installs/tomcat/bin
     add_to_path /usr/bin/perl
+    add_to_path ~/.local/bin
     
     export CATALINA_HOME="~/installs/tomcat"
     export CATALINA_BASE=""
