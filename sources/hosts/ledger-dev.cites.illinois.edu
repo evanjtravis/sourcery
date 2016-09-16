@@ -8,10 +8,13 @@
 if [ ${USER} == ${TTY_OWNER} ]; then
     export TDI_SOLDIR=${SOURCERY_MYHOME}/TDI/ # Used for relative directories when using (S/T)DI
 
+    alias eclipse="cd ~/opt/eclipse; ./eclipse"
     alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
     alias tdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
     alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
 
+
+    add_to_path "${SOURCERY_MYHOME}/opt/jdk/bin/"
     add_to_pythonpath "${SOURCERY_MYHOME}/central-registry-unit-test/module/"
 
 # As the service user...
