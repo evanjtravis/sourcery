@@ -13,6 +13,8 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     alias tdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
     alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
 
+
+    add_to_path "${SOURCERY_MYHOME}/opt/"
     add_to_pythonpath "${SOURCERY_MYHOME}/central-registry-unit-test/module/"
 
 # As the service user...
