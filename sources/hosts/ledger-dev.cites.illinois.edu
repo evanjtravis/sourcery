@@ -14,6 +14,7 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
 
 
+    add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
     add_to_path "${SOURCERY_MYHOME}/opt/jdk/bin/"
     add_to_pythonpath "${SOURCERY_MYHOME}/central-registry-unit-test/module/"
 
