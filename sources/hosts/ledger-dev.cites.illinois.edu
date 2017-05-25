@@ -12,6 +12,7 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
     alias xtdi="cd ~/TDI; /services/dir-svcs/IBM/TDI/V7.2/ibmditk"
     alias tdilogs="tail -f ${TDI_SOLDIR}/logs/ibmdi.log"
+    alias ART="cd /home/ejtravis/workspace/automated-regression-test"
 
 
     add_to_pythonpath "${SOURCERY_MYHOME}/central-registry-unit-test/module/"
