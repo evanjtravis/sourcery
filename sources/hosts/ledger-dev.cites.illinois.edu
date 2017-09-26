@@ -19,6 +19,7 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
     add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/sdg_exchange"
     add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/midpoint"
+    add_to_pythonpath "/home/ejtravis/workspace/sdg-midpoint/midpoint"
     add_to_path "${SOURCERY_MYHOME}/opt/jdk/bin/"
     add_to_path "${SOURCERY_MYHOME}/workspace/automated-regression-test/bin/"
     add_to_path "/home/ejtravis/TDI/bin/"
