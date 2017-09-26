@@ -12,9 +12,8 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     alias collections="scl enable python27 zsh"
 
     add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
-    add_to_pythonpath "/home/ejtravis/workspace/sdg-midpoint/midpoint"
-    add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/midpoint"
-    add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/sdg_exchange"
+    add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/"
+    add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/"
     add_to_path "${SOURCERY_MYHOME}/workspace/automated-regression-test/bin/"
 
 # As the service user...
