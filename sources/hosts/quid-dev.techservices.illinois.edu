@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+# As anyone...
+#---------------------------------------------------------------------
+
+# As yourself...
+#---------------------------------------------------------------------
+if [ ${USER} == ${TTY_OWNER} ]; then
+
+    alias keytool="/services/dir-svcs/IBM/TDI/V7.2/jvm/jre/bin/keytool"
+    alias ART="cd /home/ejtravis/workspace/automated-regression-test"
+    alias collections="scl enable python27 zsh"
+
+    add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
+    add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/"
+    add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/"
+    add_to_path "${SOURCERY_MYHOME}/workspace/automated-regression-test/bin/"
+
+# As the service user...
+#---------------------------------------------------------------------
+#else
+
+fi
