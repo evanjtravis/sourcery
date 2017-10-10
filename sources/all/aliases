@@ -5,5 +5,6 @@ alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
 alias collections="scl enable python27 sdg_2015a_python27 zsh"
 alias djtest="python manage.py test"
 alias env="env | sort"
+alias pullworkspace="find . -maxdepth 1 -mindepth 1 -type d -exec git --git-dir={}/.git --work-tree=$PWD/{} pull \;"
 alias ls="ls --group-directories-first --color=auto"
 alias sourcery="source ${SOURCERY_MYHOME}/.bash_profile"
