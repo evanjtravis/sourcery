@@ -11,9 +11,6 @@ source scl_source enable rh-postgresql94
 #---------------------------------------------------------------------
 if [ "${USER}" = "${TTY_OWNER}" ]; then
     echo "You are you."
-# As the service user...
-#-----------------------------------------------------------------
-else
     echo "You are the service user."
 
     alias eclipse="cd ~/installs/eclipse; ./eclipse"
@@ -23,12 +20,15 @@ else
     add_to_path ~/installs/tomcat/bin
     add_to_path /usr/bin/perl
     add_to_path ~/.local/bin
+    add_to_path ~/terragrunt
     
     export CATALINA_HOME="~/installs/tomcat"
     export CATALINA_BASE=""
     export PGDATA="/services/sdgdev-ejtravis/databases/pgsql/9.4/data"
     export PGHOST=localhost
-
+# As the service user...
+#-----------------------------------------------------------------
+else
     # Because I'm using GIT on this system as the service user, these
     # files should be copied over to be used automatically by git
     # processes. Should be a one-time fix.
@@ -48,5 +48,6 @@ else
     fi
 
     #====================================================================
+
 fi
 
