@@ -4,6 +4,9 @@ gitPullWorkspace(){
     find . -maxdepth 1 -mindepth 1 -type d -exec git --git-dir={}/.git --work-tree=$PWD/{} pull \;
 }
 
+gitCleanWorkspace(){
+    find . -maxdepth 1 -mindepth 1 -type d -exec git --git-dir={}/.git --work-tree=$PWD/{} gc \;
+}
 
 
 alias c="clear"
@@ -12,5 +15,6 @@ alias collections="scl enable python27 sdg_2015a_python27 zsh"
 alias djtest="python manage.py test"
 alias env="env | sort"
 alias GPW="gitPullWorkspace"
+alias GCW="gitCleanWorkspace"
 alias ls="ls --group-directories-first --color=auto"
 alias sourcery="source ${SOURCERY_MYHOME}/.bash_profile"
