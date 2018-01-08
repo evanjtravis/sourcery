@@ -14,6 +14,7 @@ if [ ${USER} == ${TTY_OWNER} ]; then
     add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
     add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/"
     add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/"
+    add_to_pythonpath "/home/ejtravis/workspace/lib-python-cloud-broker/"
     add_to_path "${SOURCERY_MYHOME}/workspace/automated-regression-test/bin/"
 
 # As the service user...
