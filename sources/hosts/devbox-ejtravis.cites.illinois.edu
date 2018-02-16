@@ -20,7 +20,7 @@ if [ "${USER}" = "${TTY_OWNER}" ]; then
     add_to_path ~/installs/tomcat/bin
     add_to_path /usr/bin/perl
     add_to_path ~/.local/bin
-    add_to_path ~/terragrunt
+    add_to_path ~/bin
     
     export CATALINA_HOME="~/installs/tomcat"
     export CATALINA_BASE=""

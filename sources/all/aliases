@@ -10,6 +10,7 @@ gitCleanWorkspace(){
 
 
 alias c="clear"
+alias cdw="cd ~/workspace"
 alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
 alias collections="scl enable python27 sdg_2015a_python27 zsh"
 alias djtest="python manage.py test"
