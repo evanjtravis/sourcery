@@ -9,7 +9,7 @@ alias tfc="terraform validate -check-variable=false && terraform fmt"
 export EDITOR="vim"
 export TERRAGRUNT_DEFAULT_MODULES_REPO=/home/ejtravis/cloudfirst/as-aws-modules
 terragrunt-source(){
-    TERRAGRUNT_SOURCE=$($(which terragrunt-source)) terragurnt $@
+    TERRAGRUNT_SOURCE=$($(which terragrunt-source)) terragrunt $@
 }
 alias tgs=terragrunt-source
 alias python="python3.6"
