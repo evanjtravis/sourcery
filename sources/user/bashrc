@@ -8,13 +8,11 @@ umask 022
 # Environment Variables
 #####################################################################
 LS_COLORS='di=96:ln=35;100'
-add_to_path ${HOME}/twee
 
 export SOURCERY_BASHINIT=${SOURCERY_BASHLIB}/init
 export SOURCERY_PYINIT=${SOURCERY_PYLIB}/init
 
 add_to_path ${SOURCERY_BASHINIT}
-add_to_path /cygdrive/c/HashiCorp/Vagrant/bin
 add_to_pythonpath ${SOURCERY_PYINIT}
 
 #====================================================================

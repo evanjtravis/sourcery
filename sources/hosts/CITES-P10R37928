@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+
+# As yourself...
+#---------------------------------------------------------------------
+alias python="python3.6"
+alias pip="pip3.6"
+
+#add_to_pythonpath "/home/ejtravis/workspace/CheezShop"
+#add_to_pythonpath "/home/ejtravis/workspace/lib-python-midpoint/"
+#add_to_pythonpath "/home/ejtravis/workspace/lib-python-exchange/"
+#add_to_pythonpath "/home/ejtravis/workspace/lib-python-cloud-broker/"
+#add_to_pythonpath "/home/ejtravis/workspace/automated-regression-test"
+#add_to_pythonpath "/home/ejtravis/workspace/behave-bart"
+#add_to_pythonpath "/home/ejtravis/workspace/behave-core"
+#add_to_pythonpath "/home/ejtravis/workspace/behave-terraform"
+#add_to_pythonpath "/home/ejtravis/workspace/behave-utils"
+add_to_path "/home/ejtravis/.local/shared"
+add_to_path "/home/ejtravis/.local/bin"
+export DOCKER_HOST="tcp://0.0.0.0:2375"
+export PAGER=less

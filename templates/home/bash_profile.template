@@ -1,12 +1,6 @@
 #!/usr/bin/bash
 
-SOURCERY_PROFILE=""
-NAME=$(uname -o)
-if [ "${NAME}" == "Cygwin" ]; then
-    SOURCERY_PROFILE=~/sourcery/sources/profile.bash
-else
-    SOURCERY_PROFILE=/home/${TTY_OWNER}/sourcery/sources/profile.bash
-fi
+SOURCERY_PROFILE="/home/ejtravis/sourcery/sources/profile.bash"
 
 if [ -e ${SOURCERY_PROFILE} ]; then
     source ${SOURCERY_PROFILE}

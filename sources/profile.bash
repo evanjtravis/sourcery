@@ -3,11 +3,7 @@
 NAME=$(uname -o)
 export SOURCERY_MYNAME
 
-if [ "${NAME}" == "Cygwin" ]; then
-    SOURCERY_MYNAME=${USER}
-else
-    SOURCERY_MYNAME=${TTY_OWNER}
-fi
+SOURCERY_MYNAME="ejtravis"
 
 export SOURCERY_MYHOME=/home/${SOURCERY_MYNAME}
 export SOURCERY=${SOURCERY_MYHOME}/sourcery
