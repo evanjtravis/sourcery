@@ -2,18 +2,13 @@
 #====================================================================
 # Temporary Variables
 #====================================================================
+echo "        ${SOURCERY_SOURCES}/all/main"
 
-if [ $USER == $TTY_OWNER ]; then
-    rm -rf ${SOURCERY_ERRORS}/*
-fi
+rm -rf ${SOURCERY_ERRORS}/*
 
 ERROR=0
 
-SOURCERY_SERVICE_DIR=/services
-SOURCERY_SDG_DIR=/usr/local/sdg
-
 SOURCERY_USR_DIR=${SOURCERY_SOURCES}/user
-SOURCERY_SU_DIR=${SOURCERY_SOURCES}/service-user
 
 #####################################################################
 # Functions
@@ -31,13 +26,13 @@ export PYTHONPATH
 #   None
 #######################################
 add_error(){
-    local error=$1
-    local file=${SOURCERY_ERRORS}/errors.log
+    local error="$1"
+    local file="${SOURCERY_ERRORS}/errors.log"
     if [ -n "${error}" ]; then
         ERROR=1
-        if [ ! -f $file ]; then
+        if [ ! -f "$file" ]; then
             printf "*****ERRORS*****\n" > $file
-            if [ $USER == $TTY_OWNER ]; then
+            if [ "$USER" == "$TTY_OWNER" ]; then
                 chmod 666 $file
             fi
         fi
@@ -58,7 +53,7 @@ add_error(){
 #   None
 #######################################
 add_to_path(){
-   local DIRECTORY=$1
+   local DIRECTORY="$1"
    local file=${SOURCERY_ERRORS}/path_non.log
     if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PATH}:" != *":${DIRECTORY}:"* ]]; then
@@ -66,9 +61,9 @@ add_to_path(){
         fi
     else
         ERROR=1
-        if [ ! -f $file ];then
+        if [ ! -f "$file" ];then
             printf "*****NON-EXISTENT PATHS*****\n" > $file
-            if [ $USER == $TTY_OWNER ]; then
+            if [ "$USER" == "$TTY_OWNER" ]; then
                 chmod 666 $file
             fi
         fi
@@ -97,7 +92,7 @@ add_to_pythonpath(){
         fi
     else
         ERROR=1
-        if [ ! -f $file ];then
+        if [ ! -f "$file" ];then
             printf "*****NON-EXISTENT PYTHON PATHS*****\n" > $file
             if [ $USER == $TTY_OWNER ]; then
                 chmod 666 $file
@@ -115,7 +110,11 @@ add_to_pythonpath(){
 source ${SOURCERY_SOURCES}/all/bashrc
 source ${SOURCERY_SOURCES}/all/aliases
 
+source ${SOURCERY_USR_DIR}/bashrc
+source ${SOURCERY_USR_DIR}/aliases
+
 host_settings_filename=`hostname`
+
 if [ -e "${SOURCERY_SOURCES}/hosts/${host_settings_filename}" ]; then
     echo -e "\t${SOURCERY_SOURCES}/hosts/${host_settings_filename}"
     source ${SOURCERY_SOURCES}/hosts/${host_settings_filename}
@@ -123,24 +122,13 @@ else
     echo -e "\n****No source file found for this host."
 fi
 
-if [ "${SOURCERY_MYNAME}" == "${USER}" ]; then
-    source ${SOURCERY_USR_DIR}/bashrc
-    source ${SOURCERY_USR_DIR}/aliases
-else
-    source ${SOURCERY_SU_DIR}/bashrc
-    source ${SOURCERY_SU_DIR}/aliases
-    if [ -f "~/.svc_profile" ]; then
-        source "~/.svc_profile"
-        echo "Sourced service profile."
-    fi
-fi
 
 
 #====================================================================
 # Gather up and print errors
 #====================================================================
 
-if [ $ERROR -eq 1 ]; then
+if [ "$ERROR" -eq 1 ]; then
     printf "***[SOURCERY ERRORS FOUND]***\n"
     printf "\tuse command \`sourcery.errors\` for details."
 fi

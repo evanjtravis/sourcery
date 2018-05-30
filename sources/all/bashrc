@@ -6,47 +6,23 @@ echo -e "\t${SOURCERY_SOURCES}/all/bashrc"
 #####################################################################
 
 export EDITOR=vim
-export LS_COLORS=''
-export SOURCERY_LIB=${SOURCERY}/lib
-export SOURCERY_PYLIB=${SOURCERY_LIB}/python
-export SOURCERY_BASHLIB=${SOURCERY_LIB}/bash
-export PYTHONSTARTUP=${SOURCERY_PYLIB}/pythonstartup.py
-export PYLINTRC=${SOURCERY_MYHOME}/.pylintrc
-export VIMRC=${SOURCERY_MYHOME}/.vimrc
+export LS_COLORS=""
+export SOURCERY_LIB="${SOURCERY}/lib"
+export SOURCERY_PYLIB="${SOURCERY_LIB}/python"
+export SOURCERY_BASHLIB="${SOURCERY_LIB}/bash"
+export PYTHONSTARTUP="${SOURCERY_PYLIB}/pythonstartup.py"
+export PYLINTRC="${SOURCERY_MYHOME}/.pylintrc"
+export VIMRC="${SOURCERY_MYHOME}/.vimrc"
 # FIXME
-export JAVA_HOME=/etc/alternatives/jre
+export JAVA_HOME="/etc/alternatives/jre"
 
-add_to_path ${SOURCERY}
-add_to_path ${SOURCERY_PYLIB}
-add_to_path ${SOURCERY_BASHLIB}
-add_to_pythonpath ~/central-registry-unit-test/module/
-add_to_pythonpath ${SOURCERY_PYLIB}
-if [ -d "${SOURCERY_SERVICE_DIR}" ]; then
-    export SOURCERY_SERVICE=$(python ${SOURCERY_PYLIB}/get_service.py)
-    add_to_pythonpath /services/${SOURCERY_SERVICE}/share/python/django
-    # Check for /usr/local/sdg symlink to /services/<service>/sdg
-    if [ -d "${SOURCERY_SDG_DIR}" ]; then
-        add_to_path ${SOURCERY_SDG_DIR}/share/python/django/bin
-    
-        add_to_pythonpath ${SOURCERY_SDG_DIR}/share/python/django
-        add_to_pythonpath ${SOURCERY_SDG_DIR}/share/python
-    else
-        # Add /services/<service>/sdg to paths if symlink not found
-        add_error "${SOURCERY_SDG_DIR} symlink not detected."
-        if [ -d "${SOURCERY_SERVICE_DIR}/${SOURCERY_SERVICE}" ]; then
-            add_to_path ${SOURCERY_SERVICE_DIR}/${SOURCERY_SERVICE}/sdg/share/python/django/bin
-        
-            add_to_pythonpath ${SOURCERY_SERVICE_DIR}/${SOURCERY_SERVICE}/sdg/share/python/django
-            add_to_pythonpath ${SOURCERY_SERVICE_DIR}/${SOURCERY_SERVICE}/sdg/share/python
-        else
-            add_error "No su entry for ${HOST}. See ${SOURCERY_PYLIB}/get_service.py"
-        fi
-    fi
-fi
+add_to_path "${SOURCERY}"
+add_to_path "${SOURCERY_PYLIB}"
+add_to_path "${SOURCERY_BASHLIB}"
+add_to_pythonpath "${SOURCERY_PYLIB}"
 
-add_to_pythonpath /usr/lib/python2.7/site-packages
-add_to_pythonpath /usr/lib64/python2.7/site-packages
-add_to_pythonpath /usr/lib/python2.6/site-packages
-add_to_pythonpath /usr/lib64/python2.6/site-packages
-add_to_pythonpath ${SOURCERY_MYHOME}/classNotes/bin/python
+add_to_pythonpath "/usr/lib/python2.7/site-packages"
+add_to_pythonpath "/usr/lib64/python2.7/site-packages"
+add_to_pythonpath "/usr/lib/python2.6/site-packages"
+add_to_pythonpath "/usr/lib64/python2.6/site-packages"
 
