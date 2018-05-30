@@ -19,7 +19,9 @@ add_to_pythonpath ${SOURCERY_PYINIT}
 # Git Aware Prompt
 #--------------------------------------------------------------------
 export GITAWAREPROMPT=${SOURCERY_SOURCES}/utils/git-aware-prompt
-source $GITAWAREPROMPT/main.sh
+echo "        ${GITAWAREPROMPT}/main.sh -- START"
+source ${GITAWAREPROMPT}/main.sh
+echo "        ${GITAWAREPROMPT}/main.sh -- END"
 export PS1="\n\[$txtgrn\]\u\[$txtred\]@\[$txtgrn\]\h\n\$git_branch\[$txtred\]\$git_dirty\[$txtylw\]pwd: \w\n\[$txtrst\]\$ "
 #====================================================================
 

@@ -54,7 +54,7 @@ add_error(){
 #######################################
 add_to_path(){
    local DIRECTORY="$1"
-   local file=${SOURCERY_ERRORS}/path_non.log
+   local file="${SOURCERY_ERRORS}/path_non.log"
     if [ -d "${DIRECTORY}" ]; then
         if [[ ":${PATH}:" != *":${DIRECTORY}:"* ]]; then
             PATH="${PATH:+"${PATH}:"}${DIRECTORY}"
@@ -94,7 +94,7 @@ add_to_pythonpath(){
         ERROR=1
         if [ ! -f "$file" ];then
             printf "*****NON-EXISTENT PYTHON PATHS*****\n" > $file
-            if [ $USER == $TTY_OWNER ]; then
+            if [ "$USER" == "$TTY_OWNER" ]; then
                 chmod 666 $file
             fi
         fi
