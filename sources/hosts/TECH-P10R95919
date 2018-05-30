@@ -6,6 +6,7 @@
 
 alias tfv="terraform validate -check-variables=false"
 alias tfc="terraform validate -check-variable=false && terraform fmt"
+alias eclipse="~/eclipse/eclipse"
 export EDITOR="vim"
 export TERRAGRUNT_DEFAULT_MODULES_REPO=/home/ejtravis/cloudfirst/as-aws-modules
 terragrunt-source(){
