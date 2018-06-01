@@ -4,7 +4,6 @@
 # As yourself...
 #---------------------------------------------------------------------
 
-alias tfv="terraform validate -check-variables=false"
 alias tfc="terraform validate -check-variable=false && terraform fmt"
 alias eclipse="~/eclipse/eclipse"
 export EDITOR="vim"

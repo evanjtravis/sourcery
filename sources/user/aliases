@@ -21,14 +21,6 @@ xtractRPM(){
 # Aliases
 #####################################################################
 
-if [ -d "${SOURCERY_SERVICE_DIR}/${SOURCERY_SERVICE}" ]; then
-    alias service="echo -e '\n***Logging onto \"$SOURCERY_SERVICE\"';su - $SOURCERY_SERVICE"
-elif [ -d "$SOURCERY_SERVICE_DIR" ]; then
-    alias service="echo '***Unrecognized service.'"
-else
-    alias service="echo '***CITES SERVICES NOT AVAILABLE ON SYSTEM.'"
-fi
-
 alias cdsource="cd $SOURCERY"
 alias extractRPM=xtractRPM
 alias sourcery.clean="sourcery.bash --clean;sourcery"
