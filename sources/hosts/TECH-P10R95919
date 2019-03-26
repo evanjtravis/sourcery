@@ -4,18 +4,23 @@
 # As yourself...
 #---------------------------------------------------------------------
 
-alias tfc="terraform validate -check-variable=false && terraform fmt"
+alias tfc="terraform validate -check-variables=false && terraform fmt"
 alias eclipse="~/eclipse/eclipse"
 export EDITOR="vim"
+export LIBGL_ALWAYS_INDIRECT=1
 export TERRAGRUNT_DEFAULT_MODULES_REPO=/home/ejtravis/cloudfirst/as-aws-modules
 terragrunt-source(){
     TERRAGRUNT_SOURCE=$($(which terragrunt-source)) terragrunt $@
 }
 alias tgs=terragrunt-source
-alias python="python3.6"
-alias pip="pip3.6"
+alias python="python3"
+alias pip="pip3"
 
 add_to_path "/home/ejtravis/.local/shared"
 add_to_path "/home/ejtravis/.local/bin"
 export DOCKER_HOST="tcp://0.0.0.0:2375"
 export PAGER=less
+
+export DRONE_SERVER="https://drone.techservices.illinois.edu/"
+source ${HOME}/secrets.sh
+sudo mount --bind /mnt/c /c

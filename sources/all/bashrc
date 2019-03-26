@@ -26,3 +26,11 @@ add_to_pythonpath "/usr/lib64/python2.7/site-packages"
 add_to_pythonpath "/usr/lib/python2.6/site-packages"
 add_to_pythonpath "/usr/lib64/python2.6/site-packages"
 
+# kubctl cli autocomplete
+#=====================
+source <(kubectl completion bash)
+
+# git cli autocomplete
+#=====================
+wget -c -P ${SOURCERY}/ https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash &> /dev/null
+source ${SOURCERY}/git-completion.bash
