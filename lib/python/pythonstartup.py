@@ -5,6 +5,7 @@ This file is currently set to the PYTHONSTARTUP environment variable.
 from __future__ import unicode_literals
 
 import sys
+import os
 from myutils import py
 
 from prompt_toolkit.filters import ViInsertMode
@@ -13,6 +14,8 @@ from prompt_toolkit.keys import Keys
 from pygments.token import Token
 
 from ptpython.layout import CompletionVisualisation
+
+from config import config
 
 __all__ = (
     'configure',
@@ -185,5 +188,13 @@ try:
 except ImportError:
     print("ptpython is not available: falling back to standard prompt")
 else:
-    sys.exit(embed(globals(), locals(), configure=configure, vi_mode=True))
+    sys.exit(
+        embed(
+            globals(),
+            locals(),
+            configure=configure,
+            vi_mode=True,
+            history_filename=config.get("python","relp_history")
+        )
+    )
 

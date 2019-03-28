@@ -5,24 +5,10 @@ fun things in general.
 """
 
 #import copy_templates as cp_templates
-import datetime
 import os
 import subprocess
 import sys
 
-NOW = datetime.datetime.now()
-
-RESERVE_SAVE_PATH = "~/python_interpreter_savefile_{}.{}.{}.file".format(
-    str(NOW.date()),
-    str(NOW.hour),
-    str(NOW.minute)
-)
-
-def _get_default_save_path():
-    path = "~/python_workbench.file"
-    if os.path.isfile(path):
-        path = RESERVE_SAVE_PATH
-    return path
 
 #####################################################################
 # Shortcuts
@@ -44,11 +30,9 @@ class PythonConsole(object):
     @property
     def save(self, path=None):
         """save console work"""
-        if not path:
-            path = _get_default_save_path()
-        path = os.path.expanduser(path)
-        import readline
-        readline.write_history_file(path)
+        executable = os.path.join(os.environ["SOURCERY"],
+                "lib/python/save_pyhistory.bash")
+        self.sh("{}".format(executable))
 
 
     @property
