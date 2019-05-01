@@ -13,6 +13,28 @@ if user == myname
     
     " Let Vundle manage Vundle, required
     Plugin 'gmarik/Vundle.vim'
+
+    " Installs vim table mode
+    Plugin 'dhruvasagar/vim-table-mode'
+
+    " Quickly enable/disable table mode while in INSERT mode by using '||' or
+    " '__'
+    function! s:isAtStartOfLine(mapping)
+      let text_before_cursor = getline('.')[0 : col('.')-1]
+      let mapping_pattern = '\V' . escape(a:mapping, '\')
+      let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+      return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+    endfunction
+
+    inoreabbrev <expr> <bar><bar>
+        \ <SID>isAtStartOfLine('\|\|') ?
+        \ '<c-o>:TableModeEnable<cr><space><bar><left><left>' : '<bar><bar>'
+    inoreabbrev <expr> __
+        \ <SID>isAtStartOfLine('__') ?
+        \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+
+    let g:table_mode_corner='|'
+
     
     " Istalls pylint-mode
 "    Plugin 'klen/python-mode'
@@ -77,8 +99,6 @@ set ignorecase       " ignore case when searching
 set smartcase        " ingnore case when searching with only lowercase
 set incsearch        " show search matches as you type
 set undolevels=1000  " up to 1000 undos stored
-" Useful Vim things from training manual
-map <F5> :!python %  " Press F5 to run the current Python file
 set printoptions=number:y
 
 highlight PreProc ctermfg=White  " Improve syntax highlighting, PreProc

@@ -23,4 +23,7 @@
     ignored = !git ls-files -v | grep "^[[:lower:]]"
     origin = config --get remote.origin.url
     prev = log -1 --pretty=%B
+    adog = log --all --decorate --oneline --graph
+    network = log --all --decorate --oneline --graph
+
 

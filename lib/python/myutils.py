@@ -27,53 +27,15 @@ def _print_pwd():
 
 class PythonConsole(object):
     
-    @property
-    def save(self, path=None):
-        """save console work"""
+    def _trunc_hist(self):
+        """Remove py.* commands from ptpython history file after executing them"""
         executable = os.path.join(os.environ["SOURCERY"],
-                "lib/python/save_pyhistory.bash")
-        self.sh("{}".format(executable))
+                "lib/python/trunc_hist.bash")
+        subprocess.run(executable)
 
 
-    @property
-    def c(self):
+    def _sh(self, *args, **kwargs):
         """"""
-        self.sh("clear")
-
-
-    @property
-    def q(self):
-        quit()
-
-
-    @property
-    def up(self):
-        os.chdir("..")
-        self.sh("pwd")
-        self.sh("ls", "-la")
-
-
-    @property
-    def home(self):
-        os.chdir(os.path.expanduser("~/"))
-        self.sh("ls", "-la")
-
-
-    @property
-    def version(self):
-        print("Python ", sys.version, "on linux")
-        print(('Type "help", "copyright", "credits" or "license" for '
-            'more information.'))
-
-
-    def cd(self, path):
-        os.chdir(os.path.expanduser(path))
-        self.sh("pwd")
-        self.sh("ls", "-la")
-    
-
-    def sh(self, *args, **kwargs):
-        """execute shell command"""
         defaults = {
             "shell": True,
             "executable": "/bin/bash"
@@ -87,6 +49,64 @@ class PythonConsole(object):
         else:
             print(proc.stderr)
         return proc
+
+
+    @property
+    def save(self, path=None):
+        """save console work"""
+        #self._trunc_hist()
+        executable = os.path.join(os.environ["SOURCERY"],
+                "lib/python/save_pyhistory.bash")
+        self._sh(executable)
+
+
+    @property
+    def c(self):
+        """"""
+        #self._trunc_hist()
+        self._sh("clear")
+
+
+    @property
+    def q(self):
+        #self._trunc_hist()
+        quit()
+
+
+    @property
+    def up(self):
+        #self._trunc_hist()
+        os.chdir("..")
+        self._sh("pwd")
+        self._sh("ls", "-la")
+
+
+    @property
+    def home(self):
+        #self._trunc_hist()
+        os.chdir(os.path.expanduser("~/"))
+        self._sh("ls", "-la")
+
+
+    @property
+    def version(self):
+        #self._trunc_hist()
+        print("Python ", sys.version, "on linux")
+        print(('Type "help", "copyright", "credits" or "license" for '
+            'more information.'))
+
+
+    def cd(self, path):
+        #self._trunc_hist()
+        os.chdir(os.path.expanduser(path))
+        self._sh("pwd")
+        self._sh("ls", "-la")
+    
+
+    def sh(self, *args, **kwargs):
+        """execute shell command"""
+        #self._trunc_hist()
+        self._sh(*args, **kwargs)
 
 
 py = PythonConsole()
