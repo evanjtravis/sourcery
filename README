@@ -6,7 +6,7 @@ Contributors:
 Basic settings for when switching to different dev environments
 Steps as user:
     To initialize sourcery:
-        1. $ source ~/sourcery/sources/profile.bash
+        1. $ source ~/.sourcery/sources/profile.bash
         2. $ sourcery.init
 
     To cleanup extra files created by settings.init:
