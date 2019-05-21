@@ -1,0 +1,2 @@
+Host squid
+    HostName squid.as-test.techservices.illinois.edu

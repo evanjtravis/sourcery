@@ -23,3 +23,4 @@ TODO
 *.project
 *.pydevproject
 *.settings/
+*__pycache__/
