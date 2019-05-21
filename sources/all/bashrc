@@ -28,7 +28,7 @@ add_to_pythonpath "/usr/lib64/python2.6/site-packages"
 
 # kubctl cli autocomplete
 #=====================
-source <(kubectl completion bash)
+#source <(kubectl completion bash)
 
 # git cli autocomplete
 #=====================
