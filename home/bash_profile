@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+[ -z "$PS1" ] && return
 
 SOURCERY_PROFILE="${HOME}/.sourcery/sources/profile.bash"
 echo ${SOURCERY_PROFILE}

@@ -11,7 +11,6 @@ export SOURCERY_SOURCES=${SOURCERY}/sources
 export SOURCERY_STATIC=${SOURCERY}/static
 export SOURCERY_ERRORS=${SOURCERY}/errors
 
-# PROMPT_COMMAND is cleared here and added to later on.
 export PROMPT_COMMAND=""
 
 echo -e "Sourced:\n\t${SOURCERY_SOURCES}/profile.bash"

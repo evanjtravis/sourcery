@@ -10,6 +10,9 @@ gitCleanWorkspace(){
     find . -maxdepth 1 -mindepth 1 -type d -exec git --git-dir={}/.git --work-tree=$PWD/{} gc \;
 }
 
+function cd {
+    builtin cd "$@" && ls -F
+}
 
 alias c="clear"
 alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
@@ -19,7 +22,7 @@ alias env="env | sort"
 alias gpw="gitPullWorkspace"
 alias gcw="gitCleanWorkspace"
 alias kc="kubectl"
-alias ls="ls --group-directories-first --color=auto"
+alias ls="ls --group-directories-first --color=auto -p"
 alias sourcery="source ${SOURCERY_MYHOME}/.bash_profile"
 alias sshhosts="sed -rn 's/^\s*Host\s+(.*)\s*/\1/ip' ~/.ssh/config"
 alias tg="terragrunt"
