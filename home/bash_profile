@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-SOURCERY_PROFILE="/home/ejtravis/.sourcery/sources/profile.bash"
-
+SOURCERY_PROFILE="${HOME}/.sourcery/sources/profile.bash"
+echo ${SOURCERY_PROFILE}
 if [ -e ${SOURCERY_PROFILE} ]; then
     source ${SOURCERY_PROFILE}
 else
