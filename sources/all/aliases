@@ -14,7 +14,7 @@ function cd {
     builtin cd "$@" && ls -F
 }
 
-alias c="clear"
+alias c="clear && ls"
 alias clearall="clear && printf '\033[3J'" # Clear terminal scroll buffer
 alias collections="scl enable python27 sdg_2015a_python27 zsh"
 alias dockerc="docker-compose"
