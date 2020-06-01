@@ -7,6 +7,8 @@
     excludesfile = ~/.gitignore
 # Choose a custom pager
     pager = less -FRX
+    autocrlf = false
+    eol = lf
 # Default to new style push behavior
 [push]
     default = simple

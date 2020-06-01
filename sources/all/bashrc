@@ -7,14 +7,20 @@ echo -e "\t${SOURCERY_SOURCES}/all/bashrc"
 
 export EDITOR=vim
 export LS_COLORS=""
+
+export PIPENV_MAX_DEPTH=5
+
 export SOURCERY_LIB="${SOURCERY}/lib"
 export SOURCERY_PYLIB="${SOURCERY_LIB}/python"
 export SOURCERY_BASHLIB="${SOURCERY_LIB}/bash"
 export PYTHONSTARTUP="${SOURCERY_PYLIB}/pythonstartup.py"
 export PYLINTRC="${SOURCERY_MYHOME}/.pylintrc"
 export VIMRC="${SOURCERY_MYHOME}/.vimrc"
+
+
 # FIXME
 export JAVA_HOME="/etc/alternatives/jre"
+
 
 add_to_path "${SOURCERY}"
 add_to_path "${SOURCERY_PYLIB}"

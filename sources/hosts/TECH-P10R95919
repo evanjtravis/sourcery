@@ -18,6 +18,7 @@ alias pip="pip3"
 
 add_to_path "/home/ejtravis/.local/shared"
 add_to_path "/home/ejtravis/.local/bin"
+add_to_pythonpath "/home/ejtravis/workspace/behave/int-cheez-shop"
 export DOCKER_HOST="tcp://0.0.0.0:2375"
 export PAGER=less
 
