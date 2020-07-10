@@ -4,7 +4,7 @@ echo -e "\t${SOURCERY_SOURCES}/all/bashrc"
 #####################################################################
 # Environment Variables
 #####################################################################
-
+export FQDN=`hostname --fqdn`
 export EDITOR=vim
 export LS_COLORS=""
 
@@ -27,14 +27,14 @@ add_to_path "${SOURCERY_PYLIB}"
 add_to_path "${SOURCERY_BASHLIB}"
 add_to_pythonpath "${SOURCERY_PYLIB}"
 
+add_to_pythonpath "/home/ejtravis/.local/bin"
+
+#OLD
 add_to_pythonpath "/usr/lib/python2.7/site-packages"
 add_to_pythonpath "/usr/lib64/python2.7/site-packages"
 add_to_pythonpath "/usr/lib/python2.6/site-packages"
 add_to_pythonpath "/usr/lib64/python2.6/site-packages"
-
-# kubctl cli autocomplete
-#=====================
-#source <(kubectl completion bash)
+#/OLD
 
 # git cli autocomplete
 #=====================

@@ -3,9 +3,14 @@
 
 # As yourself...
 #---------------------------------------------------------------------
+unalias c
+alias c="clear -x && ls"
+
 
 alias tfc="terraform validate -check-variables=false && terraform fmt"
 alias eclipse="~/eclipse/eclipse"
+
+export COVERAGE_HTML_DIR = "~/Desktop/coverage"
 export EDITOR="vim"
 export LIBGL_ALWAYS_INDIRECT=1
 export TERRAGRUNT_DEFAULT_MODULES_REPO=/home/ejtravis/cloudfirst/as-aws-modules
@@ -14,7 +19,6 @@ terragrunt-source(){
 }
 alias tgs=terragrunt-source
 alias python="python3"
-alias pip="pip3"
 
 add_to_path "/home/ejtravis/.local/shared"
 add_to_path "/home/ejtravis/.local/bin"
